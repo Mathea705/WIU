@@ -1,0 +1,147 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
+public class ElectricEelBossAI : MonoBehaviour
+{
+    public Transform[] patroPoints;
+    private NavMeshAgent agent;
+    private int currentLoc;
+
+    //detect ship
+    public float detectionRadius = 10f;
+    public LayerMask shipLayer;
+    private Transform shipl;
+    private bool wasChasing = false;
+
+
+    //lighting strike
+    [Header("Attack Settings")]
+    public float attackRange = 3f;
+    public float attackCooldown = 5f;
+    public GameObject lightningPrefab;
+
+    private float lastAttackTime;
+    private bool isAttacking = false; //testing
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+        agent = GetComponent<NavMeshAgent>();
+        if (patroPoints.Length > 0)
+        {
+            agent.SetDestination(patroPoints[currentLoc].position); //set where its going to pathfind too
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        EncounterPlayer();
+        if (shipl != null)
+        {
+          
+            float distance = Vector3.Distance(transform.position, shipl.position);
+
+            if (distance > attackRange)
+            {
+                wasChasing = true;
+               
+                agent.SetDestination(shipl.position);
+            }
+            else
+            {
+                //attack
+                wasChasing = true;
+
+                if (Time.time >= lastAttackTime + attackCooldown)
+                {
+                    StartCoroutine(Attack());
+                }
+            }
+        }
+        else
+        {
+            //if (!agent.pathPending && agent.remainingDistance < 0.5)
+            //{
+            //    GoToNextPoint(); //subject to change
+            //}
+            if (wasChasing)
+            {
+                wasChasing = false;
+                GoToNextPoint(); //restart patrol after chasing
+            }
+
+            // Normal patrol
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                GoToNextPoint();
+            }
+        }
+       
+       
+
+
+    }
+    public void EncounterPlayer()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, shipLayer);
+        if (hits.Length > 0)
+        {
+            shipl = hits[0].transform;
+         
+        }
+        else
+        {
+            shipl = null; //if move out then continuing patrolling
+          
+
+        }
+
+        //testing for now
+    }
+    public void GoToNextPoint()
+    {
+        if (patroPoints.Length == 0)
+            return;
+
+        //currentLoc = (currentLoc + 1) % patroPoints.Length;
+        currentLoc = Random.Range(0, patroPoints.Length);
+        agent.SetDestination(patroPoints[currentLoc].position);
+    }
+
+    //attack test
+    IEnumerator Attack()
+    {
+        isAttacking = true;
+        lastAttackTime = Time.time;
+
+        int boltCount = Random.Range(2, 6); //change later see how
+
+        for (int i = 0; i < boltCount; i++)
+        {
+            SpawnLighting();
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        isAttacking = false;
+    }
+
+    public void SpawnLighting()
+    {
+        Vector3 strikePosition;
+
+      //50% hit ship
+        if (Random.value < 0.5f)
+        {
+            strikePosition = shipl.position;
+        }
+        else
+        {
+            //randomly around ship
+            Vector2 randomCircle = Random.insideUnitCircle * 3f;
+            strikePosition = shipl.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+        }
+
+        Instantiate(lightningPrefab, strikePosition + Vector3.up * 5f, Quaternion.identity);
+    }
+}
