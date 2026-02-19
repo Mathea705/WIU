@@ -539,7 +539,7 @@ MonoBehaviour:
   detectionRadius: 15
   shipLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   attackRange: 3
   attackCooldown: 5
   lightningPrefab: {fileID: 7038995798858152066, guid: b24ee23860141f54ba6d57326d29c04e, type: 3}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 1589235965}
   - component: {fileID: 1589235964}
   - component: {fileID: 1589235968}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: testPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
