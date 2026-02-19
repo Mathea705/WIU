@@ -3,10 +3,10 @@ using Unity.Cinemachine;
 
 public class DriveTrigger : MonoBehaviour
 {
-    [SerializeField] private Camera            playerCamera;
+    [SerializeField] private CinemachineCamera    playerCamera;
     [SerializeField] private CinemachineCamera boatCamera;
     [SerializeField] private PlayerController  playerController;
-    [SerializeField] private Transform         ship;
+    [SerializeField] private Transform  ship;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float turnSpeed = 60f;
