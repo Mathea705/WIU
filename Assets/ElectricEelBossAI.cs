@@ -26,8 +26,8 @@ public class ElectricEelBossAI : MonoBehaviour
 
 
     [Header("Retreat State")]
-    public float retreatRange = 20f;
-    public float retreatCooldown = 5f;
+    public float retreatRange = 50f;
+    public float retreatCooldown = 3f;
     public bool isRetreating = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,12 +43,13 @@ public class ElectricEelBossAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
+     
         if (isRetreating)
             return;
 
         EncounterPlayer();
+
+
         if (shipl != null)
         {
           
@@ -148,7 +149,7 @@ public class ElectricEelBossAI : MonoBehaviour
         Vector3 retreatPoint = transform.position + directionAway * retreatRange; //retreating distance away from player
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(retreatPoint, out hit, 5f, NavMesh.AllAreas)) //find valid position in mesh to travel to
+        if (NavMesh.SamplePosition(retreatPoint, out hit, 5f, NavMesh.AllAreas)) //find valid position in mes
         {
             agent.SetDestination(hit.position);
         }
