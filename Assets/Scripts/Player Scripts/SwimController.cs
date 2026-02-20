@@ -8,6 +8,7 @@ public class SwimController : MonoBehaviour
     [SerializeField] private Transform        lookPivot;
 
     [SerializeField] private GameObject splashParticlePrefab;
+    [SerializeField] private GameObject splashImagePrefab;
 
     [SerializeField] private float swimSpeed     = 3.5f;
     [SerializeField] private float buoyancy      = 2.0f;
@@ -68,10 +69,17 @@ public class SwimController : MonoBehaviour
 
     private void SpawnSplash(float surfaceY)
     {
-       
         Vector3 pos = new(_rb.position.x, surfaceY, _rb.position.z);
-        GameObject splash = Instantiate(splashParticlePrefab, pos, Quaternion.identity);
-        Destroy(splash, 1f);
+
+    
+            GameObject splash = Instantiate(splashParticlePrefab, pos, Quaternion.identity);
+            Destroy(splash, 1f);
+        
+
+       
+            GameObject image = Instantiate(splashImagePrefab, pos, Quaternion.identity);
+            Destroy(image, 2f);
+        
     }
 
 
