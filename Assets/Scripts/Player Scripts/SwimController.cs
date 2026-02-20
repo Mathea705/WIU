@@ -48,11 +48,11 @@ public class SwimController : MonoBehaviour
     public void EnterWater(float surfaceY)
     {
         if (_isSwimming) return;
-        _waterSurfaceY           = surfaceY;
-        _isSwimming              = true;
+        _waterSurfaceY   = surfaceY;
+        _isSwimming   = true;
         playerController.enabled = false;
-        _rb.useGravity           = false;
-        _rb.linearVelocity       = Vector3.zero;
+        _rb.useGravity  = false;
+        _rb.linearVelocity  = Vector3.zero;
         float e = lookPivot.localEulerAngles.x;
         _xRotation = e > 180f ? e - 360f : e;
         SpawnSplash(surfaceY);
@@ -60,9 +60,9 @@ public class SwimController : MonoBehaviour
 
     public void ExitWater()
     {
-        _isSwimming              = false;
+        _isSwimming  = false;
         playerController.enabled = true;
-        _rb.useGravity           = true;
+        _rb.useGravity  = true;
         SetUnderwater(false);
         SpawnSplash(_waterSurfaceY);
     }
