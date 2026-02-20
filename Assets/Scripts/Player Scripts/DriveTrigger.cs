@@ -3,13 +3,15 @@ using Unity.Cinemachine;
 
 public class DriveTrigger : MonoBehaviour
 {
-    [SerializeField] private Camera            playerCamera;
+    [SerializeField] private CinemachineCamera    playerCamera;
     [SerializeField] private CinemachineCamera boatCamera;
     [SerializeField] private PlayerController  playerController;
-    [SerializeField] private Transform         ship;
+    [SerializeField] private Transform  ship;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float turnSpeed = 60f;
+
+    [SerializeField] private GameObject steerIcon;
 
     private Rigidbody playerRb;
 
@@ -24,7 +26,10 @@ public class DriveTrigger : MonoBehaviour
     private void Update()
     {
         if ((_inRange || _driving) && Input.GetKeyDown(KeyCode.E))
+        {
             SetDriving(!_driving);
+            steerIcon.SetActive(false);
+        }
 
         if (_driving)
             HandleSteering();
@@ -53,12 +58,26 @@ public class DriveTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            steerIcon.SetActive(true);
             _inRange = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+         if (other.CompareTag("Player") && !_driving)
+        {
+            steerIcon.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            steerIcon.SetActive(false);
             _inRange = false;
+        }
     }
 }
