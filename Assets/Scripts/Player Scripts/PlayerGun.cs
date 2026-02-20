@@ -1,7 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using TMPro;
+
 
 public class GunController : MonoBehaviour
 {
@@ -16,6 +17,23 @@ public class GunController : MonoBehaviour
     [SerializeField] private AudioSource SFX_gunshot;
     [SerializeField] private AudioSource SFX_reload;
 
+    [Header("Gun Lerp Stuff")]
+    [SerializeField] private float movementSwayAmount = 10f;
+    [SerializeField] private float mouseSwayAmount = 2f;
+    [SerializeField] private float swaySmooth = 8f;
+    [SerializeField] private float LERP_ADS = 10f;
+    [SerializeField] private float LERP_GUNPOS = 20f;
+    [SerializeField] private float LERP_AIMINACCURACY = 5f;
+    [SerializeField] private float LERP_INPUTSWAY = 10f;
+    [SerializeField] private float LERP_RECOILTRANSFORM = 10f;
+    [SerializeField] private float LERP_RECOILROT = 5f;
+
+    private Vector2 currentSway;
+    private Vector2 swayVelocity;
+    private Vector2 mouseDelta;
+
+    private Rigidbody playerRb;
+
     [Header("UI")]
     [SerializeField] private Image left;
     [SerializeField] private Image right;
@@ -26,16 +44,33 @@ public class GunController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float mouseSensitivity = 1f;
-    [SerializeField] private float aimSmooth = 10f;
+    [SerializeField] private float MOVEINACCURACY = 0.1f;
+    [SerializeField] private float CROSSHAIROFFSET = 70f;
+    [SerializeField] private float HIPFIREINACCURACY = 0.5f;
+    [SerializeField] private float ADSINACCURACY = -0.15f;
+    [SerializeField] private Vector3 adsPosRecoilLowerBound = new Vector3(0f, 0.05f, -0.05f);
+    [SerializeField] private Vector3 adsPosRecoilUpperBound = new Vector3(0f, 0.1f, 0.05f);
+    [SerializeField] private Vector3 adsRotRecoilLowerBound = new Vector3(-20f, -3f, -1f);
+    [SerializeField] private Vector3 adsRotRecoilUpperBound = new Vector3(-10f, 3f, 1f);
+    [SerializeField] private Vector3 hipPosRecoilLowerBound = new Vector3(0f, 0.05f, -0.25f);
+    [SerializeField] private Vector3 hipPosRecoilUpperBound = new Vector3(0f, 0.25f, 0.25f);
+    [SerializeField] private Vector3 hipRotRecoilLowerBound = new Vector3(-60f, -5f, -3f);
+    [SerializeField] private Vector3 hipRotRecoilUpperBound = new Vector3(-20f, 5f, 3f);
+
+    [SerializeField] private int maxAmmo = 20;
+
+    [SerializeField] private bool isOperatingGun;
+    [SerializeField] private bool isFullAuto;
+    [SerializeField] private float firerateCooldown;
+
+    private float shootCooldown;
 
     private bool shootAction;
     private bool adsAction;
     private bool reloadAction;
 
-    private const int maxAmmo = 7;
     private int currentAmmo;
 
-    private bool isOperatingGun;
     private bool canShoot = true;
     private bool isReloading;
 
@@ -46,9 +81,17 @@ public class GunController : MonoBehaviour
     private Vector3 recoilOffset;
     private Quaternion recoilRotation;
 
+    private Camera playerCam;
+
     private Vector3 localGunOffset = new Vector3(0.5f, 0.5f, 1.5f);
 
+    [SerializeField] private Vector3 OFFSETDEFAULT = new Vector3(0.5f, 0.5f, 1.5f);
+    [SerializeField] private Vector3 OFFSETADS = new Vector3(0f, 0.85f, 1.6f);
+
     private LayerMask shootLayers;
+
+    private Vector2 playerInputVector;
+    private Vector2 inputSway;
 
     void Awake()
     {
@@ -57,7 +100,11 @@ public class GunController : MonoBehaviour
         reloadAction = Input.GetKey(KeyCode.R);
 
         currentAmmo = maxAmmo;
+
+        playerRb = player.GetComponent<Rigidbody>();
         //shootLayers = LayerMask.GetMask("geometry");
+
+        playerCam = Camera.main;
     }
 
     void Update()
@@ -66,14 +113,19 @@ public class GunController : MonoBehaviour
         adsAction = Input.GetKey(KeyCode.Mouse1);
         reloadAction = Input.GetKey(KeyCode.R);
 
-        isOperatingGun = true;
-        
         HandleADS();
         HandleShooting();
         HandleReload();
+        HandleRecoil();
         UpdateUI();
         UpdateGunTransform();
         UpdateCrosshair();
+
+        shootCooldown -= Time.deltaTime;
+        if (shootCooldown < 0f)
+        {
+            shootCooldown = 0f;
+        }
     }
 
     // -------------------------
@@ -82,18 +134,27 @@ public class GunController : MonoBehaviour
 
     void HandleShooting()
     {
+        aimInaccuracy += Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) ? MOVEINACCURACY : 0;
+
+        lowerAimBound = adsAction ? ADSINACCURACY : HIPFIREINACCURACY;
+
+        aimInaccuracy = Mathf.Lerp(aimInaccuracy, lowerAimBound, Time.deltaTime * LERP_AIMINACCURACY);
+
         if (!isOperatingGun || isReloading) return;
 
-        aimInaccuracy = Mathf.Lerp(aimInaccuracy, lowerAimBound, Time.deltaTime * 5f);
-       
-        if (shootAction && canShoot && currentAmmo > 0)
+        if (shootAction && canShoot && currentAmmo > 0 && shootCooldown <= 0f)
         {
-            canShoot = false;
+            if (!isFullAuto)
+            {
+                canShoot = false;
+            }
             currentAmmo--;
+            shootCooldown = firerateCooldown;
+
             SFX_gunshot.Play();
 
             float deviation = aimInaccuracy / 10f;
-            Ray ray = Camera.main.ViewportPointToRay(
+            Ray ray = playerCam.ViewportPointToRay(
                 new Vector3(
                     0.5f + Random.Range(-deviation, deviation),
                     0.5f + Random.Range(-deviation, deviation),
@@ -108,17 +169,32 @@ public class GunController : MonoBehaviour
 
             muzzleFlash.Play();
 
-            recoilOffset = new Vector3(
-                Random.Range(-0.1f, 0.1f),
-                Random.Range(0.05f, 0.25f),
-                Random.Range(-0.25f, 0.25f));
+            if (adsAction)
+            {
+                recoilOffset = new Vector3(
+                    Random.Range(adsPosRecoilLowerBound.x, adsPosRecoilUpperBound.x),
+                    Random.Range(adsPosRecoilLowerBound.y, adsPosRecoilUpperBound.y),
+                    Random.Range(adsPosRecoilLowerBound.z, adsPosRecoilUpperBound.z));
 
-            recoilRotation = Quaternion.Euler(
-                Random.Range(-60f, -20f),
-                Random.Range(-5f, 5f),
-                Random.Range(-3f, 3f));
+                recoilRotation = Quaternion.Euler(
+                    Random.Range(adsRotRecoilLowerBound.x, adsRotRecoilUpperBound.x),
+                    Random.Range(adsRotRecoilLowerBound.y, adsRotRecoilUpperBound.y),
+                    Random.Range(adsRotRecoilLowerBound.z, adsRotRecoilUpperBound.z));
+                aimInaccuracy = 1.5f;
+            }
+            else
+            {
+                recoilOffset = new Vector3(
+                    Random.Range(hipPosRecoilLowerBound.x, hipPosRecoilUpperBound.x),
+                    Random.Range(hipPosRecoilLowerBound.y, hipPosRecoilUpperBound.y),
+                    Random.Range(hipPosRecoilLowerBound.z, hipPosRecoilUpperBound.z));
 
-            aimInaccuracy = 3f;
+                recoilRotation = Quaternion.Euler(
+                    Random.Range(hipRotRecoilLowerBound.x, hipRotRecoilUpperBound.x),
+                    Random.Range(hipRotRecoilLowerBound.y, hipRotRecoilUpperBound.y),
+                    Random.Range(hipRotRecoilLowerBound.z, hipRotRecoilUpperBound.z));
+                aimInaccuracy = 3f;
+            }
         }
 
         if (!shootAction)
@@ -132,10 +208,10 @@ public class GunController : MonoBehaviour
     void HandleADS()
     {
         Vector3 targetOffset = adsAction
-            ? new Vector3(0f, 0.85f, 1.6f)
-            : new Vector3(0.5f, 0.5f, 1.5f);
+            ? OFFSETADS
+            : OFFSETDEFAULT;
 
-        localGunOffset = Vector3.Lerp(localGunOffset, targetOffset, Time.deltaTime * aimSmooth);
+        localGunOffset = Vector3.Lerp(localGunOffset, targetOffset, Time.deltaTime * LERP_ADS);
     }
 
     // -------------------------
@@ -171,16 +247,39 @@ public class GunController : MonoBehaviour
     {
         if (!isOperatingGun) return;
 
-        recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, Time.deltaTime * 6f);
+        playerInputVector.x = (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) ? 1 : !Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) ? -1 : 0) * 50;
+        playerInputVector.y = (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) ? 1 : !Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.W) ? -1 : 0) * 50;
+
         recoilRotation = Quaternion.Lerp(recoilRotation, Quaternion.identity, Time.deltaTime * 10f);
 
-        Vector3 worldOffset = Camera.main.transform.TransformDirection(localGunOffset);
-        gun.transform.position = player.transform.position + worldOffset + recoilOffset;
-        gun.transform.rotation = Camera.main.transform.rotation * recoilRotation;
-        Vector3 angles = gun.transform.eulerAngles;
-        //angles.y -= 90f;
-        gun.transform.eulerAngles = angles;
+        Vector3 worldOffset = playerCam.transform.TransformDirection(localGunOffset);
+        gun.transform.position = Vector3.Lerp(gun.transform.position, playerCam.transform.position + worldOffset + recoilOffset, Time.deltaTime * LERP_GUNPOS);
+        gun.transform.rotation = Quaternion.Lerp(gun.transform.rotation, playerCam.transform.rotation, Time.deltaTime * LERP_GUNPOS) * recoilRotation;
+
+        inputSway = Vector2.Lerp(inputSway, playerInputVector, Time.deltaTime * LERP_INPUTSWAY);
+
+        Quaternion finalRotation =
+            playerCam.transform.rotation *
+            Quaternion.Euler(inputSway.y, inputSway.x, 0f) *
+            recoilRotation;
+
+        gun.transform.rotation = Quaternion.Lerp(
+            gun.transform.rotation,
+            finalRotation,
+            Time.deltaTime * 10f);
+
     }
+
+    // -------------------------
+    // Gun Recoil
+    // -------------------------
+    
+    void HandleRecoil()
+    {
+        recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, Time.deltaTime * LERP_RECOILTRANSFORM);
+        recoilRotation = Quaternion.Lerp(recoilRotation, Quaternion.identity, Time.deltaTime * LERP_RECOILROT);
+    }
+
 
     // -------------------------
     // UI
@@ -189,10 +288,13 @@ public class GunController : MonoBehaviour
     void UpdateUI()
     {
         ammoText.enabled = isOperatingGun;
-        reloadText.enabled = isReloading;
+        reloadText.enabled = isReloading || (isOperatingGun && currentAmmo <= 0);
+
+        ammoText.color = currentAmmo <= Mathf.Ceil(maxAmmo / 3.5f) ? Color.red : Color.black;
+        reloadText.color = currentAmmo <= Mathf.Ceil(maxAmmo / 3.5f) ? Color.red : Color.black;
 
         ammoText.text = $"{currentAmmo}/{maxAmmo}";
-        reloadText.text = isReloading ? "[R...]" : "";
+        reloadText.text = isReloading ? "[R...]" : currentAmmo <= 0 ? "[R!]" : "";
     }
 
     // -------------------------
@@ -201,11 +303,14 @@ public class GunController : MonoBehaviour
 
     void UpdateCrosshair()
     {
-        float offset = aimInaccuracy * 70f;
-
+        float offset = aimInaccuracy * CROSSHAIROFFSET;
+        
         left.rectTransform.anchoredPosition = new Vector2(-offset, 0);
         right.rectTransform.anchoredPosition = new Vector2(offset, 0);
         top.rectTransform.anchoredPosition = new Vector2(0, offset);
         bottom.rectTransform.anchoredPosition = new Vector2(0, -offset);
+
+        top.enabled = !adsAction;
+        //bottom.enabled = !adsAction;
     }
 }
