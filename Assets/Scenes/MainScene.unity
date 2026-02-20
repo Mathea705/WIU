@@ -649,7 +649,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1210129167620174417, guid: 64a11c533c5e8b5499a474122aa7430e, type: 3}
 --- !u!1 &110412002 stripped
@@ -2836,7 +2836,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7640321492218759047, guid: 954672818b6d7d24e8b3ed4a8b11bc09, type: 3}
 --- !u!1 &579526995 stripped
@@ -6379,7 +6379,7 @@ MonoBehaviour:
   boatCamera: {fileID: 1520260566}
   playerController: {fileID: 1804429238}
   ship: {fileID: 886090183}
-  moveSpeed: 5
+  moveSpeed: 15
   turnSpeed: 60
   steerIcon: {fileID: 906960680}
 --- !u!1001 &1605015624
@@ -6922,7 +6922,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7640321492218759047, guid: 954672818b6d7d24e8b3ed4a8b11bc09, type: 3}
 --- !u!1 &1804058396
