@@ -18,8 +18,14 @@ public class WaterVolume : MonoBehaviour
 
         _swimmer = other.GetComponentInChildren<SwimController>()
                 ?? other.GetComponent<SwimController>();
+    }
 
-        _swimmer?.EnterWater(_surfaceY);
+    void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag("Player") || _swimmer == null) return;
+        if (_swimmer.IsSwimming) return;
+        if (other.bounds.center.y < _surfaceY)
+            _swimmer.EnterWater(_surfaceY);
     }
 
     void OnTriggerExit(Collider other)

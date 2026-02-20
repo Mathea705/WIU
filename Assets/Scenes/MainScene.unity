@@ -981,8 +981,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.1, y: 4.48, z: -3.77}
+  m_LocalRotation: {x: 0.19689636, y: 0, z: 0, w: 0.98042434}
+  m_LocalPosition: {x: -16.280014, y: 10.76, z: -15.815238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2756,6 +2756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwimController
   playerController: {fileID: 1804429238}
   lookPivot: {fileID: 2064865063}
+  splashParticlePrefab: {fileID: 6181715011419689461, guid: b74e7bdbd1d1fab46b665bca49caaddb, type: 3}
   swimSpeed: 3.5
   buoyancy: 2
   mouseSensitivity: 2
