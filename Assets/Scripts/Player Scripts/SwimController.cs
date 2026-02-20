@@ -8,6 +8,7 @@ public class SwimController : MonoBehaviour
     [SerializeField] private Transform        lookPivot;
 
     [SerializeField] private GameObject splashParticlePrefab;
+    [SerializeField] private GameObject splashImagePrefab;
 
     [SerializeField] private float swimSpeed     = 3.5f;
     [SerializeField] private float buoyancy      = 2.0f;
@@ -47,11 +48,11 @@ public class SwimController : MonoBehaviour
     public void EnterWater(float surfaceY)
     {
         if (_isSwimming) return;
-        _waterSurfaceY           = surfaceY;
-        _isSwimming              = true;
+        _waterSurfaceY   = surfaceY;
+        _isSwimming   = true;
         playerController.enabled = false;
-        _rb.useGravity           = false;
-        _rb.linearVelocity       = Vector3.zero;
+        _rb.useGravity  = false;
+        _rb.linearVelocity  = Vector3.zero;
         float e = lookPivot.localEulerAngles.x;
         _xRotation = e > 180f ? e - 360f : e;
         SpawnSplash(surfaceY);
@@ -59,19 +60,26 @@ public class SwimController : MonoBehaviour
 
     public void ExitWater()
     {
-        _isSwimming              = false;
+        _isSwimming  = false;
         playerController.enabled = true;
-        _rb.useGravity           = true;
+        _rb.useGravity  = true;
         SetUnderwater(false);
         SpawnSplash(_waterSurfaceY);
     }
 
     private void SpawnSplash(float surfaceY)
     {
-       
         Vector3 pos = new(_rb.position.x, surfaceY, _rb.position.z);
-        GameObject splash = Instantiate(splashParticlePrefab, pos, Quaternion.identity);
-        Destroy(splash, 1f);
+
+    
+            GameObject splash = Instantiate(splashParticlePrefab, pos, Quaternion.identity);
+            Destroy(splash, 1f);
+        
+
+       
+            GameObject image = Instantiate(splashImagePrefab, pos, Quaternion.identity);
+            Destroy(image, 2f);
+        
     }
 
 
