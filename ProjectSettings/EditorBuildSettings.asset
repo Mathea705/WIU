@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BermudaScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/BaliScene.unity
+    guid: ddd8df71aead4744189428195c1bc71d
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 5fcc59dcc65fc3542a93b073bc36bd5a
+  - enabled: 1
+    path: Assets/Scenes/TasmaniaRegion.unity
+    guid: 85bf25f2a275a5d47b239275eb8e517c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
