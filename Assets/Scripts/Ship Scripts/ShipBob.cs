@@ -12,15 +12,11 @@ public class ShipBob : MonoBehaviour
     public float sampleDistance  = 2f;
     public float bankAmount      = 0.5f;
 
-    private Vector3    _startLocalPos;
-    private Quaternion _startLocalRot;
-    private float      _lastYRotation;
+    private float _lastYRotation;
 
     private void Start()
     {
-        _startLocalPos  = transform.localPosition;
-        _startLocalRot  = transform.localRotation;
-        _lastYRotation  = transform.eulerAngles.y;
+        _lastYRotation = transform.eulerAngles.y;
     }
 
     private void FixedUpdate()
@@ -32,7 +28,7 @@ public class ShipBob : MonoBehaviour
         Vector3 targetPos = new Vector3(transform.position.x, heightCenter + waterlineOffset, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.fixedDeltaTime * bobSmoothSpeed);
 
-        float turnRate  = Mathf.DeltaAngle(_lastYRotation, transform.eulerAngles.y) / Time.fixedDeltaTime;
+        float turnRate   = Mathf.DeltaAngle(_lastYRotation, transform.eulerAngles.y) / Time.fixedDeltaTime;
         float pitchAngle = Mathf.Atan2(heightFront - heightBack, sampleDistance * 2f) * Mathf.Rad2Deg * tiltAmount;
         float rollAngle  = Mathf.Sin(Time.time * 0.7f + transform.position.z * 0.5f) * tiltAmount * 0.5f
                          - turnRate * bankAmount;
