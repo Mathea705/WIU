@@ -27,8 +27,13 @@ public class ElectricEelBossAI : MonoBehaviour
 
     [Header("Retreat State")]
     public float retreatRange = 50f;
-    public float retreatCooldown = 3f;
+    public float retreatCooldown = 5f;
     public bool isRetreating = false;
+
+
+    //testing cause ai keeps tracking and returning to player while retreating
+    //works then dosen't work so very confusing
+    private float ignorePlayerUntil = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,11 +48,21 @@ public class ElectricEelBossAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+
+
+        
         if (isRetreating)
             return;
 
-        EncounterPlayer();
+        if (Time.time > ignorePlayerUntil) //hope
+        {
+            EncounterPlayer();
+        }
+        else
+        {
+            shipl = null;
+        }
+
 
 
         if (shipl != null)
@@ -154,10 +169,18 @@ public class ElectricEelBossAI : MonoBehaviour
             agent.SetDestination(hit.position);
         }
 
-        yield return new WaitForSeconds(retreatCooldown);
+        // yield return new WaitForSeconds(retreatCooldown);
 
+        //retreat then only wait a while before going back
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f); //wait bit more for now lol
         isRetreating = false;
 
+        ignorePlayerUntil = Time.time + 3f; //fix should pls work
+        shipl = null;
         // Resume patrol cleanly
         GoToNextPoint();
     }
@@ -177,6 +200,6 @@ public class ElectricEelBossAI : MonoBehaviour
             strikePosition = shipl.position + new Vector3(randomCircle.x, 0, randomCircle.y);
         }
 
-        Instantiate(lightningPrefab, strikePosition + Vector3.up * 5f, Quaternion.identity);
+        Instantiate(lightningPrefab, strikePosition + Vector3.up * 10f, Quaternion.identity);
     }
 }
