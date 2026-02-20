@@ -178,7 +178,7 @@ public class GunController : MonoBehaviour
         gun.transform.position = player.transform.position + worldOffset + recoilOffset;
         gun.transform.rotation = Camera.main.transform.rotation * recoilRotation;
         Vector3 angles = gun.transform.eulerAngles;
-        angles.y -= 90f;
+        //angles.y -= 90f;
         gun.transform.eulerAngles = angles;
     }
 
