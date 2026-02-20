@@ -68,7 +68,7 @@ public class SwimController : MonoBehaviour
 
     private void SpawnSplash(float surfaceY)
     {
-        if (splashParticlePrefab == null) return;
+       
         Vector3 pos = new(_rb.position.x, surfaceY, _rb.position.z);
         GameObject splash = Instantiate(splashParticlePrefab, pos, Quaternion.identity);
         Destroy(splash, 1f);
