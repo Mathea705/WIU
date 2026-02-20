@@ -223,14 +223,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class SwordfishAI : MonoBehaviour
+public class Swordfish : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
+    public Transform player;   // optional
+    public Transform boat;     // main target
 
-    [Header("Detection (Cone)")]
+    [Header("Detection (Cone - Z Forward)")]
     public float detectionRange = 30f;
-    public float viewAngle = 90f; // cone angle
+    public float viewAngle = 90f;
 
     [Header("Movement")]
     public float swimSpeed = 6f;
@@ -243,25 +244,29 @@ public class SwordfishAI : MonoBehaviour
 
     [Header("Rest")]
     public float retreatSpeed = 8f;
-    public float retreatDistance = 30f;
     public float restDuration = 5f;
 
-    private float lastAttackTime;
+    [Header("Hit Detection")]
+    public float hitDistance = 2f; // collision distance
 
+    private float lastAttackTime;
     private Vector3 moveDirection;
     private Vector3 lockedPosition;
-
     private float stateTimer;
 
     private enum State { Swim, Aim, Dash, Rest }
     private State currentState;
 
+    private bool hasHitBoatThisDash = false;
+
+    // ================= START =================
     void Start()
     {
         currentState = State.Swim;
         PickRandomDirection();
     }
 
+    // ================= UPDATE =================
     void Update()
     {
         switch (currentState)
@@ -292,97 +297,95 @@ public class SwordfishAI : MonoBehaviour
 
         stateTimer -= Time.deltaTime;
         if (stateTimer <= 0)
-        {
             PickRandomDirection();
-        }
     }
 
     void PickRandomDirection()
     {
-        moveDirection = new Vector3(
-            Random.Range(-1f, 1f),
-            0,
-            Random.Range(-1f, 1f)
-        ).normalized;
-
+        moveDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         stateTimer = Random.Range(2f, 4f);
     }
 
-    // ================= CONE DETECTION =================
+    // ================= DETECTION =================
     void DetectPlayer()
     {
-        if (player == null) return;
+        if (boat == null) return;
 
-        Vector3 dirToPlayer = (player.position - transform.position);
-        float distance = dirToPlayer.magnitude;
+        Vector3 dirToBoat = boat.position - transform.position;
+        float distance = dirToBoat.magnitude;
 
-        if (distance > detectionRange)
-            return;
+        if (distance > detectionRange) return;
 
-        dirToPlayer.Normalize();
+        dirToBoat.Normalize();
 
-        // Angle check using forward (Z-axis)
-        float angle = Vector3.Angle(transform.forward, dirToPlayer);
+        float angle = Vector3.Angle(transform.forward, dirToBoat);
 
-        if (angle < viewAngle / 2f)
+        if (angle < viewAngle / 2f && Time.time >= lastAttackTime + attackCooldown)
         {
-            if (Time.time >= lastAttackTime + attackCooldown)
-            {
-                currentState = State.Aim;
-                stateTimer = aimDuration;
-
-                lockedPosition = player.position;
-            }
+            currentState = State.Aim;
+            stateTimer = aimDuration;
+            lockedPosition = boat.position;
+            hasHitBoatThisDash = false;
         }
     }
 
     // ================= AIM =================
     void Aim()
     {
+        if (boat == null) return;
+
         stateTimer -= Time.deltaTime;
 
-        Vector3 dir = (player.position - transform.position).normalized;
+        Vector3 dir = (boat.position - transform.position).normalized;
         RotateTowards(dir);
 
         if (stateTimer <= 0)
-        {
             currentState = State.Dash;
-        }
     }
 
-   void Dash()
-{
-    Vector3 dir = (lockedPosition - transform.position).normalized;
-    Move(dir, dashSpeed);
-
-    // Check distance to boat
-    if (player != null)
+    // ================= DASH =================
+    void Dash()
     {
-        float distanceToBoat = Vector3.Distance(transform.position, player.position);
-        if (distanceToBoat < 1.5f) // adjust hit range
+        Vector3 dir = (lockedPosition - transform.position).normalized;
+
+        // Store previous position (for anti-skip detection)
+        Vector3 previousPosition = transform.position;
+
+        Move(dir, dashSpeed);
+
+        if (!hasHitBoatThisDash && boat != null)
         {
-            Debug.Log("Fish hit the boat!");
-            // Optional: start rest immediately after hitting
+            float currentDist = Vector3.Distance(transform.position, boat.position);
+            float previousDist = Vector3.Distance(previousPosition, boat.position);
+
+            if (currentDist <= hitDistance || previousDist <= hitDistance)
+            {
+                Debug.Log("collide");
+
+                hasHitBoatThisDash = true;
+
+                currentState = State.Rest;
+                stateTimer = restDuration;
+            }
+        }
+
+        // End dash if reached target
+        float distToTarget = Vector3.Distance(transform.position, lockedPosition);
+        if (distToTarget < 1.5f)
+        {
             currentState = State.Rest;
             stateTimer = restDuration;
         }
     }
 
-    float dist = Vector3.Distance(transform.position, lockedPosition);
-    if (dist < 1.5f)
-    {
-        currentState = State.Rest;
-        stateTimer = restDuration;
-    }
-}
-
     // ================= REST =================
     void Rest()
     {
+        if (boat == null) return;
+
         stateTimer -= Time.deltaTime;
 
-        Vector3 awayDir = (transform.position - player.position).normalized;
-        awayDir.y = 0;
+        Vector3 awayDir = (transform.position - boat.position).normalized;
         Move(awayDir, retreatSpeed);
 
         if (stateTimer <= 0)
@@ -413,9 +416,11 @@ public class SwordfishAI : MonoBehaviour
     // ================= DEBUG =================
     void OnDrawGizmos()
     {
+        // Detection range
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
+        // Cone lines (Z-forward)
         Vector3 left = Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward;
         Vector3 right = Quaternion.Euler(0, viewAngle / 2, 0) * transform.forward;
 
@@ -424,3 +429,6 @@ public class SwordfishAI : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + right * detectionRange);
     }
 }
+
+
+
