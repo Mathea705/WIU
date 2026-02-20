@@ -542,7 +542,7 @@ MonoBehaviour:
     m_Bits: 64
   attackRange: 3
   attackCooldown: 5
-  lightningPrefab: {fileID: 7038995798858152066, guid: b24ee23860141f54ba6d57326d29c04e, type: 3}
+  lightningPrefab: {fileID: 8266058151962970350, guid: 3c66b0eb40f14f849bc01bbef40853d0, type: 3}
   retreatRange: 50
   retreatCooldown: 3
   isRetreating: 0
