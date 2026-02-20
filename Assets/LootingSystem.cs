@@ -1,9 +1,11 @@
 using UnityEngine;
+
 public enum Rarity
 {
     Common,
     Rare
 }
+[System.Serializable]
 public class LootingSystem
 {
     public string itemName;

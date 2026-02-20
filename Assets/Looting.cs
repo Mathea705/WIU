@@ -1,19 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+
 public class Looting : MonoBehaviour
 {
+    
     public List<LootingSystem> possibleLoot; //loot that will spawn
 
     public List<(string, int)> GenerateLoot()
     {
         List<(string, int)> dropped = new List<(string, int)>();
+        List<LootingSystem> commons = new List<LootingSystem>();
 
-        var commons = possibleLoot.Where(i => i.rarity == Rarity.Common).ToList();
-        var rares = possibleLoot.Where(i => i.rarity == Rarity.Rare).ToList();
+
+        //check list, if item = common put in commons, same thing for rare.
+        foreach (LootingSystem item in possibleLoot)
+        {
+            if (item.rarity == Rarity.Common)
+            {
+                commons.Add(item);
+            }
+        }
+
+        List<LootingSystem> rares = new List<LootingSystem>();
+
+        foreach (LootingSystem item in possibleLoot)
+        {
+            if (item.rarity == Rarity.Common)
+            {
+                commons.Add(item);
+            }
+        }
+        //whether or not its rare or common
+        //var commons = possibleLoot.Where(i => i.rarity == Rarity.Common).ToList(); //this one uses linq to make it neater, but i use the option above cause i can understand it better
+        //var rares = possibleLoot.Where(i => i.rarity == Rarity.Rare).ToList(); //with lingq
 
         //ensure mostly common
-        int commonCount = Random.Range(2, 5);
+        int commonCount = Random.Range(2, 5); //ensure within this rnage the amount of common items
         for (int i = 0; i < commonCount; i++)
         {
             LootingSystem item = commons[Random.Range(0, commons.Count)];
