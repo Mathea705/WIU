@@ -2001,7 +2001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &906960681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2719,7 +2719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1688777239}
   - component: {fileID: 1688777240}
-  - component: {fileID: 1688777241}
+  - component: {fileID: 1688777242}
   m_Layer: 0
   m_Name: SwimController
   m_TagString: Untagged
@@ -2759,7 +2759,7 @@ MonoBehaviour:
   swimSpeed: 3.5
   buoyancy: 2
   mouseSensitivity: 2
---- !u!114 &1688777241
+--- !u!114 &1688777242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2768,9 +2768,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1688777238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1daec2def56fa24c92bcd5bd058f387, type: 3}
+  m_Script: {fileID: 11500000, guid: 42f724018d7c0ec49bcb5d4359c6295b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnderwaterFX
+  swimController: {fileID: 1688777240}
+  playerCamera: {fileID: 330585545}
+  underwaterMaterial: {fileID: 2100000, guid: 375fef951520a6c4faaf27443bd3e7bd, type: 2}
+  fxTransitionSpeed: 4
+  underwaterBackgroundColor: {r: 0.18943577, g: 0.4623088, b: 0.6084906, a: 1}
+  underwaterFogColor: {r: 0.057849757, g: 0.34360573, b: 0.49056602, a: 1}
+  underwaterFogDensity: 0.09
+  fogTransitionSpeed: 3
+  maxDarkDepth: 10
+  minVignetteIntensity: 0.2
+  maxVignetteIntensity: 0.65
 --- !u!1 &1804058396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,7 +2818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.700012, y: -39.5}
+  m_AnchoredPosition: {x: 15.699951, y: -39.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804058398
