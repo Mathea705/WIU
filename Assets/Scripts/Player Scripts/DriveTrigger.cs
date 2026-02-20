@@ -34,7 +34,7 @@ public class DriveTrigger : MonoBehaviour
     {
         _driving                    = driving;
         playerController.enabled    = !driving;
-        playerCamera.enabled        = !driving;
+        // playerCamera.enabled        = !driving;
         boatCamera.gameObject.SetActive(driving);
         playerRb.linearVelocity = Vector3.zero;
     }
