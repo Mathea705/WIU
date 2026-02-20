@@ -43,6 +43,20 @@ public class PlayerController : MonoBehaviour
         HandleLook();
         HandleJump();
         HandleHeadBob();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 3f))
+            {
+                chestLogic chest = hit.collider.GetComponent<chestLogic>();
+                if (chest != null)
+                {
+                    chest.OpenChest();
+                }
+            }
+        }
     }
 
     void FixedUpdate()
