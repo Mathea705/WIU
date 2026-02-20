@@ -59,7 +59,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefractionStrength: 1
-    - _RippleStrength: 20
+    - _RippleStrength: 50
     - _Smoothness: 1
     - _SpecularStrength: 5000
     - _WaveAmplitude: 0.15
