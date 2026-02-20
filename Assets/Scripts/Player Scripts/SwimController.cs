@@ -7,6 +7,8 @@ public class SwimController : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Transform        lookPivot;
 
+    private StaminaSystem _stamina;
+
     [SerializeField] private GameObject splashParticlePrefab;
     [SerializeField] private GameObject splashImagePrefab;
 
@@ -27,7 +29,8 @@ public class SwimController : MonoBehaviour
 
     void Awake()
     {
-        _rb = playerController.GetComponent<Rigidbody>();
+        _rb      = playerController.GetComponent<Rigidbody>();
+        _stamina = playerController.GetComponentInChildren<StaminaSystem>();
     }
 
     void Update()
@@ -55,6 +58,7 @@ public class SwimController : MonoBehaviour
         _rb.linearVelocity  = Vector3.zero;
         float e = lookPivot.localEulerAngles.x;
         _xRotation = e > 180f ? e - 360f : e;
+        if (_stamina != null) _stamina.SetSwimming(true);
         SpawnSplash(surfaceY);
     }
 
@@ -64,6 +68,7 @@ public class SwimController : MonoBehaviour
         playerController.enabled = true;
         _rb.useGravity  = true;
         SetUnderwater(false);
+        if (_stamina != null) _stamina.SetSwimming(false);
         SpawnSplash(_waterSurfaceY);
     }
 

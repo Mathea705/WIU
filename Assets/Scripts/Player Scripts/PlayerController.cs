@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float bobFrequency = 2f;
     [SerializeField] private float bobAmplitude = 0.05f;
 
-    [SerializeField] private Transform lookPivot;
+    [SerializeField] private Transform     lookPivot;
+    [SerializeField] private StaminaSystem stamina;
 
     private Rigidbody rb;
     private float xRotation = 0f;
@@ -36,6 +37,9 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         defaultCameraY = lookPivot.transform.localPosition.y;
+
+        if (stamina == null)
+            stamina = GetComponentInChildren<StaminaSystem>();
     }
 
     void Update()
@@ -81,7 +85,10 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.2f, groundMask);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (stamina != null) stamina.OnJump();
+        }
     }
 
     private void HandleMovement()
@@ -89,7 +96,9 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical   = Input.GetAxis("Vertical");
 
-        float speed = moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? runMultiplier : 1f);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && (stamina == null || stamina.CanRun);
+
+        float speed = moveSpeed * (isRunning ? runMultiplier : 1f);
 
         Vector3 movement = transform.right * horizontal + transform.forward * vertical;
         rb.MovePosition(rb.position + movement * (speed * Time.fixedDeltaTime));
@@ -101,9 +110,11 @@ public class PlayerController : MonoBehaviour
         float vertical   = Input.GetAxis("Vertical");
         bool isMoving    = (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f) && isGrounded;
 
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && (stamina == null || stamina.CanRun);
+
         if (isMoving)
         {
-            float bobSpeed = bobFrequency * (Input.GetKey(KeyCode.LeftShift) ? runMultiplier : 1f);
+            float bobSpeed = bobFrequency * (isRunning ? runMultiplier : 1f);
             bobTimer += Time.deltaTime * bobSpeed;
 
             Vector3 pos = lookPivot.transform.localPosition;
