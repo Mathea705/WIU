@@ -48,6 +48,8 @@ public class GunController : MonoBehaviour
     [SerializeField] private float CROSSHAIROFFSET = 70f;
     [SerializeField] private float HIPFIREINACCURACY = 0.5f;
     [SerializeField] private float ADSINACCURACY = -0.15f;
+    [SerializeField] private float SHOOTINACCURACYADS = 1.5f;
+    [SerializeField] private float SHOOTINACCURACYHIP = 3f;
     [SerializeField] private Vector3 adsPosRecoilLowerBound = new Vector3(0f, 0.05f, -0.05f);
     [SerializeField] private Vector3 adsPosRecoilUpperBound = new Vector3(0f, 0.1f, 0.05f);
     [SerializeField] private Vector3 adsRotRecoilLowerBound = new Vector3(-20f, -3f, -1f);
@@ -160,13 +162,13 @@ public class GunController : MonoBehaviour
                     0.5f + Random.Range(-deviation, deviation),
                     0f));
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 2000f, shootLayers))
+            if (Physics.Raycast(ray, out RaycastHit hit, 2000f))//, shootLayers))
             {
-                hitParticle.transform.position = hit.point;
-                hitParticle.transform.rotation = Quaternion.LookRotation(hit.normal);
+                //hitParticle.transform.position = hit.point;
+                //hitParticle.transform.rotation = Quaternion.LookRotation(hit.normal);
                 hitParticle.Play();
             }
-
+            
             muzzleFlash.Play();
 
             if (adsAction)
@@ -180,7 +182,7 @@ public class GunController : MonoBehaviour
                     Random.Range(adsRotRecoilLowerBound.x, adsRotRecoilUpperBound.x),
                     Random.Range(adsRotRecoilLowerBound.y, adsRotRecoilUpperBound.y),
                     Random.Range(adsRotRecoilLowerBound.z, adsRotRecoilUpperBound.z));
-                aimInaccuracy = 1.5f;
+                aimInaccuracy = SHOOTINACCURACYADS;
             }
             else
             {
@@ -193,7 +195,7 @@ public class GunController : MonoBehaviour
                     Random.Range(hipRotRecoilLowerBound.x, hipRotRecoilUpperBound.x),
                     Random.Range(hipRotRecoilLowerBound.y, hipRotRecoilUpperBound.y),
                     Random.Range(hipRotRecoilLowerBound.z, hipRotRecoilUpperBound.z));
-                aimInaccuracy = 3f;
+                aimInaccuracy = SHOOTINACCURACYHIP;
             }
         }
 
