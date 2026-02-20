@@ -355,7 +355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 557673296}
   boat: {fileID: 1591200363}
-  hitCollider: {fileID: 1836492268}
   detectionRange: 60
   viewAngle: 90
   swimSpeed: 6
@@ -364,8 +363,8 @@ MonoBehaviour:
   attackCooldown: 4
   aimDuration: 1
   retreatSpeed: 8
-  retreatDistance: 25
   restDuration: 5
+  hitDistance: 2
 --- !u!4 &261391852
 Transform:
   m_ObjectHideFlags: 0
