@@ -14,6 +14,8 @@ public class StaminaSystem : MonoBehaviour
     [SerializeField] private RectTransform flashIcon;
     [SerializeField] private HealthSystem  health;   
 
+    [SerializeField] private GameObject divingGearIcon;
+
     public bool  CanRun    => !_isExhausted;
     public bool  IsRunning => _isRunning;
     public float Ratio     => _stamina / maxStamina;
@@ -62,7 +64,11 @@ public class StaminaSystem : MonoBehaviour
 
     public void SetSwimming(bool swimming) => _isSwimming = swimming;
 
-    public void ApplyDiverBoost() => swimDrainRate *= 0.2f;
+    public void ApplyDiverBoost()
+    {
+        swimDrainRate *= 0.2f;
+        divingGearIcon.SetActive(true);
+    } 
 
     public void OnJump()
     {
