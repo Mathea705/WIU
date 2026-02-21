@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8196956493743777555}
   - component: {fileID: 8991699917763869895}
   - component: {fileID: 2271579548985129996}
+  - component: {fileID: 2917547860333435297}
   m_Layer: 0
-  m_Name: Bennelli_M4
+  m_Name: Bennelli_M4 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,6 +93,61 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2917547860333435297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644763078791420997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1543beccd807b41935c92ee2500612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunController
+  player: {fileID: 0}
+  playerInput: {fileID: 5217497375756276885, guid: 2a48e540b0b36a84ba903c62f479ae10, type: 3}
+  gun: {fileID: 1644763078791420997}
+  hitParticle: {fileID: 4269686950372267743, guid: 2a48e540b0b36a84ba903c62f479ae10, type: 3}
+  muzzleFlash: {fileID: 6316508090392272876, guid: 2a48e540b0b36a84ba903c62f479ae10, type: 3}
+  SFX_gunshot: {fileID: 340427849726412568, guid: 2a48e540b0b36a84ba903c62f479ae10, type: 3}
+  SFX_reload: {fileID: 6071999588489506197, guid: 2a48e540b0b36a84ba903c62f479ae10, type: 3}
+  movementSwayAmount: 10
+  mouseSwayAmount: 2
+  swaySmooth: 8
+  LERP_ADS: 10
+  LERP_GUNPOS: 20
+  LERP_AIMINACCURACY: 5
+  LERP_INPUTSWAY: 10
+  LERP_RECOILTRANSFORM: 5
+  LERP_RECOILROT: 1
+  left: {fileID: 0}
+  right: {fileID: 0}
+  top: {fileID: 0}
+  bottom: {fileID: 0}
+  ammoText: {fileID: 0}
+  reloadText: {fileID: 0}
+  mouseSensitivity: 1
+  MOVEINACCURACY: 0.1
+  CROSSHAIROFFSET: 70
+  HIPFIREINACCURACY: 0.5
+  ADSINACCURACY: -0.15
+  SHOOTINACCURACYADS: 5
+  SHOOTINACCURACYHIP: 5
+  adsPosRecoilLowerBound: {x: 0, y: 0.05, z: -0.05}
+  adsPosRecoilUpperBound: {x: 0, y: 0.1, z: 0.05}
+  adsRotRecoilLowerBound: {x: -20, y: -5, z: -3}
+  adsRotRecoilUpperBound: {x: -5, y: 5, z: 3}
+  hipPosRecoilLowerBound: {x: 0, y: 0.05, z: -1}
+  hipPosRecoilUpperBound: {x: 0, y: 0.25, z: -0.5}
+  hipRotRecoilLowerBound: {x: -60, y: -5, z: -3}
+  hipRotRecoilUpperBound: {x: -20, y: 5, z: 3}
+  maxAmmo: 10
+  isOperatingGun: 1
+  isFullAuto: 0
+  firerateCooldown: 1
+  OFFSETDEFAULT: {x: 0.2, y: -0.3, z: 1}
+  OFFSETADS: {x: 0, y: -0.185, z: 1}
 --- !u!1 &4306788132989518854
 GameObject:
   m_ObjectHideFlags: 0
