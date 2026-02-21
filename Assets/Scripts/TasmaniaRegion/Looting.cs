@@ -25,9 +25,9 @@ public class Looting : MonoBehaviour
 
         foreach (LootingSystem item in possibleLoot)
         {
-            if (item.rarity == Rarity.Common)
+            if (item.rarity == Rarity.Rare)
             {
-                commons.Add(item);
+                rares.Add(item);
             }
         }
         //whether or not its rare or common
@@ -44,7 +44,7 @@ public class Looting : MonoBehaviour
         }
 
        //30% will appear rare
-        if (Random.value < 0.3f && rares.Count > 0)
+        if (Random.value < 0.4f && rares.Count > 0)
         {
             LootingSystem rareItem = rares[Random.Range(0, rares.Count)];
             int amount = Random.Range(rareItem.minAmount, rareItem.maxAmount + 1);

@@ -13,6 +13,7 @@ public class LootingSystem
     public Rarity rarity; //rareity of the item, 4 common, 2 rare for now
     public int minAmount;
     public int maxAmount;
-    [Range(0f, 1f)]
-    public float dropChance; //randomise chance of drop
+    //[Range(0f, 1f)]
+    
+    //public float dropChance; //randomise chance of drop
 }
