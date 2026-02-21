@@ -7,6 +7,7 @@ public class DriveTrigger : MonoBehaviour
     [SerializeField] private CinemachineCamera boatCamera;
     [SerializeField] private PlayerController  playerController;
     [SerializeField] private Transform  ship;
+    [SerializeField] private BoxCollider hullBounds;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float turnSpeed = 60f;
@@ -50,9 +51,32 @@ public class DriveTrigger : MonoBehaviour
         float forward = Input.GetAxis("Vertical");
 
         ship.Rotate(Vector3.up, turn * turnSpeed * Time.deltaTime);
-        ship.position += ship.forward * (forward * moveSpeed * Time.deltaTime);
 
+        if (forward != 0f)
+        {
+            Vector3 prev = ship.position;
+            ship.position += ship.forward * (forward * moveSpeed * Time.deltaTime);
 
+           
+            if (forward > 0f && IsHullOverlappingWorld())
+                ship.position = prev;
+        }
+    }
+
+    private bool IsHullOverlappingWorld()
+    {
+        Vector3 worldCenter = hullBounds.transform.TransformPoint(hullBounds.center);
+        Vector3 halfExtents = Vector3.Scale(hullBounds.size * 0.5f, hullBounds.transform.lossyScale);
+
+        Collider[] hits = Physics.OverlapBox(worldCenter, halfExtents, hullBounds.transform.rotation,
+                                             ~0, QueryTriggerInteraction.Ignore);
+        foreach (Collider hit in hits)
+        {
+            if (hit.transform.IsChildOf(ship) || hit.transform == ship) continue;
+            if (hit.CompareTag("Player")) continue;
+            return true;
+        }
+        return false;
     }
 
     private void OnTriggerEnter(Collider other)
