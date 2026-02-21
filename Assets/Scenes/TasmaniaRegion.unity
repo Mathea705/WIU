@@ -701,6 +701,7 @@ MonoBehaviour:
   bobFrequency: 10
   bobAmplitude: 0.1
   lookPivot: {fileID: 1026361677}
+  stamina: {fileID: 0}
 --- !u!54 &770967245
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -991,37 +992,31 @@ MonoBehaviour:
     rarity: 0
     minAmount: 1
     maxAmount: 5
-    dropChance: 0.7
   - itemName: Rubber
     sellValue: 2
     rarity: 0
     minAmount: 1
     maxAmount: 10
-    dropChance: 0.7
   - itemName: Ammonition
     sellValue: 0
     rarity: 0
     minAmount: 9
     maxAmount: 45
-    dropChance: 0.7
   - itemName: Copper Wire
     sellValue: 4
     rarity: 0
     minAmount: 1
     maxAmount: 45
-    dropChance: 0.7
   - itemName: Battery
     sellValue: 15
     rarity: 1
     minAmount: 1
     maxAmount: 2
-    dropChance: 0.3
   - itemName: Oil
     sellValue: 25
     rarity: 1
     minAmount: 1
     maxAmount: 2
-    dropChance: 0.3
 --- !u!1 &1026361676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,37 +1852,31 @@ MonoBehaviour:
     rarity: 0
     minAmount: 1
     maxAmount: 5
-    dropChance: 0.7
   - itemName: Rubber
     sellValue: 2
     rarity: 0
     minAmount: 1
     maxAmount: 10
-    dropChance: 0.7
   - itemName: Ammonition
     sellValue: 0
     rarity: 0
     minAmount: 9
     maxAmount: 45
-    dropChance: 0.7
   - itemName: Copper Wire
     sellValue: 4
     rarity: 0
     minAmount: 1
     maxAmount: 45
-    dropChance: 0.7
   - itemName: Battery
     sellValue: 15
     rarity: 1
     minAmount: 1
     maxAmount: 2
-    dropChance: 0.3
   - itemName: Oil
     sellValue: 25
     rarity: 1
     minAmount: 1
     maxAmount: 2
-    dropChance: 0.3
 --- !u!114 &1659522624
 MonoBehaviour:
   m_ObjectHideFlags: 0
