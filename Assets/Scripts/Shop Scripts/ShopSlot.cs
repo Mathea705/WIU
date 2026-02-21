@@ -17,20 +17,27 @@ public class ShopSlot : MonoBehaviour
     public static readonly List<GameObject> SoldGuns    = new List<GameObject>();
     public static bool GunOwned;
 
-    private AurumManager _aurum;
-    private ShopItemData _data;
-    private GameObject   _gunObject;
-    private bool  _purchased;
+    private AurumManager     _aurum;
+    private ShopItemData     _data;
+    private GameObject       _gunObject;
+    private HealthSystem     _health;
+    private PlayerController _player;
+    private StaminaSystem    _stamina;
+    private bool             _purchased;
 
 
-    public void Setup(ShopItemData data, AurumManager aurum, GameObject gunObject = null, bool alreadyOwned = false)
+    public void Setup(ShopItemData data, AurumManager aurum, GameObject gunObject = null, bool alreadyOwned = false,
+                      HealthSystem health = null, PlayerController player = null, StaminaSystem stamina = null)
     {
-        _data = data;
-        _aurum = aurum;
+        _data      = data;
+        _aurum     = aurum;
         _gunObject = gunObject;
+        _health    = health;
+        _player    = player;
+        _stamina   = stamina;
 
-        icon.sprite = data.icon;
-        nameText.text = data.itemName;
+        icon.sprite    = data.icon;
+        nameText.text  = data.itemName;
         descText.text  = data.description;
         priceText.text = data.price.ToString();
 
@@ -38,9 +45,9 @@ public class ShopSlot : MonoBehaviour
 
         if (alreadyOwned)
         {
-            _purchased = true;
+            _purchased             = true;
             buyButton.interactable = false;
-            buyText.text = "BOUGHT";
+            buyText.text           = "BOUGHT";
         }
     }
 
@@ -50,9 +57,27 @@ public class ShopSlot : MonoBehaviour
         if (_gunObject != null && GunOwned) return;
         if (!_aurum.DeductAurum(_data.price)) return;
 
-        _purchased  = true;
+        // Consumables: apply effect and leave button active
+        switch (_data.effect)
+        {
+            case ItemEffect.Medkit:
+                if (_health != null) _health.HealFull();
+                return;
+            case ItemEffect.SpeedBoost:
+                if (_player != null) _player.ApplySpeedBoost(_data.effectValue, _data.effectDuration);
+                return;
+            case ItemEffect.DiverSuit:
+                if (_stamina != null) _stamina.ApplyDiverBoost();
+                _purchased             = true;
+                buyButton.interactable = false;
+                buyText.text           = "BOUGHT";
+                return;
+        }
+
+        // Gun purchase — lock the slot
+        _purchased             = true;
         buyButton.interactable = false;
-        buyText.text = "BOUGHT";
+        buyText.text           = "BOUGHT";
 
         if (_gunObject != null)
         {

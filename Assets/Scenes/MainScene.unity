@@ -6219,6 +6219,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   aurumManager: {fileID: 1508183011}
+  healthSystem: {fileID: 961130422}
+  playerController: {fileID: 1804429238}
+  staminaSystem: {fileID: 0}
   gunsPanel: {fileID: 1016724797}
   itemsPanel: {fileID: 608070108}
   sellPanel: {fileID: 2119288359}
@@ -6235,7 +6238,10 @@ MonoBehaviour:
   - {fileID: 93557580}
   - {fileID: 1768881950}
   - {fileID: 1295428060}
-  shopItems: []
+  shopItems:
+  - {fileID: 11400000, guid: ec7655a396884e04da1dc85edb46f5c4, type: 2}
+  - {fileID: 11400000, guid: 8e7632f1ef2a5094db9759f971b4d1eb, type: 2}
+  - {fileID: 11400000, guid: 68f765860dda09c4686951eb03803e08, type: 2}
   slotPrefab: {fileID: 8265940955233951084, guid: 53c6a6ffb92bfee44a65957d98038047, type: 3}
 --- !u!1 &826982003
 GameObject:
@@ -7576,6 +7582,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 983834684}
+  - component: {fileID: 983834686}
+  - component: {fileID: 983834685}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -7602,6 +7610,44 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0003851862, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &983834685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983834683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &983834686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983834683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: -40
+    m_Right: 0
+    m_Top: 100
+    m_Bottom: 90
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 160, y: 30}
+  m_Spacing: {x: -100, y: 200}
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!1001 &999441838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8666,7 +8712,7 @@ GameObject:
   - component: {fileID: 1203586485}
   - component: {fileID: 1203586484}
   m_Layer: 5
-  m_Name: ShopCanvas
+  m_Name: ShopkeeperCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11053,7 +11099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9def68c3cec7e1c449846a3863f79cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AurumManager
-  startingAurum: 0
+  startingAurum: 500
   aurumTextHUD: {fileID: 139486236}
   aurumTextShop: {fileID: 1096539400}
 --- !u!1 &1520260565

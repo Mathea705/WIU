@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f06f1684be3c24c93850db022c554e, type: 3}
+  m_Name: Medkit_SO
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
+  itemName: Medkit
+  description: Say goodbye to all your wounds, cuts and scratches.
+  icon: {fileID: 21300000, guid: 02261a6960a456143bae0a0fe7ce3aa4, type: 3}
+  price: 150
+  effect: 1
+  effectValue: 100
+  effectDuration: 0

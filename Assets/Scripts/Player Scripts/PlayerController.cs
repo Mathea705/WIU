@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -102,6 +103,18 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = transform.right * horizontal + transform.forward * vertical;
         rb.MovePosition(rb.position + movement * (speed * Time.fixedDeltaTime));
+    }
+
+    public void ApplySpeedBoost(float multiplier, float duration)
+    {
+        StartCoroutine(SpeedBoostCoroutine(multiplier, duration));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
+    {
+        moveSpeed *= multiplier;
+        yield return new WaitForSeconds(duration);
+        moveSpeed /= multiplier;
     }
 
     private void HandleHeadBob()

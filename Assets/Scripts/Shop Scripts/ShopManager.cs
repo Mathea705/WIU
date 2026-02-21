@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private AurumManager aurumManager;
+    [SerializeField] private AurumManager    aurumManager;
+    [SerializeField] private HealthSystem    healthSystem;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private StaminaSystem   staminaSystem;
 
     [SerializeField] private GameObject gunsPanel;
     [SerializeField] private GameObject itemsPanel;
@@ -45,7 +48,7 @@ public class ShopManager : MonoBehaviour
         foreach (ShopItemData data in items)
         {
             ShopSlot slot = Instantiate(slotPrefab, content);
-            slot.Setup(data, aurumManager);
+            slot.Setup(data, aurumManager, null, false, healthSystem, playerController, staminaSystem);
         }
     }
 

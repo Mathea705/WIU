@@ -62,6 +62,8 @@ public class StaminaSystem : MonoBehaviour
 
     public void SetSwimming(bool swimming) => _isSwimming = swimming;
 
+    public void ApplyDiverBoost() => swimDrainRate *= 0.2f;
+
     public void OnJump()
     {
         _stamina = Mathf.Max(0f, _stamina - jumpCost);
