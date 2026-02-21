@@ -36,7 +36,6 @@ public class ShopSlot : MonoBehaviour
 
         _purchased             = true;
         buyButton.interactable = false;
-        // priceText.text         = "Purchased";
         buyText.text = "BOUGHT";
 
     }
