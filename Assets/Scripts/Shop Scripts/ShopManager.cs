@@ -12,13 +12,19 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Transform itemsContent;
 
     [SerializeField] private ShopItemData[] gunItems;
+    [SerializeField] private GameObject[]  sceneGuns;
     [SerializeField] private ShopItemData[] shopItems;
 
     [SerializeField] private ShopSlot slotPrefab;
 
     private void Start()
     {
-        Populate(gunsContent, gunItems);
+        for (int i = 0; i < gunItems.Length; i++)
+        {
+            ShopSlot slot = Instantiate(slotPrefab, gunsContent);
+            GameObject gun = (sceneGuns != null && i < sceneGuns.Length) ? sceneGuns[i] : null;
+            slot.Setup(gunItems[i], aurumManager, gun);
+        }
         Populate(itemsContent, shopItems);
         ShowGuns();
     }

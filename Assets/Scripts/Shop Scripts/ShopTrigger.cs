@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.Cinemachine;
 using TMPro;
@@ -20,10 +21,14 @@ public class ShopTrigger : MonoBehaviour
     [SerializeField] private float cameraRotateDuration = 0.5f;
     [SerializeField] private AurumManager AurumManager;
 
+    [SerializeField] private GameObject   gunCanvas;
+    [SerializeField] private GameObject[] allGuns;
+
     private bool _inRange;
     private bool _shopOpen;
     private bool _hasVisited;
     private Quaternion _shopCameraStartRotation;
+    private readonly List<GameObject> _gunsActiveBeforeShop = new List<GameObject>();
 
     private void Start()
     {
@@ -48,6 +53,15 @@ public class ShopTrigger : MonoBehaviour
         foreach (GameObject panel in hideOnShopOpen)
             panel.SetActive(false);
 
+        _gunsActiveBeforeShop.Clear();
+        if (allGuns != null)
+            foreach (GameObject gun in allGuns)
+                if (gun != null && gun.activeSelf)
+                {
+                    _gunsActiveBeforeShop.Add(gun);
+                    gun.SetActive(false);
+                }
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible   = true;
         dialogueBox.SetActive(true);
@@ -64,6 +78,23 @@ public class ShopTrigger : MonoBehaviour
         playerController.enabled = true;
         foreach (GameObject panel in hideOnShopOpen)
             panel.SetActive(true);
+
+        foreach (GameObject gun in _gunsActiveBeforeShop)
+            if (gun != null) gun.SetActive(true);
+
+        foreach (GameObject gun in ShopSlot.PendingGuns)
+            if (gun != null) gun.SetActive(true);
+        ShopSlot.PendingGuns.Clear();
+
+        if (gunCanvas != null)
+        {
+            bool ownsGun = false;
+            if (allGuns != null)
+                foreach (GameObject gun in allGuns)
+                    if (gun != null && gun.activeSelf) { ownsGun = true; break; }
+            gunCanvas.SetActive(ownsGun);
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible   = false;
         dialogueBox.SetActive(false);

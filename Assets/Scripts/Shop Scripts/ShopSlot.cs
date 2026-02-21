@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,17 +13,21 @@ public class ShopSlot : MonoBehaviour
 
     [SerializeField] private TMP_Text buyText;
 
+    public static readonly List<GameObject> PendingGuns = new List<GameObject>();
+
     private AurumManager _aurum;
     private ShopItemData _data;
-    private bool         _purchased;
+    private GameObject   _gunObject;
+    private bool  _purchased;
 
-    public void Setup(ShopItemData data, AurumManager aurum)
+    public void Setup(ShopItemData data, AurumManager aurum, GameObject gunObject = null)
     {
-        _data  = data;
+        _data = data;
         _aurum = aurum;
+        _gunObject = gunObject;
 
-        if (data.icon != null) icon.sprite = data.icon;
-        nameText.text  = data.itemName;
+        icon.sprite = data.icon;
+        nameText.text = data.itemName;
         descText.text  = data.description;
         priceText.text = data.price.ToString();
 
@@ -34,9 +39,10 @@ public class ShopSlot : MonoBehaviour
         if (_purchased) return;
         if (!_aurum.DeductAurum(_data.price)) return;
 
-        _purchased             = true;
+        _purchased  = true;
         buyButton.interactable = false;
         buyText.text = "BOUGHT";
 
+        if (_gunObject != null) PendingGuns.Add(_gunObject);
     }
 }
