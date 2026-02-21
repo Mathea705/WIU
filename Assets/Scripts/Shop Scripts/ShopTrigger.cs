@@ -48,6 +48,8 @@ public class ShopTrigger : MonoBehaviour
         foreach (GameObject panel in hideOnShopOpen)
             panel.SetActive(false);
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
         dialogueBox.SetActive(true);
         shopContent.SetActive(false);
         StartCoroutine(PlayDialogue());
@@ -62,6 +64,8 @@ public class ShopTrigger : MonoBehaviour
         playerController.enabled = true;
         foreach (GameObject panel in hideOnShopOpen)
             panel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible   = false;
         dialogueBox.SetActive(false);
         shopContent.SetActive(false);
     }
@@ -71,8 +75,14 @@ public class ShopTrigger : MonoBehaviour
         dialogueText.text = "";
         var typeWait = new WaitForSeconds(typeSpeed);
         string line = _hasVisited ? repeatLine : firstLine;
+         if (!_hasVisited)
+        {
+             AurumManager.AddAurum(200);
+        }
+        
         _hasVisited = true;
-         AurumManager.AddAurum(200);
+
+       
         foreach (char c in line)
         {
             dialogueText.text += c;
@@ -80,7 +90,6 @@ public class ShopTrigger : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(RotateCamera());
-       
         dialogueBox.SetActive(false);
         shopContent.SetActive(true);
     }
