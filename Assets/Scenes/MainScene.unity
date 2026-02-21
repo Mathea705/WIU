@@ -11099,7 +11099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9def68c3cec7e1c449846a3863f79cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AurumManager
-  startingAurum: 500
+  startingAurum: 0
   aurumTextHUD: {fileID: 139486236}
   aurumTextShop: {fileID: 1096539400}
 --- !u!1 &1520260565
