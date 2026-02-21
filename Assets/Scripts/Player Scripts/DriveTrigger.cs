@@ -13,8 +13,11 @@ public class DriveTrigger : MonoBehaviour
     [SerializeField] private float turnSpeed = 60f;
 
     [SerializeField] private GameObject steerIcon;
+    [SerializeField] private GameObject   gunCanvas;
+    [SerializeField] private GameObject[] allGuns;
 
-    private Rigidbody playerRb;
+    private Rigidbody  playerRb;
+    private GameObject _gunActiveBeforeDrive;
 
     private bool _inRange;
     private bool _driving;
@@ -43,6 +46,25 @@ public class DriveTrigger : MonoBehaviour
         playerCamera.enabled        = !driving;
         boatCamera.gameObject.SetActive(driving);
         playerRb.linearVelocity = Vector3.zero;
+
+        if (driving)
+        {
+            _gunActiveBeforeDrive = null;
+            if (allGuns != null)
+                foreach (GameObject gun in allGuns)
+                    if (gun != null && gun.activeSelf)
+                    {
+                        _gunActiveBeforeDrive = gun;
+                        gun.SetActive(false);
+                        break;
+                    }
+            if (gunCanvas != null) gunCanvas.SetActive(false);
+        }
+        else
+        {
+            if (_gunActiveBeforeDrive != null) _gunActiveBeforeDrive.SetActive(true);
+            if (gunCanvas != null) gunCanvas.SetActive(_gunActiveBeforeDrive != null);
+        }
     }
 
     private void HandleSteering()

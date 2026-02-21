@@ -646,7 +646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &80045760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6224,6 +6224,7 @@ MonoBehaviour:
   sellPanel: {fileID: 2119288359}
   gunsContent: {fileID: 2010387250}
   itemsContent: {fileID: 983834684}
+  sellContent: {fileID: 827486325}
   gunItems:
   - {fileID: 11400000, guid: 8749d0bac39e5934db02f67a39ee6120, type: 2}
   - {fileID: 11400000, guid: c784b5672693d8242bb6ab5bbabbb49f, type: 2}
@@ -6320,6 +6321,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 827486325}
+  - component: {fileID: 827486327}
+  - component: {fileID: 827486326}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -6346,6 +6349,44 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0003851862, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &827486326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827486324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &827486327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827486324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: -50
+    m_Right: 0
+    m_Top: 100
+    m_Bottom: 90
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 160, y: 30}
+  m_Spacing: {x: -100, y: 200}
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -11012,7 +11053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9def68c3cec7e1c449846a3863f79cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AurumManager
-  startingAurum: 1000
+  startingAurum: 0
   aurumTextHUD: {fileID: 139486236}
   aurumTextShop: {fileID: 1096539400}
 --- !u!1 &1520260565
@@ -11338,6 +11379,12 @@ MonoBehaviour:
   moveSpeed: 15
   turnSpeed: 60
   steerIcon: {fileID: 906960680}
+  gunCanvas: {fileID: 80045759}
+  allGuns:
+  - {fileID: 1162880379}
+  - {fileID: 93557580}
+  - {fileID: 1768881950}
+  - {fileID: 1295428060}
 --- !u!1001 &1605015624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14348,6 +14395,7 @@ MonoBehaviour:
   - {fileID: 521557009}
   - {fileID: 521557009}
   - {fileID: 521557009}
+  - {fileID: 80045759}
   dialogueBox: {fileID: 629099125}
   dialogueText: {fileID: 306969236}
   firstLine: Nice to see a new face. Welcome to the shop. You say you want to take
@@ -14364,6 +14412,7 @@ MonoBehaviour:
   - {fileID: 93557580}
   - {fileID: 1768881950}
   - {fileID: 1295428060}
+  shopManager: {fileID: 808620637}
 --- !u!65 &2076157408
 BoxCollider:
   m_ObjectHideFlags: 0

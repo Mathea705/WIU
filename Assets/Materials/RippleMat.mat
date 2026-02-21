@@ -67,11 +67,11 @@ Material:
     - _WaveSpeed: 1.2
     m_Colors:
     - _Color: {r: 0.3938679, g: 0.7877358, b: 0.7763194, a: 1}
-    - _DeepColor: {r: 0.3037113, g: 0.54766715, b: 0.6132076, a: 0.29803923}
+    - _DeepColor: {r: 0.30371127, g: 0.5476671, b: 0.6132076, a: 0.654902}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _ScrollSpeedA: {r: 0.03, g: 0.02, b: 0, a: 0}
     - _ScrollSpeedB: {r: -0.02, g: 0.05, b: 0, a: 0}
-    - _ShallowColor: {r: 0.45334193, g: 0.7274875, b: 0.7688679, a: 0.34509805}
+    - _ShallowColor: {r: 0.4533419, g: 0.72748744, b: 0.76886797, a: 0.77254903}
     - _WaveDir1: {r: 1, g: 0.7, b: 0, a: 0}
     - _WaveDir2: {r: -0.5, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

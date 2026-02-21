@@ -23,6 +23,7 @@ public class ShopTrigger : MonoBehaviour
 
     [SerializeField] private GameObject   gunCanvas;
     [SerializeField] private GameObject[] allGuns;
+    [SerializeField] private ShopManager  shopManager;
 
     private bool _inRange;
     private bool _shopOpen;
@@ -54,13 +55,21 @@ public class ShopTrigger : MonoBehaviour
             panel.SetActive(false);
 
         _gunsActiveBeforeShop.Clear();
+        ShopSlot.GunOwned = false;
         if (allGuns != null)
             foreach (GameObject gun in allGuns)
                 if (gun != null && gun.activeSelf)
                 {
+                    ShopSlot.GunOwned = true;
                     _gunsActiveBeforeShop.Add(gun);
                     gun.SetActive(false);
                 }
+
+        if (shopManager != null)
+        {
+            shopManager.RefreshBuy(_gunsActiveBeforeShop);
+            shopManager.RefreshSell(_gunsActiveBeforeShop);
+        }
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible   = true;
@@ -80,7 +89,8 @@ public class ShopTrigger : MonoBehaviour
             panel.SetActive(true);
 
         foreach (GameObject gun in _gunsActiveBeforeShop)
-            if (gun != null) gun.SetActive(true);
+            if (gun != null && !ShopSlot.SoldGuns.Contains(gun)) gun.SetActive(true);
+        ShopSlot.SoldGuns.Clear();
 
         foreach (GameObject gun in ShopSlot.PendingGuns)
             if (gun != null) gun.SetActive(true);
