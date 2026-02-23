@@ -1,12 +1,11 @@
 using UnityEngine;
-
 public enum Rarity
 {
     Common,
     Rare
 }
-[System.Serializable]
-public class LootingSystem
+[CreateAssetMenu(fileName = "LootingItem", menuName = "Scriptable Objects/LootingItem1")]
+public class LootingItem : ScriptableObject
 {
     public string itemName;
     public int sellValue;
@@ -14,6 +13,6 @@ public class LootingSystem
     public int minAmount;
     public int maxAmount;
     //[Range(0f, 1f)]
-    
+
     //public float dropChance; //randomise chance of drop
 }

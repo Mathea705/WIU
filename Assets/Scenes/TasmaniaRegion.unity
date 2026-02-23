@@ -987,36 +987,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Looting
   possibleLoot:
-  - itemName: Scrap Iron
-    sellValue: 5
-    rarity: 0
-    minAmount: 1
-    maxAmount: 5
-  - itemName: Rubber
-    sellValue: 2
-    rarity: 0
-    minAmount: 1
-    maxAmount: 10
-  - itemName: Ammonition
-    sellValue: 0
-    rarity: 0
-    minAmount: 9
-    maxAmount: 45
-  - itemName: Copper Wire
-    sellValue: 4
-    rarity: 0
-    minAmount: 1
-    maxAmount: 45
-  - itemName: Battery
-    sellValue: 15
-    rarity: 1
-    minAmount: 1
-    maxAmount: 2
-  - itemName: Oil
-    sellValue: 25
-    rarity: 1
-    minAmount: 1
-    maxAmount: 2
+  - {fileID: 11400000, guid: 3b9b27bc7cd6a3b408470215bc47208f, type: 2}
+  - {fileID: 11400000, guid: 4170df82ab1ee7d4383d00b7036e832c, type: 2}
+  - {fileID: 11400000, guid: 4396a741ed308f742baf790f472a8139, type: 2}
+  - {fileID: 11400000, guid: 6dfacdc0c919b91449b5343862d4149d, type: 2}
+  - {fileID: 11400000, guid: 2c9c517fa3c54d34685a1f1483cb283f, type: 2}
+  - {fileID: 11400000, guid: c75990625a24a3440b49eb14a09ea600, type: 2}
 --- !u!1 &1026361676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,7 +1789,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!1 &1659522622
+--- !u!1 &1918442907
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1821,12 +1797,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1659522628}
-  - component: {fileID: 1659522627}
-  - component: {fileID: 1659522626}
-  - component: {fileID: 1659522625}
-  - component: {fileID: 1659522624}
-  - component: {fileID: 1659522623}
+  - component: {fileID: 1918442913}
+  - component: {fileID: 1918442912}
+  - component: {fileID: 1918442911}
+  - component: {fileID: 1918442910}
+  - component: {fileID: 1918442909}
+  - component: {fileID: 1918442908}
   m_Layer: 0
   m_Name: Chest Test (1)
   m_TagString: Untagged
@@ -1834,68 +1810,44 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1659522623
+--- !u!114 &1918442908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659522622}
+  m_GameObject: {fileID: 1918442907}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a48f194dbd2fec4c895e5c78ed09330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Looting
   possibleLoot:
-  - itemName: Scrap Iron
-    sellValue: 5
-    rarity: 0
-    minAmount: 1
-    maxAmount: 5
-  - itemName: Rubber
-    sellValue: 2
-    rarity: 0
-    minAmount: 1
-    maxAmount: 10
-  - itemName: Ammonition
-    sellValue: 0
-    rarity: 0
-    minAmount: 9
-    maxAmount: 45
-  - itemName: Copper Wire
-    sellValue: 4
-    rarity: 0
-    minAmount: 1
-    maxAmount: 45
-  - itemName: Battery
-    sellValue: 15
-    rarity: 1
-    minAmount: 1
-    maxAmount: 2
-  - itemName: Oil
-    sellValue: 25
-    rarity: 1
-    minAmount: 1
-    maxAmount: 2
---- !u!114 &1659522624
+  - {fileID: 11400000, guid: 3b9b27bc7cd6a3b408470215bc47208f, type: 2}
+  - {fileID: 11400000, guid: 4170df82ab1ee7d4383d00b7036e832c, type: 2}
+  - {fileID: 11400000, guid: 4396a741ed308f742baf790f472a8139, type: 2}
+  - {fileID: 11400000, guid: 6dfacdc0c919b91449b5343862d4149d, type: 2}
+  - {fileID: 11400000, guid: 2c9c517fa3c54d34685a1f1483cb283f, type: 2}
+  - {fileID: 11400000, guid: c75990625a24a3440b49eb14a09ea600, type: 2}
+--- !u!114 &1918442909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659522622}
+  m_GameObject: {fileID: 1918442907}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b96746eaf028db9418e36e8aa665e6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
---- !u!65 &1659522625
+--- !u!65 &1918442910
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659522622}
+  m_GameObject: {fileID: 1918442907}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1910,13 +1862,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1659522626
+--- !u!23 &1918442911
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659522622}
+  m_GameObject: {fileID: 1918442907}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1959,24 +1911,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1659522627
+--- !u!33 &1918442912
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659522622}
+  m_GameObject: {fileID: 1918442907}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1659522628
+--- !u!4 &1918442913
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659522622}
+  m_GameObject: {fileID: 1918442907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.25, y: -0.76, z: 14.67353}
+  m_LocalPosition: {x: -9.64, y: -0.76, z: 10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2175,4 +2127,4 @@ SceneRoots:
   - {fileID: 770967249}
   - {fileID: 1208615480}
   - {fileID: 907833586}
-  - {fileID: 1659522628}
+  - {fileID: 1918442913}
