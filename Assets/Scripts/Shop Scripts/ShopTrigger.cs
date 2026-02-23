@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Cinemachine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShopTrigger : MonoBehaviour
 {
@@ -27,13 +28,42 @@ public class ShopTrigger : MonoBehaviour
 
     private bool _inRange;
     private bool _shopOpen;
-    private bool _hasVisited;
+    private static bool _hasVisited;
     private Quaternion _shopCameraStartRotation;
     private readonly List<GameObject> _gunsActiveBeforeShop = new List<GameObject>();
+    private string[] _hideNames;
+
+    private void Awake()
+    {
+        // Cache panel names now, before sceneLoaded cleanup destroys scene-native duplicates.
+        _hideNames = new string[hideOnShopOpen.Length];
+        for (int i = 0; i < hideOnShopOpen.Length; i++)
+            if (hideOnShopOpen[i] != null)
+                _hideNames[i] = hideOnShopOpen[i].name;
+    }
+
+    private void OnEnable()  => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameObject p = GameObject.FindWithTag("Player");
+        if (p != null) playerController = p.GetComponent<PlayerController>();
+        RebindPanels();
+    }
+
+    private void RebindPanels()
+    {
+        if (_hideNames == null) return;
+        for (int i = 0; i < hideOnShopOpen.Length; i++)
+            if (hideOnShopOpen[i] == null && _hideNames[i] != null)
+                hideOnShopOpen[i] = GameObject.Find(_hideNames[i]);
+    }
 
     private void Start()
     {
         _shopCameraStartRotation = shopCamera.transform.localRotation;
+        RebindPanels(); // catch anything destroyed between Awake and Start
     }
 
     private void Update()
@@ -52,7 +82,7 @@ public class ShopTrigger : MonoBehaviour
         shopCamera.gameObject.SetActive(true);
         playerController.enabled = false;
         foreach (GameObject panel in hideOnShopOpen)
-            panel.SetActive(false);
+            if (panel != null) panel.SetActive(false);
 
         _gunsActiveBeforeShop.Clear();
         ShopSlot.GunOwned = false;
@@ -86,7 +116,7 @@ public class ShopTrigger : MonoBehaviour
         shopCamera.transform.localRotation = _shopCameraStartRotation;
         playerController.enabled = true;
         foreach (GameObject panel in hideOnShopOpen)
-            panel.SetActive(true);
+            if (panel != null) panel.SetActive(true);
 
         foreach (GameObject gun in _gunsActiveBeforeShop)
             if (gun != null && !ShopSlot.SoldGuns.Contains(gun)) gun.SetActive(true);

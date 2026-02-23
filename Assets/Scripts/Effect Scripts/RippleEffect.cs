@@ -19,6 +19,11 @@ public class RippleEffect : MonoBehaviour
 
     void Start()
     {
+        // Always refresh by tag — an Inspector-assigned reference may point to a
+        // scene-native ship that gets destroyed on reload, leaving a stale transform.
+        GameObject s = GameObject.FindWithTag("Ship");
+        if (s != null) shipTransform = s.transform;
+
         CurrRT = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat) { filterMode = FilterMode.Bilinear };
         PrevRT = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat) { filterMode = FilterMode.Bilinear };
         TempRT = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat) { filterMode = FilterMode.Bilinear };

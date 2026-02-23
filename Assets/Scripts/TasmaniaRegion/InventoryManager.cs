@@ -14,7 +14,13 @@ public class InventoryManager : MonoBehaviour
     }
     public void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     public void AddLootToInventory(List<(LootingItem, int)> loot)
     {

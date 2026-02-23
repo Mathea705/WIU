@@ -235,7 +235,7 @@ public class GunController : MonoBehaviour
 
     void UpdateGunTransform()
     {
-        if (!isOperatingGun) return;
+        if (!isOperatingGun || gun == null) return;
 
         playerInputVector.x = (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) ? 1 : !Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) ? -1 : 0) * 50;
         playerInputVector.y = (!Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.W) ? -1 : 0) * 50;

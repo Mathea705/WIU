@@ -58,7 +58,7 @@ Material:
     - _Normal_Strength: 0.99
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionStrength: 1
+    - _RefractionStrength: 1000
     - _RippleStrength: 50
     - _Smoothness: 1
     - _SpecularStrength: 5000
