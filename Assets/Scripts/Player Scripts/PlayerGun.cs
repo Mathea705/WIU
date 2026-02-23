@@ -171,22 +171,20 @@ public class GunController : MonoBehaviour
             if (adsAction)
             {
                 recoilOffset = (adsPosRecoilLowerBound + adsPosRecoilUpperBound) * 0.5f;
-                if (!isFullAuto)
-                {
-                    float adsKick = (adsRotRecoilLowerBound.x + adsRotRecoilUpperBound.x) * 0.5f;
-                    recoilRotation = Quaternion.Euler(-adsKick, 0f, 0f);
-                    aimInaccuracy = SHOOTINACCURACYADS;
-                }
+
+                float adsKick = (adsRotRecoilLowerBound.x + adsRotRecoilUpperBound.x) * 0.5f;
+                recoilRotation = Quaternion.Euler(-adsKick, 0f, 0f);
+                aimInaccuracy = SHOOTINACCURACYADS;
+
             }
             else
             {
                 recoilOffset = (hipPosRecoilLowerBound + hipPosRecoilUpperBound) * 0.5f;
-                if (!isFullAuto)
-                {
-                    float hipKick = (hipRotRecoilLowerBound.x + hipRotRecoilUpperBound.x) * 0.5f;
-                    recoilRotation = Quaternion.Euler(-hipKick, 0f, 0f);
-                }
+
+                float hipKick = (hipRotRecoilLowerBound.x + hipRotRecoilUpperBound.x) * 0.5f;
+                recoilRotation = Quaternion.Euler(-hipKick, 0f, 0f);
                 aimInaccuracy = SHOOTINACCURACYHIP;
+
             }
         }
 
@@ -291,7 +289,7 @@ public class GunController : MonoBehaviour
 
     void UpdateCrosshair()
     {
-        float offset = isFullAuto ? 0f : aimInaccuracy * CROSSHAIROFFSET;
+        float offset = isFullAuto ? aimInaccuracy * CROSSHAIROFFSET : aimInaccuracy * CROSSHAIROFFSET;
         
         left.rectTransform.anchoredPosition = new Vector2(-offset, 0);
         right.rectTransform.anchoredPosition = new Vector2(offset, 0);
@@ -300,7 +298,7 @@ public class GunController : MonoBehaviour
 
         top.enabled = !adsAction;
         bottom.enabled = !adsAction;
-        left.enabled = !adsAction;
-        right.enabled = !adsAction;
+        //left.enabled = !adsAction;
+        //right.enabled = !adsAction;
     }
 }
