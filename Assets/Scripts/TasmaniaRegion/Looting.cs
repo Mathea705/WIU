@@ -4,16 +4,16 @@ using UnityEngine;
 public class Looting : MonoBehaviour
 {
     
-    public List<LootingSystem> possibleLoot; //loot that will spawn
+    public List<LootingItem> possibleLoot; //loot that will spawn
 
-    public List<(string, int)> GenerateLoot()
+    public List<(LootingItem, int)> GenerateLoot()
     {
-        List<(string, int)> dropped = new List<(string, int)>();
-        List<LootingSystem> commons = new List<LootingSystem>();
+        List<(LootingItem, int)> dropped = new List<(LootingItem, int)>();
+        List<LootingItem> commons = new List<LootingItem>();
 
 
         //check list, if item = common put in commons, same thing for rare.
-        foreach (LootingSystem item in possibleLoot)
+        foreach (LootingItem item in possibleLoot)
         {
             if (item.rarity == Rarity.Common)
             {
@@ -21,9 +21,9 @@ public class Looting : MonoBehaviour
             }
         }
 
-        List<LootingSystem> rares = new List<LootingSystem>();
+        List<LootingItem> rares = new List<LootingItem>();
 
-        foreach (LootingSystem item in possibleLoot)
+        foreach (LootingItem item in possibleLoot)
         {
             if (item.rarity == Rarity.Rare)
             {
@@ -36,19 +36,26 @@ public class Looting : MonoBehaviour
 
         //ensure mostly common
         int commonCount = Random.Range(2, 5); //ensure within this rnage the amount of common items
+
+        commonCount = Mathf.Min(commonCount, commons.Count);
         for (int i = 0; i < commonCount; i++)
         {
-            LootingSystem item = commons[Random.Range(0, commons.Count)];
+            int randomIndex = Random.Range(0, commons.Count);
+
+            LootingItem item = commons[/*Random.Range(0, commons.Count)*/randomIndex];
+            //commons.RemoveAt(Random.Range(0, commons.Count));
+            commons.RemoveAt(randomIndex);
             int amount = Random.Range(item.minAmount, item.maxAmount + 1);
-            dropped.Add((item.itemName, amount));
+            dropped.Add((item, amount));
         }
 
-       //30% will appear rare
+       //30% will appear rare //well now 40%
         if (Random.value < 0.4f && rares.Count > 0)
         {
-            LootingSystem rareItem = rares[Random.Range(0, rares.Count)];
+            LootingItem rareItem = rares[Random.Range(0, rares.Count)];
+            //rares.RemoveAt(Random.Range(0, rares.Count)); //prevent duplication
             int amount = Random.Range(rareItem.minAmount, rareItem.maxAmount + 1);
-            dropped.Add((rareItem.itemName, amount));
+            dropped.Add((rareItem, amount));
         }
 
         return dropped;
