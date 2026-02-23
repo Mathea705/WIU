@@ -334,6 +334,8 @@ GameObject:
   - component: {fileID: 261391850}
   - component: {fileID: 261391853}
   - component: {fileID: 261391856}
+  - component: {fileID: 261391858}
+  - component: {fileID: 261391857}
   m_Layer: 0
   m_Name: Swordfish
   m_TagString: Untagged
@@ -354,17 +356,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   player: {fileID: 557673296}
-  boat: {fileID: 1591200363}
+  eyePoint: {fileID: 0}
   detectionRange: 60
   viewAngle: 90
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
   swimSpeed: 6
-  dashSpeed: 25
+  attackSpeed: 20
+  restSpeed: 8
   turnSpeed: 5
-  attackCooldown: 4
+  memoryDuration: 2
   aimDuration: 1
-  retreatSpeed: 8
-  restDuration: 5
-  hitDistance: 2
 --- !u!4 &261391852
 Transform:
   m_ObjectHideFlags: 0
@@ -421,6 +424,55 @@ MonoBehaviour:
   tiltSmoothSpeed: 0
   sampleDistance: 2
   bankAmount: 0
+--- !u!54 &261391857
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261391849}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &261391858
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261391849}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +719,7 @@ MonoBehaviour:
   bobFrequency: 10
   bobAmplitude: 0.1
   lookPivot: {fileID: 507904348}
+  stamina: {fileID: 0}
 --- !u!54 &557673292
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1273,11 +1326,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122438039}
   m_CullTransparentMesh: 1
---- !u!1 &1143784034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9539b05e4d886dd43a9198cc9366b83a, type: 3}
-  m_PrefabInstance: {fileID: 1836492266}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1291283965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,9 +1855,12 @@ MonoBehaviour:
   boatCamera: {fileID: 75648324}
   playerController: {fileID: 557673291}
   ship: {fileID: 1591200363}
+  hullBounds: {fileID: 1617300059}
   moveSpeed: 5
   turnSpeed: 60
   steerIcon: {fileID: 1974436448}
+  gunCanvas: {fileID: 0}
+  allGuns: []
 --- !u!65 &1617300059
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2281,69 +2332,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9539b05e4d886dd43a9198cc9366b83a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1836492268}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9539b05e4d886dd43a9198cc9366b83a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1836492269}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9539b05e4d886dd43a9198cc9366b83a, type: 3}
 --- !u!4 &1836492267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9539b05e4d886dd43a9198cc9366b83a, type: 3}
   m_PrefabInstance: {fileID: 1836492266}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &1836492268
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143784034}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.2
-  m_Height: 4.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1836492269
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143784034}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1844337066
 GameObject:
   m_ObjectHideFlags: 0
