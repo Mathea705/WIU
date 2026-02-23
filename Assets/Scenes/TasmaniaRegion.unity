@@ -4502,6 +4502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
   targetScene: MainScene
+  regionName: Boatmans Watch
   returnSpawnPoint: {fileID: 0}
   arrivalSpawnPoint: {fileID: 0}
 --- !u!65 &1190316248
