@@ -4202,8 +4202,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14321554, y: 0.6728169, z: -0.13512026, w: 0.7131264}
-  m_LocalPosition: {x: -21.551569, y: 10.76, z: 44.55242}
+  m_LocalRotation: {x: 0, y: 0.6033148, z: 0, w: 0.7975032}
+  m_LocalPosition: {x: 6.02, y: 7.18, z: -0.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14575,7 +14575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9def68c3cec7e1c449846a3863f79cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AurumManager
-  startingAurum: 0
+  startingAurum: 10000
   aurumTextHUD: {fileID: 139486236}
   aurumTextShop: {fileID: 1096539400}
 --- !u!1001 &1514617320
@@ -19910,6 +19910,18 @@ PrefabInstance:
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1738901355}
+    - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
+      propertyPath: ADSINACCURACY
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
+      propertyPath: LERP_INPUTSWAY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
+      propertyPath: LERP_RECOILROT
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4757186361144494645, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
       propertyPath: m_Name
       value: AK74
@@ -20047,6 +20059,26 @@ PrefabInstance:
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1738901355}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: ADSINACCURACY
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: LERP_INPUTSWAY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: LERP_RECOILROT
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: firerateCooldown
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: SHOOTINACCURACYADS
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20186,6 +20218,18 @@ PrefabInstance:
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1738901355}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: LERP_INPUTSWAY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: LERP_RECOILROT
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: SHOOTINACCURACYADS
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3298837119159735802, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.3703837
@@ -20375,6 +20419,30 @@ PrefabInstance:
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1738901355}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: ADSINACCURACY
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: LERP_INPUTSWAY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: LERP_RECOILROT
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: CROSSHAIROFFSET
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: SHOOTINACCURACYADS
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: hipRotRecoilLowerBound.x
+      value: -20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
