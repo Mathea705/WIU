@@ -5,8 +5,8 @@ public class SceneTrigger : MonoBehaviour
 {
 
     [SerializeField] private string targetScene;
+    [SerializeField] private string regionName;
 
- 
     [SerializeField] private Transform returnSpawnPoint;
 
 
@@ -37,7 +37,9 @@ public class SceneTrigger : MonoBehaviour
 
         if (GameSceneManager.Instance != null)
         {
-          
+            if (!string.IsNullOrEmpty(regionName))
+                GameSceneManager.Instance.PendingRegionName = regionName;
+
             if (returnSpawnPoint != null)
                 GameSceneManager.Instance.SetReturnPoint(returnSpawnPoint.position, returnSpawnPoint.rotation);
 

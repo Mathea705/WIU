@@ -12,8 +12,10 @@ public class GameSceneManager : MonoBehaviour
    
     [SerializeField] private Vector3 playerOnShipOffset = new Vector3(0f, 2f, 0f);
 
-    [SerializeField] private string mainSceneName = "MainScene";
+    [SerializeField] private string mainSceneName   = "MainScene";
+    [SerializeField] private string startRegionName = "";
 
+    public string PendingRegionName { get; set; }
 
     public Vector3  ReturnPosition { get; set; }
     public Quaternion ReturnRotation { get; set; }
@@ -42,6 +44,12 @@ public class GameSceneManager : MonoBehaviour
             if (obj != null)
                 DontDestroyOnLoad(obj);
         }
+    }
+
+    void Start()
+    {
+        if (!string.IsNullOrEmpty(startRegionName))
+            if (RegionBannerUI.Instance != null) RegionBannerUI.Instance.Show(startRegionName);
     }
 
     void OnEnable()  => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -81,6 +89,17 @@ public class GameSceneManager : MonoBehaviour
         foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
             if (p.scene.name != "DontDestroyOnLoad")
                 Destroy(p);
+
+        // Show region banner for every scene load
+        if (!string.IsNullOrEmpty(PendingRegionName))
+        {
+            if (RegionBannerUI.Instance != null) RegionBannerUI.Instance.Show(PendingRegionName);
+            PendingRegionName = null;
+        }
+        else if (scene.name == mainSceneName && !string.IsNullOrEmpty(startRegionName))
+        {
+            if (RegionBannerUI.Instance != null) RegionBannerUI.Instance.Show(startRegionName);
+        }
 
         if (scene.name == mainSceneName)
         {

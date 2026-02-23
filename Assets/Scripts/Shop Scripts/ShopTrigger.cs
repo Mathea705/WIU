@@ -30,6 +30,9 @@ public class ShopTrigger : MonoBehaviour
     private bool _inRange;
     private bool _shopOpen;
     private static bool _hasVisited;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetStatics() => _hasVisited = false;
     private Quaternion _shopCameraStartRotation;
     private readonly List<GameObject> _gunsActiveBeforeShop = new List<GameObject>();
     private string[] _hideNames;
