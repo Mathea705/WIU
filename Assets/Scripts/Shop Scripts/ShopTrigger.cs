@@ -21,6 +21,7 @@ public class ShopTrigger : MonoBehaviour
     [SerializeField] private GameObject shopContent;
     [SerializeField] private float cameraRotateDuration = 0.5f;
     [SerializeField] private AurumManager AurumManager;
+    [SerializeField] private TMP_Text     shopAurumText;
 
     [SerializeField] private GameObject   gunCanvas;
     [SerializeField] private GameObject[] allGuns;
@@ -32,38 +33,86 @@ public class ShopTrigger : MonoBehaviour
     private Quaternion _shopCameraStartRotation;
     private readonly List<GameObject> _gunsActiveBeforeShop = new List<GameObject>();
     private string[] _hideNames;
+    private string[] _gunNames;
+    private string   _gunCanvasName;
 
     private void Awake()
     {
-        // Cache panel names now, before sceneLoaded cleanup destroys scene-native duplicates.
+        // Cache names before sceneLoaded cleanup destroys scene-native duplicates.
         _hideNames = new string[hideOnShopOpen.Length];
         for (int i = 0; i < hideOnShopOpen.Length; i++)
             if (hideOnShopOpen[i] != null)
                 _hideNames[i] = hideOnShopOpen[i].name;
+
+        if (allGuns != null)
+        {
+            _gunNames = new string[allGuns.Length];
+            for (int i = 0; i < allGuns.Length; i++)
+                if (allGuns[i] != null)
+                    _gunNames[i] = allGuns[i].name;
+        }
+
+        if (gunCanvas != null) _gunCanvasName = gunCanvas.name;
     }
 
     private void OnEnable()  => SceneManager.sceneLoaded += OnSceneLoaded;
     private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => RebindRefs();
+
+    // Search only the DontDestroyOnLoad scene by name, including inactive objects.
+    private static GameObject FindPersistent(string objName)
     {
-        GameObject p = GameObject.FindWithTag("Player");
-        if (p != null) playerController = p.GetComponent<PlayerController>();
-        RebindPanels();
+        foreach (var t in FindObjectsByType<Transform>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            if (t.name == objName && t.gameObject.scene.name == "DontDestroyOnLoad")
+                return t.gameObject;
+        return null;
     }
 
-    private void RebindPanels()
+    private void RebindRefs()
     {
-        if (_hideNames == null) return;
-        for (int i = 0; i < hideOnShopOpen.Length; i++)
-            if (hideOnShopOpen[i] == null && _hideNames[i] != null)
-                hideOnShopOpen[i] = GameObject.Find(_hideNames[i]);
+        // Always reassign — no null check — so deferred-Destroy timing never matters.
+
+        // PlayerController: find persistent player by scene name
+        foreach (var pc in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+            if (pc.gameObject.scene.name == "DontDestroyOnLoad") { playerController = pc; break; }
+
+        // hideOnShopOpen: prefer persistent, fall back to scene-native (some panels may not persist)
+        if (_hideNames != null)
+            for (int i = 0; i < hideOnShopOpen.Length; i++)
+                if (_hideNames[i] != null)
+                {
+                    GameObject found = FindPersistent(_hideNames[i]);
+                    if (found == null) found = GameObject.Find(_hideNames[i]);
+                    if (found != null) hideOnShopOpen[i] = found;
+                }
+
+        // allGuns: live on the persistent player — only look in DontDestroyOnLoad
+        if (_gunNames != null && allGuns != null)
+            for (int i = 0; i < allGuns.Length; i++)
+                if (_gunNames[i] != null)
+                {
+                    GameObject found = FindPersistent(_gunNames[i]);
+                    if (found != null) allGuns[i] = found;
+                }
+
+        // gunCanvas: persistent canvas
+        if (_gunCanvasName != null)
+        {
+            GameObject found = FindPersistent(_gunCanvasName);
+            if (found == null) found = GameObject.Find(_gunCanvasName);
+            if (found != null) gunCanvas = found;
+        }
+
+        // AurumManager: find the persistent one by scene name
+        foreach (var am in FindObjectsByType<AurumManager>(FindObjectsSortMode.None))
+            if (am.gameObject.scene.name == "DontDestroyOnLoad") { AurumManager = am; break; }
     }
 
     private void Start()
     {
         _shopCameraStartRotation = shopCamera.transform.localRotation;
-        RebindPanels(); // catch anything destroyed between Awake and Start
+        RebindRefs();
     }
 
     private void Update()
@@ -100,6 +149,9 @@ public class ShopTrigger : MonoBehaviour
             shopManager.RefreshBuy(_gunsActiveBeforeShop);
             shopManager.RefreshSell(_gunsActiveBeforeShop);
         }
+
+        if (AurumManager != null && shopAurumText != null)
+            AurumManager.SetShopDisplay(shopAurumText);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible   = true;

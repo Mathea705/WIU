@@ -32,10 +32,15 @@ public class AurumManager : MonoBehaviour
 
     public bool CanAfford(int amount) => Aurum >= amount;
 
+    public void SetShopDisplay(TMP_Text shopText)
+    {
+        aurumTextShop = shopText;
+        UpdateDisplay();
+    }
+
     private void UpdateDisplay()
     {
-        aurumTextHUD.text  = Aurum.ToString();
+        if (aurumTextHUD  != null) aurumTextHUD.text  = Aurum.ToString();
         if (aurumTextShop != null) aurumTextShop.text = Aurum.ToString();
-        
     }
 }

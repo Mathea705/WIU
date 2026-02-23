@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -22,8 +23,57 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] private ShopSlot slotPrefab;
 
+    private string[] _gunNames;
+
+    private void Awake()
+    {
+        if (sceneGuns != null)
+        {
+            _gunNames = new string[sceneGuns.Length];
+            for (int i = 0; i < sceneGuns.Length; i++)
+                if (sceneGuns[i] != null) _gunNames[i] = sceneGuns[i].name;
+        }
+    }
+
+    private void OnEnable()  => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => RebindRefs();
+
+    private static GameObject FindPersistent(string objName)
+    {
+        foreach (var t in FindObjectsByType<Transform>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            if (t.name == objName && t.gameObject.scene.name == "DontDestroyOnLoad")
+                return t.gameObject;
+        return null;
+    }
+
+    private void RebindRefs()
+    {
+        foreach (var am in FindObjectsByType<AurumManager>(FindObjectsSortMode.None))
+            if (am.gameObject.scene.name == "DontDestroyOnLoad") { aurumManager = am; break; }
+
+        foreach (var pc in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+            if (pc.gameObject.scene.name == "DontDestroyOnLoad") { playerController = pc; break; }
+
+        foreach (var hs in FindObjectsByType<HealthSystem>(FindObjectsSortMode.None))
+            if (hs.gameObject.scene.name == "DontDestroyOnLoad") { healthSystem = hs; break; }
+
+        foreach (var ss in FindObjectsByType<StaminaSystem>(FindObjectsSortMode.None))
+            if (ss.gameObject.scene.name == "DontDestroyOnLoad") { staminaSystem = ss; break; }
+
+        if (_gunNames != null && sceneGuns != null)
+            for (int i = 0; i < sceneGuns.Length; i++)
+                if (_gunNames[i] != null)
+                {
+                    GameObject found = FindPersistent(_gunNames[i]);
+                    if (found != null) sceneGuns[i] = found;
+                }
+    }
+
     private void Start()
     {
+        RebindRefs();
         RefreshBuy(null);
         Populate(itemsContent, shopItems);
         ShowGuns();
