@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.LowLevelPhysics2D;
+using UnityEngine.Splines.ExtrusionShapes;
 
 public class AI_Stingray : MonoBehaviour
 {
@@ -34,15 +35,16 @@ public class AI_Stingray : MonoBehaviour
     private bool randomAttack;
 
     private float dir;
+    private float rad;
 
     private void Start()
     {
-        speed = 5.0f;
-        pivotSpeed = 5.0f;
+        speed = 10.0f;
+        pivotSpeed = 30.0f;
         dir = 0.0f;
         aggroRange = 50.0f;
 
-        wanderTargetRange = 200.0f;
+        wanderTargetRange = 100.0f;
 
         currentState = State.WANDER;
 
@@ -57,7 +59,18 @@ public class AI_Stingray : MonoBehaviour
         ClampDir();
         HandleTransform();
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
+
+        
+    }
+
+    void OnDrawGizmos()
+    {
+        
+        Gizmos.color = Color.red;
+
+        
+        Gizmos.DrawSphere(targetPos, 10);
     }
 
     private void CheckStateTransitions()
@@ -91,9 +104,15 @@ public class AI_Stingray : MonoBehaviour
                 break;
 
         }
-        float myCross = (Mathf.Cos(dir) * targetPos.y - transform.position.y) - (Mathf.Sin(dir) * targetPos.x - transform.position.x);
-        CTRL_left = myCross < 0;
-        CTRL_right = myCross > 0;
+        rad = dir * Mathf.Deg2Rad;
+        Vector3 forward = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad));
+        Vector3 toTarget = (targetPos - transform.position).normalized;
+
+        float cross = (forward.x * toTarget.z) - (forward.z * toTarget.x);
+        CTRL_left = cross < 0;
+        CTRL_right = cross > 0;
+
+        Debug.Log(CTRL_left || CTRL_right);
     }
 
     private void RunStateCode()
@@ -140,7 +159,8 @@ public class AI_Stingray : MonoBehaviour
 
     private void HandleTransform()
     {
-        Vector3 dirVec = new Vector3(Mathf.Cos(dir), 0, Mathf.Sin(dir));
+        rad = dir * Mathf.Deg2Rad;
+        Vector3 dirVec = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad));
         dirVec.Normalize();
 
         transform.position += new Vector3(dirVec.x * speed * Time.deltaTime, 0, dirVec.z * speed * Time.deltaTime);
