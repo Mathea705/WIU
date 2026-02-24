@@ -51,6 +51,8 @@ public class AI_Stingray : BossAI
     private const int dmg_lowerBound = 5;
     private const int dmg_upperBound = 10;
 
+    private const float DAMAGEDISTANCETHRESHOLD = 6.0f;
+
     private bool hasAttemptedSpring;
 
     private float dir;
@@ -142,7 +144,10 @@ public class AI_Stingray : BossAI
                     currentState = State.RECUPERATE;
                 }
 
-                springTimer -= Time.deltaTime;
+                if (CTRL_jump)
+                {
+                    springTimer -= Time.deltaTime;
+                }
                 if (springTimer <= 0f)
                 {
                     springTimer = SPRINGTIMERMAX;
@@ -265,8 +270,18 @@ public class AI_Stingray : BossAI
                     {
                         CTRL_jump = true;
                     }
+
+                    
                 }
-                
+
+                Vector3 toShip = (shipObject.transform.position - transform.position);
+                if (toShip.magnitude <= DAMAGEDISTANCETHRESHOLD)
+                {
+                    DealDamageToShip(Random.Range(dmg_lowerBound, dmg_upperBound + 1));
+
+                    dir += 180;
+                    currentState = State.RECUPERATE;
+                }
 
                 break;
             case State.STING:
@@ -292,10 +307,7 @@ public class AI_Stingray : BossAI
         {
             if (other.gameObject == shipObject)
             {
-                DealDamageToShip(Random.Range(dmg_lowerBound, dmg_upperBound + 1));
-
-                dir += 180;
-                currentState = State.RECUPERATE;
+                
             }
         }
     }
