@@ -8,7 +8,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private float lerpSpeed  = 5f;
     [SerializeField] private Image healthBar;
 
-      [SerializeField] private RectTransform flashIcon;
+
 
     public float CurrentHealth => _currentHealth;
     public float Ratio         => _currentHealth / maxHealth;

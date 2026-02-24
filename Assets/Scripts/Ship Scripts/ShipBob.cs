@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class ShipBob : MonoBehaviour
 {
-    [Header("Bob")]
     public float bobSmoothSpeed  = 2f;
     public float waterlineOffset = 1f;
 
-    [Header("Tilt")]
     public float tiltAmount      = 8f;
     public float tiltSmoothSpeed = 2f;
     public float sampleDistance  = 2f;

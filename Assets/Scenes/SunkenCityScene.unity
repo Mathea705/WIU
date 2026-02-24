@@ -2188,16 +2188,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae68ae08190986e439f031c3f9ab6862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AI_SeaLeviathan
-  maxHealth: 200
+  maxHealth: 5000
   bossHealthBarPanel: {fileID: 0}
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
   flashDuration: 0.2
-  orbitRadius: 290
+  orbitRadius: 300
   orbitSpeed: 20
   swimSpeed: 80
   turnSpeed: 2000
   swimDepth: -70
+  swimDuration: 3
+  slamSpeed: 20
+  slamDamage: 40
+  slamHitDist: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2206,6 +2210,7 @@ SceneRoots:
   - {fileID: 47110863}
   - {fileID: 770967249}
   - {fileID: 461825621}
+  - {fileID: 4791045695778275727}
   - {fileID: 929200538}
   - {fileID: 1926905265}
   - {fileID: 1493409737}
@@ -2213,4 +2218,3 @@ SceneRoots:
   - {fileID: 1936655912}
   - {fileID: 1995387656}
   - {fileID: 642479964}
-  - {fileID: 4791045695778275727}
