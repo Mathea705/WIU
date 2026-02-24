@@ -36,8 +36,9 @@ public class AI_SeaLeviathan : BossAI
     [SerializeField] private float submergeDuration   = 8f;    // time spent underwater
     [SerializeField] private float submergeRiseTime   = 2f;    // seconds to resurface
     [SerializeField] private GameObject whirlpoolPrefab;
-    [SerializeField] private int        whirlpoolCount  = 3;
-    [SerializeField] private float      whirlpoolRadius = 20f;
+    [SerializeField] private int        whirlpoolCount     = 3;
+    [SerializeField] private float      whirlpoolMinRadius = 5f;
+    [SerializeField] private float      whirlpoolMaxRadius = 25f;
 
     private float _orbitAngle;
     private float _swimTimer;
@@ -224,9 +225,10 @@ public class AI_SeaLeviathan : BossAI
         GameObject[] whirlpools = new GameObject[whirlpoolCount];
         for (int i = 0; i < whirlpoolCount; i++)
         {
-            float angle = 360f / whirlpoolCount * i * Mathf.Deg2Rad;
+            float angle  = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            float radius = Random.Range(whirlpoolMinRadius, whirlpoolMaxRadius);
             Vector3 pos = shipObject.transform.position
-                + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * whirlpoolRadius;
+                + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
             whirlpools[i] = Instantiate(whirlpoolPrefab, pos, Quaternion.Euler(90.0f, 0f, 0f));
             whirlpools[i].GetComponent<WhirlpoolHazard>().Init(this);
         }

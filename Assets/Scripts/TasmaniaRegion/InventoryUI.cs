@@ -4,8 +4,11 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public GameObject inventoryPanel; //to hide it
+
     public Transform ContentPanel;
     public GameObject itemText; //item texts in the panel
+
+    public GameObject panelOutline;
 
     private bool isOpen = false;
     public static InventoryUI Instance;
@@ -33,6 +36,7 @@ public class InventoryUI : MonoBehaviour
     {
         isOpen = !isOpen;
         inventoryPanel.SetActive(isOpen);
+        panelOutline.SetActive(isOpen);
 
         if (isOpen)
         {

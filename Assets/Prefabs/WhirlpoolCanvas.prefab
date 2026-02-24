@@ -119,7 +119,7 @@ MonoBehaviour:
   rotateSpeed: 500
   fadeTime: 1
   whirlpoolImage: {fileID: 2188693821950593665}
-  damageRadius: 20
+  damageRadius: 70
 --- !u!1 &7136795938310601437
 GameObject:
   m_ObjectHideFlags: 0

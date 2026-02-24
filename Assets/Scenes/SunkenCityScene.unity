@@ -2141,7 +2141,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4162876848122790814, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
---- !u!1001 &4791045695778275727
+--- !u!1001 &621156619320017131
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2149,157 +2149,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 3760086242753866704, guid: 99088f34336c844498571195e949c025, type: 3}
+      propertyPath: m_Name
+      value: Sea Leviathan
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalPosition.x
       value: -77
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalPosition.y
       value: -54
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalPosition.z
       value: 102.4
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 487288968315764946, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
+    - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425177878260396539, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
-      propertyPath: m_Name
-      value: Sea Leviathan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4425177878260396539, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 4791045695778275729}
-    - targetCorrespondingSourceObject: {fileID: 4425177878260396539, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4791045695778275732}
-  m_SourcePrefab: {fileID: 100100000, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
---- !u!1 &4791045695778275728 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4425177878260396539, guid: c6f1261a817a6414693ad9bcbe65c8ea, type: 3}
-  m_PrefabInstance: {fileID: 4791045695778275727}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4791045695778275729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4791045695778275728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae68ae08190986e439f031c3f9ab6862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AI_SeaLeviathan
-  maxHealth: 5000
-  bossHealthBarPanel: {fileID: 0}
-  bossHealthBarFill: {fileID: 0}
-  barLerpSpeed: 5
-  flashDuration: 0.2
-  orbitRadius: 400
-  orbitSpeed: 20
-  swimSpeed: 80
-  turnSpeed: 2000
-  swimDepth: -70
-  swimDuration: 10
-  slamAimDuration: 1
-  slamAimTurnSpeed: 30
-  slamArcDuration: 2
-  slamRiseHeight: 200
-  slamDamage: 40
-  splashPrefab: {fileID: 3323387954473017891, guid: 0b912e9003fba894faa88cf964a6fb8a, type: 3}
-  splashScale: 200
-  impulseSource: {fileID: 4791045695778275732}
-  submergeDepth: -500
-  submergeDiveTime: 3
-  submergeDuration: 8
-  submergeRiseTime: 3
-  whirlpoolPrefab: {fileID: 6596172222965295673, guid: 502a783f76da1bd478ea91d189d412dc, type: 3}
-  whirlpoolCount: 5
-  whirlpoolRadius: 120
---- !u!114 &4791045695778275732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4791045695778275728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
-  ImpulseDefinition:
-    ImpulseChannel: 1
-    ImpulseShape: 2
-    CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ImpulseDuration: 1
-    ImpulseType: 0
-    DissipationRate: 0.25
-    RawSignal: {fileID: 0}
-    AmplitudeGain: 1
-    FrequencyGain: 1
-    RepeatMode: 0
-    Randomize: 1
-    TimeEnvelope:
-      AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      AttackTime: 0
-      SustainTime: 0.2
-      DecayTime: 0.7
-      ScaleWithImpact: 1
-      HoldForever: 0
-    ImpactRadius: 100
-    DirectionMode: 0
-    DissipationMode: 2
-    DissipationDistance: 100
-    PropagationSpeed: 343
-  DefaultVelocity: {x: -2, y: -1, z: -2}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 99088f34336c844498571195e949c025, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2308,7 +2206,7 @@ SceneRoots:
   - {fileID: 47110863}
   - {fileID: 770967249}
   - {fileID: 461825621}
-  - {fileID: 4791045695778275727}
+  - {fileID: 621156619320017131}
   - {fileID: 929200538}
   - {fileID: 1926905265}
   - {fileID: 1493409737}
