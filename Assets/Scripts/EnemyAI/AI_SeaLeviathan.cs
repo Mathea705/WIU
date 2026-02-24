@@ -37,7 +37,7 @@ public class AI_SeaLeviathan : BossAI
     [SerializeField] private float submergeRiseTime   = 2f;    // seconds to resurface
     [SerializeField] private GameObject whirlpoolPrefab;
     [SerializeField] private int        whirlpoolCount     = 3;
-    [SerializeField] private float      whirlpoolMinRadius = 5f;
+    [SerializeField] private float      whirlpoolMinRadius = 0f;
     [SerializeField] private float      whirlpoolMaxRadius = 25f;
 
     private float _orbitAngle;
@@ -64,7 +64,7 @@ public class AI_SeaLeviathan : BossAI
         CheckStateTransitions();
         RunStateCode();
 
-        Debug.Log(currentState);
+        // Debug.Log(currentState);
     }
 
     private void CheckStateTransitions()
