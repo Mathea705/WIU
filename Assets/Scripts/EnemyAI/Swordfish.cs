@@ -21,6 +21,7 @@ public class Swordfish : BossAI
     [Header("Attack")]
     public float attackCooldown = 4f;
     public float aimDuration = 1f;
+    public float attackDamage = 20f;
 
     [Header("Rest")]
     public float retreatSpeed = 8f;
@@ -48,7 +49,7 @@ public class Swordfish : BossAI
     }
 
     // ================= UPDATE =================
-    void Update()
+    protected override void Update()
     {
         switch (currentState)
         {
@@ -141,8 +142,9 @@ public class Swordfish : BossAI
 
             if (currentDist <= hitDistance || previousDist <= hitDistance)
             {
-                DealDamageToShip(20f);
-
+                DealDamageToShip(attackDamage);
+                
+                Debug.Log("Swordfish does " + attackDamage + " Damage to the ship!");
                 hasHitBoatThisDash = true;
 
                 currentState = State.Rest;
