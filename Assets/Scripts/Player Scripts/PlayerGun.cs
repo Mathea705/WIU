@@ -168,6 +168,8 @@ public class GunController : BossAI
                 if (boss != null)
                 {
                     boss.TakeDamage(Random.Range(dmg_lowest, dmg_highest + 1));
+
+                    Debug.Log("DEALT DAMAGE!");
                 }
             }
             
