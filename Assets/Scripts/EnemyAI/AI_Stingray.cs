@@ -43,6 +43,9 @@ public class AI_Stingray : BossAI
     private float aggroTimer;
     private const float AGGROTIMERMAX = 2.0f;
 
+    private float springTimer;
+    private const float SPRINGTIMERMAX = 2.0f;
+
     private bool randomAttack;
 
     private const int dmg_lowerBound = 5;
@@ -76,6 +79,10 @@ public class AI_Stingray : BossAI
         currentState = State.WANDER;
 
         aggroTimer = AGGROTIMERMAX;
+        springTimer = SPRINGTIMERMAX;
+
+        shipObject = GameObject.FindWithTag("Ship");
+        shipHealth = shipObject.GetComponent<HealthSystem>();
     }
 
     private void Update()
@@ -88,6 +95,9 @@ public class AI_Stingray : BossAI
         HandleTransform();
 
         Debug.Log(currentState);
+        //Debug.Log(shipHealth);
+
+
 
 
     }
@@ -129,6 +139,13 @@ public class AI_Stingray : BossAI
                 }
                 else if ((shipObject.transform.position - transform.position).magnitude >= JUMPDISENGAGEDIST && CTRL_jump && hasAttemptedSpring)
                 {
+                    currentState = State.RECUPERATE;
+                }
+
+                springTimer -= Time.deltaTime;
+                if (springTimer <= 0f)
+                {
+                    springTimer = SPRINGTIMERMAX;
                     currentState = State.RECUPERATE;
                 }
                 break;
@@ -256,6 +273,7 @@ public class AI_Stingray : BossAI
                 break;
             case State.RECUPERATE:
                 hasAttemptedSpring = false;
+                CTRL_jump = false;
 
                 Vector3 awayFromPlayer = (transform.position - shipObject.transform.position).normalized;
 
