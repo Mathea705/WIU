@@ -108,6 +108,8 @@ public class GunController : BossAI
         //shootLayers = LayerMask.GetMask("geometry");
 
         playerCam = Camera.main;
+
+        shootLayers = ~LayerMask.GetMask("Water");
     }
 
     void Update()
@@ -157,7 +159,7 @@ public class GunController : BossAI
                     0.5f + Random.Range(-deviation, deviation),
                     0f));
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 2000f))//, shootLayers))
+            if (Physics.Raycast(ray, out RaycastHit hit, 2000f, shootLayers))
             {
                 hitParticle.transform.position = hit.point;
                 hitParticle.transform.rotation = Quaternion.LookRotation(hit.normal);
