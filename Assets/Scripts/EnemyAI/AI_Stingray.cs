@@ -31,6 +31,9 @@ public class AI_Stingray : BossAI
 
     private bool randomAttack;
 
+    private const int damageLowerBound = 10;
+    private const int damageUpperBound = 15;
+
     private float dir;
     private float rad;
 
@@ -144,6 +147,14 @@ public class AI_Stingray : BossAI
 
         }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == shipObject)
+        {
+            DealDamageToShip(Random.Range(damageLowerBound, damageUpperBound + 1));
+        }
     }
 
     private void ParseInputs()
