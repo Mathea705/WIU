@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
       propertyPath: m_TagString
@@ -2199,7 +2199,10 @@ MonoBehaviour:
   turnSpeed: 2000
   swimDepth: -70
   swimDuration: 3
-  slamSpeed: 20
+  slamAimDuration: 1
+  slamAimTurnSpeed: 30
+  slamArcDuration: 2
+  slamRiseHeight: 200
   slamDamage: 40
   slamHitDist: 5
 --- !u!1660057539 &9223372036854775807
