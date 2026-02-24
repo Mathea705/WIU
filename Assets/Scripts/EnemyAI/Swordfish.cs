@@ -40,11 +40,14 @@ public class Swordfish : BossAI
 
     private bool hasHitBoatThisDash = false;
 
+    [SerializeField] private float YOffset;
+
     // ================= START =================
     protected override void Start()
     {
         base.Start();
         currentState = State.Swim;
+        transform.position = transform.position + new Vector3(0.0f, YOffset, 0.0f);
         PickRandomDirection();
     }
 
@@ -144,7 +147,7 @@ public class Swordfish : BossAI
             {
                 DealDamageToShip(attackDamage);
                 
-                Debug.Log("Swordfish does " + attackDamage + " Damage to the ship!");
+                // Debug.Log("Swordfish does " + attackDamage + " Damage to the ship!");
                 hasHitBoatThisDash = true;
 
                 currentState = State.Rest;
