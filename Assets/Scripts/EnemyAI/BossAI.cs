@@ -16,6 +16,7 @@ public class BossAI : MonoBehaviour
 
     protected float currentHealth;
     protected HealthSystem shipHealth;
+    protected bool _invulnerable = false;
 
     private float _displayHealth;
     private Renderer[] _renderers;
@@ -50,6 +51,8 @@ public class BossAI : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (_invulnerable) return;
+
         if (bossHealthBarPanel != null)
             bossHealthBarPanel.SetActive(true);
 
