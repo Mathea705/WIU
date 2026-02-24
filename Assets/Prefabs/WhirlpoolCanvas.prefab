@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 685722237265395103}
   - component: {fileID: 8159582815210986639}
   - component: {fileID: 8701345869567926197}
-  - component: {fileID: 1993880169190686446}
   m_Layer: 5
   m_Name: WhirlpoolCanvas
   m_TagString: Untagged
@@ -86,7 +85,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8159582815210986639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,30 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15515d0efe8d0d489c8b44ff6132ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WhirlpoolHazard
-  damagePerSecond: 2
-  rotateSpeed: 120
+  damagePerSecond: 10
+  rotateSpeed: 500
   fadeTime: 1
---- !u!65 &1993880169190686446
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6596172222965295673}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2148.4827, y: 1276.665, z: 6.100512}
-  m_Center: {x: 19.406301, y: -23.799994, z: -2.5502567}
+  whirlpoolImage: {fileID: 2188693821950593665}
+  damageRadius: 20
 --- !u!1 &7136795938310601437
 GameObject:
   m_ObjectHideFlags: 0
