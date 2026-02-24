@@ -91,7 +91,7 @@ public class BossAI : MonoBehaviour
             _renderers[i].material.color = _originalColors[i];
     }
 
-    protected void DealDamageToShip(float amount)
+    public void DealDamageToShip(float amount)
     {
      
             shipHealth.TakeDamage(amount);

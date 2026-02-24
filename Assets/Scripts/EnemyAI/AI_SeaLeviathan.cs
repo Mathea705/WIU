@@ -30,7 +30,7 @@ public class AI_SeaLeviathan : BossAI
     [SerializeField] private float                   splashScale = 1f;
     [SerializeField] private CinemachineImpulseSource impulseSource;
 
-    [Header("Submerge")]
+
     [SerializeField] private float submergeDepth      = -30f;  // how deep it dives
     [SerializeField] private float submergeDiveTime   = 2f;    // seconds to reach depth
     [SerializeField] private float submergeDuration   = 8f;    // time spent underwater
@@ -74,19 +74,19 @@ public class AI_SeaLeviathan : BossAI
                 _swimTimer -= Time.deltaTime;
                 if (_swimTimer <= 0f)
                 {
-                    // if (Random.value < 0.5f)
-                    // {
-                    //     currentState = State.SLAM;
-                    //     StartCoroutine(SlamSequence());
-                    // }
-                    // else
-                    // {
-                    //     currentState = State.SUBMERGE;
-                    //     StartCoroutine(SubmergeSequence());
-                    // }
+                    if (Random.value < 0.5f)
+                    {
+                        currentState = State.SLAM;
+                        StartCoroutine(SlamSequence());
+                    }
+                    else
+                    {
+                        currentState = State.SUBMERGE;
+                        StartCoroutine(SubmergeSequence());
+                    }
 
-                    currentState = State.SUBMERGE;
-                    StartCoroutine(SubmergeSequence());
+                    // currentState = State.SUBMERGE;
+                    // StartCoroutine(SubmergeSequence());
                 }
                 break;
             case State.SLAM:
@@ -228,6 +228,7 @@ public class AI_SeaLeviathan : BossAI
             Vector3 pos = shipObject.transform.position
                 + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * whirlpoolRadius;
             whirlpools[i] = Instantiate(whirlpoolPrefab, pos, Quaternion.Euler(90.0f, 0f, 0f));
+            whirlpools[i].GetComponent<WhirlpoolHazard>().Init(this);
         }
 
 

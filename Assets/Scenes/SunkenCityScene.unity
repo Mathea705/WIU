@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
       propertyPath: m_TagString
@@ -2231,7 +2231,7 @@ MonoBehaviour:
   swimSpeed: 80
   turnSpeed: 2000
   swimDepth: -70
-  swimDuration: 3
+  swimDuration: 10
   slamAimDuration: 1
   slamAimTurnSpeed: 30
   slamArcDuration: 2
@@ -2245,7 +2245,7 @@ MonoBehaviour:
   submergeDuration: 8
   submergeRiseTime: 3
   whirlpoolPrefab: {fileID: 6596172222965295673, guid: 502a783f76da1bd478ea91d189d412dc, type: 3}
-  whirlpoolCount: 3
+  whirlpoolCount: 5
   whirlpoolRadius: 120
 --- !u!114 &4791045695778275732
 MonoBehaviour:
