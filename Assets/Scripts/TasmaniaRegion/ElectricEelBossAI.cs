@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ElectricEelBossAI : BossAI
+public class ElectricEelBossAI : MonoBehaviour
 {
 
 
@@ -44,15 +44,11 @@ public class ElectricEelBossAI : BossAI
     public float retreatCooldown = 5f;
     public bool isRetreating = false;
 
-
-    //testing cause ai keeps tracking and returning to player while retreating
-    //works then dosen't work so very confusing
-
-    private float ignorePlayerUntil = 0f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    protected override void Start()
+    private float ignorePlayerUntil = 3;
+  /*  protected override*/ void Start()
     {
-        base.Start();
+        //base.Start();
+      
         agent = GetComponent<NavMeshAgent>();
         if (patroPoints.Length > 0)
         {
@@ -61,12 +57,12 @@ public class ElectricEelBossAI : BossAI
     }
     //change everything to state switching HHHHH
     // Update is called once per frame
-    protected override void Update()
+    /*protected override*/ void Update()
     {
 
 
-        base.Update(); //call from base class to update health bar and all t hat
-      
+        //base.Update(); //call from base class to update health bar and all t hat
+
 
         switch (currentState)
         {
@@ -79,10 +75,10 @@ public class ElectricEelBossAI : BossAI
                 break;
 
             case BossState.Attack:
-                break; 
+                break;
 
             case BossState.Retreat:
-                break; 
+                break;
         }
 
         //Debug.Log($"shipl: {shipl}, isRetreating: {isRetreating}, agent: {agent}"); //testing
@@ -102,18 +98,18 @@ public class ElectricEelBossAI : BossAI
         ////{
         ////    shipl = null;
         ////}
-        
+
 
 
         //if (shipl != null)
         //{
-          
+
         //    float distance = Vector3.Distance(transform.position, shipl.position);
 
         //    if (distance > attackRange)
         //    {
         //        agent.isStopped = false;
-               
+
         //        agent.SetDestination(shipl.position);
         //    }
         //    else
@@ -149,23 +145,35 @@ public class ElectricEelBossAI : BossAI
         //        GoToNextPoint();
         //    }
         //}
-       
-       
+
+
 
 
     }
 
     void HandlePatrol()
     {
+        //EncounterPlayer();
+
+        //if (shipl != null)
+        //{
+
+        //    return;
+        //}
+
+        //if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        //{
+        //    GoToNextPoint();
+        //}
+
+        agent.isStopped = false;
+
         EncounterPlayer();
 
         if (shipl != null)
-        {
-          
             return;
-        }
 
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        if (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance)
         {
             GoToNextPoint();
         }
@@ -173,31 +181,63 @@ public class ElectricEelBossAI : BossAI
 
     void HandleChase()
     {
-
+        Debug.Log("Chasing: " + shipl);
         //EncounterPlayer();
         if (shipl == null)
         {
             currentState = BossState.Patrol;
             return;
         }
-        agent.isStopped = false;
+        // agent.isStopped = false;
         float distance = Vector3.Distance(transform.position, shipl.position);
 
-        if (distance > attackRange)
+        //if (distance > attackRange)
+        //{
+        //    agent.isStopped = false;
+        //    agent.SetDestination(shipl.position);
+        //}
+        //else
+        //{
+        //    // Stop moving and attack
+        //    agent.isStopped = true;
+
+        //    if (!isAttacking && Time.time >= lastAttackTime + attackCooldown)
+        //    {
+        //        StartCoroutine(Attack());
+        //    }
+        //}
+
+        float attackBuffer = 5f; 
+
+        if (distance > attackRange + attackBuffer)
         {
+           //buffer and range
             agent.isStopped = false;
+            agent.stoppingDistance = attackRange; 
             agent.SetDestination(shipl.position);
         }
         else
         {
-            if (Time.time >= lastAttackTime + attackCooldown)
+            //if close then attack
+            agent.isStopped = true;
+
+            //if (!isAttacking && Time.time >= lastAttackTime + attackCooldown)
+            //{
+            //    StartCoroutine(Attack());
+            //}
+            if (!isAttacking && Time.time >= lastAttackTime + attackCooldown)
             {
-                currentState = BossState.Attack;
-                StartCoroutine(Attack());
+                if (Random.value < 0.3f) //possible rare attack
+                {
+                    StartCoroutine(SpecialLightningAttack());
+                }
+                else
+                {
+                    StartCoroutine(Attack()); 
+                }
+                isAttacking = true;
             }
         }
-
-
 
     }
 
@@ -222,7 +262,7 @@ public class ElectricEelBossAI : BossAI
         {
             //shipl = null; //if move out then continuing patrolling
             //clear when far
-            if (shipl != null && Vector3.Distance(transform.position, shipl.position) > detectionRadius + 2f)
+            if (shipl != null && Vector3.Distance(transform.position, shipl.position) > detectionRadius + 5f)
             {
                 shipl = null;
                 currentState = BossState.Patrol;
@@ -246,7 +286,7 @@ public class ElectricEelBossAI : BossAI
     {
         isAttacking = true;
         lastAttackTime = Time.time;
-       // agent.isStopped = true;
+        // agent.isStopped = true;
         int boltCount = Random.Range(2, 6); //change later see how
 
         for (int i = 0; i < boltCount; i++)
@@ -300,7 +340,7 @@ public class ElectricEelBossAI : BossAI
     {
         Vector3 strikePosition;
 
-      //50% hit ship
+        //50% hit ship
         if (Random.value < 0.5f)
         {
             strikePosition = shipl.position;
@@ -312,6 +352,228 @@ public class ElectricEelBossAI : BossAI
             strikePosition = shipl.position + new Vector3(randomCircle.x, 0, randomCircle.y);
         }
 
-        Instantiate(lightningPrefab, strikePosition + Vector3.up * 10f, Quaternion.identity);
+        //Instantiate(lightningPrefab, strikePosition + Vector3.up * 10f, Quaternion.identity);
+        GameObject bolt = Instantiate(lightningPrefab, strikePosition + Vector3.up * 10f, Quaternion.identity);
+        lightingAttack la = bolt.GetComponent<lightingAttack>();
+        if (la != null && shipl != null)
+        {
+            la.target = shipl.gameObject; //target of ai is target here!
+        }
+    }
+
+    IEnumerator SpecialLightningAttack()
+    {
+        int boltCount = Random.Range(5, 9); 
+
+        for (int i = 0; i < boltCount; i++)
+        {
+            //spawn randomly around eel
+            Vector2 randomCircle = Random.insideUnitCircle * 5f; //
+            Vector3 spawnPos = transform.position + new Vector3(randomCircle.x, 10f, randomCircle.y);
+
+            GameObject bolt = Instantiate(lightningPrefab, spawnPos, Quaternion.identity);
+
+            // assign the player as the target
+            lightingAttack la = bolt.GetComponent<lightingAttack>();
+            if (la != null)
+                la.target = shipl.gameObject; 
+
+            yield return new WaitForSeconds(0.1f); //
+        }
     }
 }
+
+
+//testing cause ai keeps tracking and returning to player while retreating
+//works then dosen't work so very confusing
+
+// private float ignorePlayerUntil = 0f;
+
+//    protected override void Start()
+//    {
+//        base.Start();
+
+//        agent = GetComponent<NavMeshAgent>();
+//        if (agent == null)
+//        {
+//            Debug.LogError("NavMeshAgent not found! Check GameObject structure.");
+//        }
+//        //if (!agent.isOnNavMesh)
+//        //{
+//        //    Debug.LogError("Agent is NOT on NavMesh!"); //
+//        //    return;
+//        //}
+
+//        currentState = BossState.Patrol;
+//        GoToNextPatrolPoint();
+//    }
+
+//    protected override void Update()
+//    {
+//        base.Update();
+
+//        if (!agent.isOnNavMesh) 
+//            return;
+
+//        switch (currentState)
+//        {
+//            case BossState.Patrol:
+//                UpdatePatrol();
+//                break;
+
+//            case BossState.Chase:
+//                UpdateChase();
+//                break;
+//        }
+//    }
+
+
+//    void UpdatePatrol()
+//    {
+//        DetectPlayer();
+
+//        if (shipl != null)
+//        {
+//            ChangeState(BossState.Chase);
+//            return;
+//        }
+
+//        if (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance)
+//        {
+//            GoToNextPatrolPoint();
+//        }
+//    }
+
+//    void GoToNextPatrolPoint()
+//    {
+//        if (patrolPoints.Length == 0) return;
+
+//        currentLoc = Random.Range(0, patrolPoints.Length);
+//        agent.isStopped = false;
+//        agent.SetDestination(patrolPoints[currentLoc].position);
+//    }
+
+
+//    void UpdateChase()
+//    {
+//        if (shipl == null)
+//        {
+//            ChangeState(BossState.Patrol);
+//            return;
+//        }
+
+//        agent.isStopped = false;
+//        agent.SetDestination(shipl.position);
+
+//        float distance = Vector3.Distance(transform.position, shipl.position);
+
+//        if (distance <= attackRange && Time.time >= lastAttackTime + attackCooldown && !isAttacking)
+//        {
+//            StartCoroutine(AttackRoutine());
+//        }
+
+//        // Lose player if too far
+//        if (distance > detectionRadius * 1.5f)
+//        {
+//            shipl = null;
+//            ChangeState(BossState.Patrol);
+//        }
+//    }
+
+
+//    IEnumerator AttackRoutine()
+//    {
+//        isAttacking = true;
+//        ChangeState(BossState.Attack);
+
+//        lastAttackTime = Time.time;
+//        agent.isStopped = true;
+
+//        int bolts = Random.Range(2, 6);
+
+//        for (int i = 0; i < bolts; i++)
+//        {
+//            SpawnLightning();
+//            yield return new WaitForSeconds(0.3f);
+//        }
+
+//        yield return RetreatRoutine();
+
+//        isAttacking = false;
+//        ChangeState(BossState.Patrol);
+//    }
+
+//    IEnumerator RetreatRoutine()
+//    {
+//        if (shipl == null) 
+//            yield break;
+
+//        ChangeState(BossState.Retreat);
+
+//        Vector3 dir = (transform.position - shipl.position).normalized;
+//        Vector3 retreatPos = transform.position + dir * retreatRange;
+
+//        NavMeshHit hit;
+//        if (NavMesh.SamplePosition(retreatPos, out hit, 5f, NavMesh.AllAreas))
+//        {
+//            agent.isStopped = false;
+//            agent.SetDestination(hit.position);
+
+//            while (agent.pathPending)
+//                yield return null;
+
+//            while (agent.hasPath && agent.remainingDistance > agent.stoppingDistance)
+//                yield return null;
+//        }
+
+//        yield return new WaitForSeconds(retreatCooldown);
+
+//        shipl = null;
+//    }
+
+//    // =========================
+//    // DETECTION
+//    // =========================
+//    void DetectPlayer()
+//    {
+//        if (isAttacking) return;
+
+//        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, shipLayer);
+
+//        if (hits.Length > 0)
+//        {
+//            shipl = hits[0].transform;
+//        }
+//    }
+
+//    // =========================
+//    // LIGHTNING
+//    // =========================
+//    void SpawnLightning()
+//    {
+//        if (shipl == null) return;
+
+//        Vector3 strikePos;
+
+//        if (Random.value < 0.5f)
+//        {
+//            strikePos = shipl.position;
+//        }
+//        else
+//        {
+//            Vector2 rand = Random.insideUnitCircle * 3f;
+//            strikePos = shipl.position + new Vector3(rand.x, 0, rand.y);
+//        }
+
+//        Instantiate(lightningPrefab, strikePos + Vector3.up * 10f, Quaternion.identity);
+//    }
+
+//    void ChangeState(BossState newState)
+//    {
+//        currentState = newState;
+//    }
+//}
+
+//something broke so had to redo sadly
+//Start is called once before the first execution of Update after the MonoBehaviour is created
+
