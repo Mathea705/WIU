@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ElectricEelBossAI : MonoBehaviour
+public class ElectricEelBossAI : BossAI
 {
 
 
@@ -44,10 +44,10 @@ public class ElectricEelBossAI : MonoBehaviour
     public float retreatCooldown = 5f;
     public bool isRetreating = false;
 
-    private float ignorePlayerUntil = 3;
-  /*  protected override*/ void Start()
+    private float ignorePlayerUntil = 0;
+    protected override void Start()
     {
-        //base.Start();
+        base.Start();
       
         agent = GetComponent<NavMeshAgent>();
         if (patroPoints.Length > 0)
@@ -57,11 +57,11 @@ public class ElectricEelBossAI : MonoBehaviour
     }
     //change everything to state switching HHHHH
     // Update is called once per frame
-    /*protected override*/ void Update()
+    protected override void Update()
     {
 
 
-        //base.Update(); //call from base class to update health bar and all t hat
+        base.Update(); //call from base class to update health bar and all t hat
 
 
         switch (currentState)
@@ -250,31 +250,60 @@ public class ElectricEelBossAI : MonoBehaviour
 
         if (currentState == BossState.Retreat || isAttacking) //testing
             return;
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, shipLayer);
-        if (hits.Length > 0)
+        //Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, shipLayer);
+        //if (hits.Length > 0)
+        //{
+        //    shipl = hits[0].transform;
+        //    wasChasing = true;
+        //    currentState = BossState.Chase;
+        //    Debug.Log("Player detected: " + shipl.name);
+        //}
+        //else
+        //{
+        //    //shipl = null; //if move out then continuing patrolling
+        //    //clear when far
+        //    if (shipl != null && Vector3.Distance(transform.position, shipl.position) > detectionRadius + 5f)
+        //    {
+        //        shipl = null;
+        //        currentState = BossState.Patrol;
+        //    }
+        //}
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius); //change to tag now
+        shipl = null; 
+
+        foreach (Collider hit in hits)
         {
-            shipl = hits[0].transform;
-            wasChasing = true;
-            currentState = BossState.Chase;
-            Debug.Log("Player detected: " + shipl.name);
-        }
-        else
-        {
-            //shipl = null; //if move out then continuing patrolling
-            //clear when far
-            if (shipl != null && Vector3.Distance(transform.position, shipl.position) > detectionRadius + 5f)
+            if (hit.CompareTag("Ship")) // check for tag instead of layer
             {
-                shipl = null;
-                currentState = BossState.Patrol;
+                shipl = hit.transform;
+                wasChasing = true;
+                currentState = BossState.Chase;
+                Debug.Log("Player detected: " + shipl.name);
+                break; 
             }
         }
 
+        //else return to normal
+
+        if (shipl != null && Vector3.Distance(transform.position, shipl.position) > detectionRadius + 5f)
+        {
+            shipl = null;
+            currentState = BossState.Patrol;
+        }
         //testing for now
     }
     public void GoToNextPoint()
     {
         if (patroPoints.Length == 0)
             return;
+
+        int nextLoc = currentLoc;
+
+        //issue is if same point and choose same point, stuck
+        while (nextLoc == currentLoc && patroPoints.Length > 1)
+        {
+            nextLoc = Random.Range(0, patroPoints.Length);
+        }
 
         //currentLoc = (currentLoc + 1) % patroPoints.Length;
         currentLoc = Random.Range(0, patroPoints.Length);
@@ -380,6 +409,10 @@ public class ElectricEelBossAI : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f); //
         }
+
+        StartCoroutine(Retreat());
+        currentState = BossState.Retreat;
+        isAttacking = false;
     }
 }
 

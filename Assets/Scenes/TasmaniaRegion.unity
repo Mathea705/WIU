@@ -450,6 +450,37 @@ MonoBehaviour:
   arrivalRadius: 0.8
   waterSurfaceY: 0
   modelYOffset: 0
+--- !u!1 &64149778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64149779}
+  m_Layer: 0
+  m_Name: test (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64149779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64149778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -73.1, y: 0, z: -27.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &65271897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2643,7 +2674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &581420607
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2712,7 +2743,7 @@ Transform:
   m_GameObject: {fileID: 581420606}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.420002, y: 7.0854464, z: -3.2699986}
+  m_LocalPosition: {x: 4.699999, y: 7.0854464, z: -50.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3546,7 +3577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &770967244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3687,7 +3718,7 @@ Transform:
   m_GameObject: {fileID: 770967243}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.22, y: 5.19, z: -10.9}
+  m_LocalPosition: {x: 12.9, y: 5.19, z: -58.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4802,7 +4833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1208615475
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5429,6 +5460,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4266b1e0614938840b9c5124011bc638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  maxHealth: 200
+  bossHealthBarPanel: {fileID: 0}
+  bossHealthBarFill: {fileID: 0}
+  barLerpSpeed: 5
+  flashDuration: 0.2
   patroPoints:
   - {fileID: 42726324}
   - {fileID: 1169021592}
@@ -6602,7 +6638,7 @@ GameObject:
   - component: {fileID: 1782598663}
   - component: {fileID: 1782598662}
   - component: {fileID: 1782598661}
-  m_Layer: 3
+  m_Layer: 4
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7594,7 +7630,7 @@ Transform:
   m_GameObject: {fileID: 1942910993}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -70.3, y: 0.01, z: -10.8}
+  m_LocalPosition: {x: -70.3, y: 0.01, z: 51.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7613,12 +7649,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4266b1e0614938840b9c5124011bc638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  maxHealth: 200
+  bossHealthBarPanel: {fileID: 0}
+  bossHealthBarFill: {fileID: 0}
+  barLerpSpeed: 5
+  flashDuration: 0.2
   patroPoints:
   - {fileID: 42726324}
   - {fileID: 1169021592}
   - {fileID: 589021304}
   - {fileID: 554987133}
   - {fileID: 1935814313}
+  - {fileID: 64149779}
   detectionRadius: 100
   shipLayer:
     serializedVersion: 2
@@ -10290,12 +10332,14 @@ SceneRoots:
   - {fileID: 770967249}
   - {fileID: 461825621}
   - {fileID: 1421923337}
+  - {fileID: 1782598665}
   - {fileID: 1942910995}
   - {fileID: 42726324}
   - {fileID: 1169021592}
   - {fileID: 1935814313}
   - {fileID: 554987133}
   - {fileID: 589021304}
+  - {fileID: 64149779}
   - {fileID: 1589235967}
   - {fileID: 1208615480}
   - {fileID: 929200538}
@@ -10315,4 +10359,3 @@ SceneRoots:
   - {fileID: 2132682954}
   - {fileID: 94001325}
   - {fileID: 205805534}
-  - {fileID: 1782598665}
