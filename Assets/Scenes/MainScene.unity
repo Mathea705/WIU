@@ -30814,7 +30814,7 @@ GameObject:
   - component: {fileID: 1885344123}
   - component: {fileID: 1885344122}
   m_Layer: 0
-  m_Name: inventoryManager
+  m_Name: InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35206,6 +35206,7 @@ SceneRoots:
   - {fileID: 1508183010}
   - {fileID: 2129197967}
   - {fileID: 470907524}
+  - {fileID: 1885344124}
   - {fileID: 1128884490}
   - {fileID: 906960684}
   - {fileID: 157076956}
@@ -35232,6 +35233,5 @@ SceneRoots:
   - {fileID: 1349952717}
   - {fileID: 430742843}
   - {fileID: 16254958}
-  - {fileID: 1885344124}
   - {fileID: 215557972}
   - {fileID: 36537324}
