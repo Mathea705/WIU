@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 129b186e6241b6249a6bbc1f5a1e768b, type: 3}
       propertyPath: m_TagString
@@ -282,6 +282,33 @@ MonoBehaviour:
   tiltSmoothSpeed: 1
   sampleDistance: 0.1
   bankAmount: 0.2
+--- !u!1 &232792249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -17189283115001891, guid: 64a11c533c5e8b5499a474122aa7430e, type: 3}
+  m_PrefabInstance: {fileID: 642479964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &232792253
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232792249}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1210129167620174417, guid: 64a11c533c5e8b5499a474122aa7430e, type: 3}
 --- !u!1 &267116941
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,7 +951,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -17189283115001891, guid: 64a11c533c5e8b5499a474122aa7430e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 232792253}
   m_SourcePrefab: {fileID: 100100000, guid: 64a11c533c5e8b5499a474122aa7430e, type: 3}
 --- !u!1 &770967243
 GameObject:
@@ -2205,6 +2235,8 @@ MonoBehaviour:
   slamRiseHeight: 200
   slamDamage: 40
   slamHitDist: 5
+  splashPrefab: {fileID: 3323387954473017891, guid: 0b912e9003fba894faa88cf964a6fb8a, type: 3}
+  splashScale: 400
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

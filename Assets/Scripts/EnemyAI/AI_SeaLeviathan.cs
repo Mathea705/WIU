@@ -13,7 +13,6 @@ public class AI_SeaLeviathan : BossAI
 
     private State currentState;
 
-    [Header("Swim")]
     [SerializeField] private float orbitRadius   = 40f;
     [SerializeField] private float orbitSpeed    = 20f;
     [SerializeField] private float swimSpeed     = 4f;
@@ -21,13 +20,14 @@ public class AI_SeaLeviathan : BossAI
     [SerializeField] private float swimDepth     = -5f;
     [SerializeField] private float swimDuration  = 20f;
 
-    [Header("Slam")]
-    [SerializeField] private float slamAimDuration  = 1.5f;   // time spent rotating to face ship
-    [SerializeField] private float slamAimTurnSpeed = 120f;   // degrees per second
-    [SerializeField] private float slamArcDuration  = 2.0f;   // total time of the arc
-    [SerializeField] private float slamRiseHeight   = 20f;    // peak height of the arc
-    [SerializeField] private float slamDamage       = 40f;
-    [SerializeField] private float slamHitDist      = 8f;
+    [SerializeField] private float slamAimDuration  = 1.5f;   
+    [SerializeField] private float slamAimTurnSpeed = 120f;   
+    [SerializeField] private float slamArcDuration  = 2.0f;   
+    [SerializeField] private float slamRiseHeight   = 20f;   
+    [SerializeField] private float slamDamage        = 40f;
+    [SerializeField] private float slamHitDist       = 8f;
+    [SerializeField] private GameObject splashPrefab;
+    [SerializeField] private float       splashScale = 1f;
 
     private float _orbitAngle;
     private float _swimTimer;
@@ -85,7 +85,7 @@ public class AI_SeaLeviathan : BossAI
                 Swim();
                 break;
             case State.SLAM:
-                break; // handled by SlamSequence coroutine
+                break; 
             case State.SUBMERGE:
                 break;
             case State.RESURFACE:
@@ -93,7 +93,7 @@ public class AI_SeaLeviathan : BossAI
         }
     }
 
-    // ================= SWIM =================
+
     private void Swim()
     {
         if (shipObject == null) return;
@@ -116,12 +116,12 @@ public class AI_SeaLeviathan : BossAI
         }
     }
 
-    // ================= SLAM =================
+
     private IEnumerator SlamSequence()
     {
         if (shipObject == null) yield break;
 
-        // --- Phase 1: AIM ---
+   
         float t = 0f;
         while (t < slamAimDuration)
         {
@@ -137,10 +137,9 @@ public class AI_SeaLeviathan : BossAI
             yield return null;
         }
 
-        // --- Phase 2: ARC ---
-        // Ballistic arc over the ship — sin curve handles the height naturally
+        
         Vector3 arcStart = transform.position;
-        // Land on the far side of the ship, same depth as start
+
         Vector3 toShipFlat = shipObject.transform.position - arcStart;
         toShipFlat.y = 0f;
         Vector3 arcEnd = arcStart + toShipFlat * 2f;
@@ -158,7 +157,7 @@ public class AI_SeaLeviathan : BossAI
             float   arcY     = Mathf.Sin(p * Mathf.PI) * slamRiseHeight;
             transform.position = new Vector3(flatPos.x, arcStart.y + arcY, flatPos.z);
 
-            // Face direction of travel
+    
             Vector3 moveDir = transform.position - prevPos;
             if (moveDir != Vector3.zero)
             {
@@ -168,7 +167,7 @@ public class AI_SeaLeviathan : BossAI
                     slamAimTurnSpeed * 4f * Time.deltaTime);
             }
 
-            // Damage when grazing the ship
+     
             if (!hasDealtDamage)
             {
                 float dist     = Vector3.Distance(transform.position, shipObject.transform.position);
@@ -182,8 +181,11 @@ public class AI_SeaLeviathan : BossAI
             yield return null;
         }
 
-        // Recalculate orbit angle from actual landing position so Swim() targets the
-        // nearest point on the orbit ring — no snap, just a smooth glide back in.
+      
+            GameObject splash = Instantiate(splashPrefab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
+            splash.transform.localScale = Vector3.one * splashScale;
+            Destroy(splash, 2f);
+
         Vector3 currentOffset = transform.position - shipObject.transform.position;
         _orbitAngle = Mathf.Atan2(currentOffset.z, currentOffset.x) * Mathf.Rad2Deg;
 
