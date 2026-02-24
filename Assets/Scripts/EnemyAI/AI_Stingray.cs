@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.LowLevelPhysics2D;
-using UnityEngine.Splines.ExtrusionShapes;
 
-public class AI_Stingray : MonoBehaviour
+public class AI_Stingray : BossAI
 {
-    [SerializeField] private GameObject PlayerShip;
 
     private enum State
     {
@@ -37,8 +34,10 @@ public class AI_Stingray : MonoBehaviour
     private float dir;
     private float rad;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         speed = 10.0f;
         pivotSpeed = 30.0f;
         dir = 0.0f;
@@ -78,7 +77,7 @@ public class AI_Stingray : MonoBehaviour
         switch (currentState)
         {
             case State.WANDER:
-                if ((PlayerShip.transform.position - transform.position).magnitude <= aggroRange)
+                if ((shipObject.transform.position - transform.position).magnitude <= aggroRange)
                 {
                     currentState = State.AGGRO;
                 }
@@ -123,9 +122,9 @@ public class AI_Stingray : MonoBehaviour
                 if ((targetPos - transform.position).magnitude <= wanderTargetRange)
                 {
                     targetPos = new Vector3(
-                        PlayerShip.transform.position.x + Random.Range(-wanderTargetRange, wanderTargetRange),
+                        shipObject.transform.position.x + Random.Range(-wanderTargetRange, wanderTargetRange),
                         0,
-                        PlayerShip.transform.position.z + Random.Range(-wanderTargetRange, wanderTargetRange));
+                        shipObject.transform.position.z + Random.Range(-wanderTargetRange, wanderTargetRange));
                 }
                 break;
             case State.AGGRO:

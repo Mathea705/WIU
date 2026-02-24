@@ -4,11 +4,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Swordfish : MonoBehaviour
+public class Swordfish : BossAI
 {
     [Header("References")]
     public Transform player;   // optional
-    public Transform boat;     // main target
 
     [Header("Detection (Cone - Z Forward)")]
     public float detectionRange = 30f;
@@ -41,8 +40,9 @@ public class Swordfish : MonoBehaviour
     private bool hasHitBoatThisDash = false;
 
     // ================= START =================
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         currentState = State.Swim;
         PickRandomDirection();
     }
@@ -90,9 +90,9 @@ public class Swordfish : MonoBehaviour
     // ================= DETECTION =================
     void DetectPlayer()
     {
-        if (boat == null) return;
+        if (shipObject.transform == null) return;
 
-        Vector3 dirToBoat = boat.position - transform.position;
+        Vector3 dirToBoat = shipObject.transform.position - transform.position;
         float distance = dirToBoat.magnitude;
 
         if (distance > detectionRange) return;
@@ -105,7 +105,7 @@ public class Swordfish : MonoBehaviour
         {
             currentState = State.Aim;
             stateTimer = aimDuration;
-            lockedPosition = boat.position;
+            lockedPosition = shipObject.transform.position;
             hasHitBoatThisDash = false;
         }
     }
@@ -113,11 +113,11 @@ public class Swordfish : MonoBehaviour
     // ================= AIM =================
     void Aim()
     {
-        if (boat == null) return;
+        if (shipObject.transform == null) return;
 
         stateTimer -= Time.deltaTime;
 
-        Vector3 dir = (boat.position - transform.position).normalized;
+        Vector3 dir = (shipObject.transform.position - transform.position).normalized;
         RotateTowards(dir);
 
         if (stateTimer <= 0)
@@ -134,14 +134,14 @@ public class Swordfish : MonoBehaviour
 
         Move(dir, dashSpeed);
 
-        if (!hasHitBoatThisDash && boat != null)
+        if (!hasHitBoatThisDash && shipObject.transform != null)
         {
-            float currentDist = Vector3.Distance(transform.position, boat.position);
-            float previousDist = Vector3.Distance(previousPosition, boat.position);
+            float currentDist = Vector3.Distance(transform.position, shipObject.transform.position);
+            float previousDist = Vector3.Distance(previousPosition, shipObject.transform.position);
 
             if (currentDist <= hitDistance || previousDist <= hitDistance)
             {
-                Debug.Log("collide");
+                DealDamageToShip(20f);
 
                 hasHitBoatThisDash = true;
 
@@ -162,11 +162,11 @@ public class Swordfish : MonoBehaviour
     // ================= REST =================
     void Rest()
     {
-        if (boat == null) return;
+        if (shipObject.transform == null) return;
 
         stateTimer -= Time.deltaTime;
 
-        Vector3 awayDir = (transform.position - boat.position).normalized;
+        Vector3 awayDir = (transform.position - shipObject.transform.position).normalized;
         Move(awayDir, retreatSpeed);
 
         if (stateTimer <= 0)
