@@ -618,8 +618,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba317b0a84c63714b97ed428b52eff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  maxHealth: 200
+  shipObject: {fileID: 0}
+  bossHealthBarPanel: {fileID: 0}
+  bossHealthBarFill: {fileID: 0}
+  barLerpSpeed: 5
+  flashDuration: 0.2
   player: {fileID: 557673296}
+<<<<<<< Updated upstream
   boat: {fileID: 1591200363}
+=======
+>>>>>>> Stashed changes
   detectionRange: 120
   viewAngle: 90
   swimSpeed: 6

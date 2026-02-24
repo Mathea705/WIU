@@ -25,7 +25,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+<<<<<<< Updated upstream
     - _BlurAmount: 1.8e-44
+=======
+    - _BlurAmount: 1e-45
+>>>>>>> Stashed changes
     - _ChromaticAmount: 0
     - _VignetteAmount: 0
     m_Colors: []
