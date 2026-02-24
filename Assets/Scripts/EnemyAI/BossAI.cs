@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossAI : MonoBehaviour
 {
@@ -7,17 +8,23 @@ public class BossAI : MonoBehaviour
 
     [SerializeField] protected GameObject shipObject;
 
+    [SerializeField] private GameObject bossHealthBarPanel;
+    [SerializeField] private Image bossHealthBarFill;
+    [SerializeField] private float barLerpSpeed = 5f;
+
     [SerializeField] private float flashDuration = 0.2f;
 
     protected float currentHealth;
     protected HealthSystem shipHealth;
 
+    private float _displayHealth;
     private Renderer[] _renderers;
     private Color[] _originalColors;
 
     protected virtual void Start()
     {
         currentHealth = maxHealth;
+        _displayHealth = maxHealth;
 
         if (shipObject != null)
             shipHealth = shipObject.GetComponent<HealthSystem>();
@@ -26,10 +33,24 @@ public class BossAI : MonoBehaviour
         _originalColors = new Color[_renderers.Length];
         for (int i = 0; i < _renderers.Length; i++)
             _originalColors[i] = _renderers[i].material.color;
+
+        if (bossHealthBarPanel != null)
+            bossHealthBarPanel.SetActive(false);
+    }
+
+    protected virtual void Update()
+    {
+        if (bossHealthBarFill == null) return;
+
+        _displayHealth = Mathf.Lerp(_displayHealth, currentHealth, Time.deltaTime * barLerpSpeed);
+        bossHealthBarFill.fillAmount = _displayHealth / maxHealth;
     }
 
     public void TakeDamage(float amount)
     {
+        if (bossHealthBarPanel != null)
+            bossHealthBarPanel.SetActive(true);
+
         currentHealth = Mathf.Max(0f, currentHealth - amount);
         StartCoroutine(FlashRed());
 
@@ -73,6 +94,9 @@ public class BossAI : MonoBehaviour
 
     protected virtual void OnDeath()
     {
+        if (bossHealthBarPanel != null)
+            bossHealthBarPanel.SetActive(false);
+
         Destroy(gameObject);
     }
 }
