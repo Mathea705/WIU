@@ -33871,7 +33871,8 @@ MonoBehaviour:
   firstLine: Nice to see a new face. Welcome to the shop. You say you want to take
     on the  four beasts of the Black Sea? I can help with that. Just a warning though,
     most don't make it back alive. Here's 200 Aurum to start you off.  Feel free
-    to use my trusty ship over there at the docks. Good luck.
+    to use my trusty ship over there at the docks. Hold E at the ship's hull to repair
+    it. Good luck.
   repeatLine: See anything you like?
   typeSpeed: 0.03
   shopContent: {fileID: 1968559864}
