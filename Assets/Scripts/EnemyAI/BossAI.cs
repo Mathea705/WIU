@@ -6,7 +6,7 @@ public class BossAI : MonoBehaviour
 {
     [SerializeField] protected float maxHealth = 200f;
 
-    [SerializeField] protected GameObject shipObject;
+    protected GameObject shipObject;
 
     [SerializeField] private GameObject bossHealthBarPanel;
     [SerializeField] private Image bossHealthBarFill;
@@ -16,6 +16,7 @@ public class BossAI : MonoBehaviour
 
     protected float currentHealth;
     protected HealthSystem shipHealth;
+    protected bool _invulnerable = false;
 
     private float _displayHealth;
     private Renderer[] _renderers;
@@ -26,7 +27,9 @@ public class BossAI : MonoBehaviour
         currentHealth = maxHealth;
         _displayHealth = maxHealth;
 
-        if (shipObject != null)
+        shipObject = GameObject.FindWithTag("Ship");
+
+
             shipHealth = shipObject.GetComponent<HealthSystem>();
 
         _renderers = GetComponentsInChildren<Renderer>();
@@ -48,6 +51,8 @@ public class BossAI : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (_invulnerable) return;
+
         if (bossHealthBarPanel != null)
             bossHealthBarPanel.SetActive(true);
 
