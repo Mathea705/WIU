@@ -3,9 +3,42 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    public GameObject inventoryPanel; //to hide it
     public Transform ContentPanel;
     public GameObject itemText; //item texts in the panel
-   
+
+    private bool isOpen = false;
+    public static InventoryUI Instance;
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    //toggle
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ToggleInventory();
+        }
+    }
+
+    public void ToggleInventory()
+    {
+        isOpen = !isOpen;
+        inventoryPanel.SetActive(isOpen);
+
+        if (isOpen)
+        {
+            RefreshUI();
+        }
+    }
     public void RefreshUI()
     {
         foreach (Transform child in ContentPanel)
@@ -17,4 +50,6 @@ public class InventoryUI : MonoBehaviour
             obj.GetComponent<TMP_Text>().text = entry.lootedItem.itemName + " x" + entry.quantity + "\n";
         }
     }
+
+
 }
