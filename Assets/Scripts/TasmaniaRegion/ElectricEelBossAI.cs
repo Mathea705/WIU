@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ElectricEelBossAI : MonoBehaviour
+public class ElectricEelBossAI : BossAI
 {
     public Transform[] patroPoints;
     private NavMeshAgent agent;
