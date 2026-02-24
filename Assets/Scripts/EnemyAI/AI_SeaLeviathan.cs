@@ -13,9 +13,10 @@ public class AI_SeaLeviathan : BossAI
     private State currentState;
 
     [SerializeField] private float orbitRadius = 40f;
-    [SerializeField] private float orbitSpeed  = 20f;  
+    [SerializeField] private float orbitSpeed  = 20f;
     [SerializeField] private float swimSpeed   = 4f;
     [SerializeField] private float turnSpeed   = 2f;
+    [SerializeField] private float swimDepth   = -5f;
 
     private float _orbitAngle;
 
@@ -84,7 +85,8 @@ public class AI_SeaLeviathan : BossAI
 
         float rad = _orbitAngle * Mathf.Deg2Rad;
         Vector3 targetPos = shipObject.transform.position
-            + new Vector3(Mathf.Cos(rad), 0f, Mathf.Sin(rad)) * orbitRadius;
+            + new Vector3(Mathf.Cos(rad), 0f, Mathf.Sin(rad)) * orbitRadius
+            + Vector3.up * swimDepth;
 
 
         Vector3 dir = (targetPos - transform.position).normalized;
