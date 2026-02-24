@@ -57,8 +57,8 @@ public class InventoryManager : MonoBehaviour
 
         FindAnyObjectByType<AurumManager>().AddAurum(totalValue); //add aurum using aurumManager;
 
-        Debug.Log("Sold everything for: " + totalValue + " Aurum");
-        Debug.Log("Total Aurum: " + aurum); //why not
+        // Debug.Log("Sold everything for: " + totalValue + " Aurum");
+        // Debug.Log("Total Aurum: " + aurum); //why not
 
         inventory.Clear();
 
