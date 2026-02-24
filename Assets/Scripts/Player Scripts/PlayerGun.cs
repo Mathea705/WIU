@@ -4,18 +4,18 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-public class GunController : MonoBehaviour
+public class GunController : BossAI
 {
-    [Header("References")]
+    [Header("references")]
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject gun;
 
-    [Header("Gun FX")]
+    [Header("gun effects")]
     [SerializeField] private ParticleSystem hitParticle;
     [SerializeField] private ParticleSystem muzzleFlash;
 
-    [Header("Gun Lerp Stuff")]
+    [Header("gun lerp stuff")]
     [SerializeField] private float movementSwayAmount = 10f;
     [SerializeField] private float mouseSwayAmount = 2f;
     [SerializeField] private float swaySmooth = 8f;
@@ -32,7 +32,7 @@ public class GunController : MonoBehaviour
 
     private Rigidbody playerRb;
 
-    [Header("UI")]
+    [Header("ui things")]
     [SerializeField] private Image left;
     [SerializeField] private Image right;
     [SerializeField] private Image top;
@@ -40,7 +40,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private TextMeshProUGUI reloadText;
 
-    [Header("Settings")]
+    [Header("settings")]
     [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private float MOVEINACCURACY = 0.1f;
     [SerializeField] private float CROSSHAIROFFSET = 70f;
@@ -58,6 +58,8 @@ public class GunController : MonoBehaviour
     [SerializeField] private Vector3 hipRotRecoilUpperBound = new Vector3(-20f, 5f, 3f);
 
     [SerializeField] private int maxAmmo = 20;
+    [SerializeField] private int dmg_lowest = 10;
+    [SerializeField] private int dmg_highest = 20;
 
     [SerializeField] private bool isOperatingGun;
     [SerializeField] private bool isFullAuto;
@@ -129,10 +131,6 @@ public class GunController : MonoBehaviour
         }
     }
 
-    // -------------------------
-    // Shooting
-    // -------------------------
-
     void HandleShooting()
     {
         aimInaccuracy += Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) ? MOVEINACCURACY : 0;
@@ -161,9 +159,16 @@ public class GunController : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hit, 2000f))//, shootLayers))
             {
-                //hitParticle.transform.position = hit.point;
-                //hitParticle.transform.rotation = Quaternion.LookRotation(hit.normal);
+                hitParticle.transform.position = hit.point;
+                hitParticle.transform.rotation = Quaternion.LookRotation(hit.normal);
                 hitParticle.Play();
+
+                BossAI boss = hit.collider.GetComponentInParent<BossAI>();
+
+                if (boss != null)
+                {
+                    boss.TakeDamage(Random.Range(dmg_lowest, dmg_highest + 1));
+                }
             }
             
             muzzleFlash.Play();
@@ -192,10 +197,6 @@ public class GunController : MonoBehaviour
             canShoot = true;
     }
 
-    // -------------------------
-    // ADS
-    // -------------------------
-
     void HandleADS()
     {
         Vector3 targetOffset = adsAction
@@ -204,10 +205,6 @@ public class GunController : MonoBehaviour
 
         localGunOffset = Vector3.Lerp(localGunOffset, targetOffset, Time.deltaTime * LERP_ADS);
     }
-
-    // -------------------------
-    // Reload
-    // -------------------------
 
     void HandleReload()
     {
@@ -228,10 +225,6 @@ public class GunController : MonoBehaviour
             }
         }
     }
-
-    // -------------------------
-    // Gun Positioning
-    // -------------------------
 
     void UpdateGunTransform()
     {
@@ -256,20 +249,11 @@ public class GunController : MonoBehaviour
 
     }
 
-    // -------------------------
-    // Gun Recoil
-    // -------------------------
-    
     void HandleRecoil()
     {
         recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, Time.deltaTime * LERP_RECOILTRANSFORM);
         recoilRotation = Quaternion.Lerp(recoilRotation, Quaternion.identity, Time.deltaTime * LERP_RECOILROT);
     }
-
-
-    // -------------------------
-    // UI
-    // -------------------------
 
     void UpdateUI()
     {
@@ -282,10 +266,6 @@ public class GunController : MonoBehaviour
         ammoText.text = $"{currentAmmo}/{maxAmmo}";
         reloadText.text = isReloading ? "[R...]" : currentAmmo <= 0 ? "[R!]" : "";
     }
-
-    // -------------------------
-    // Crosshair
-    // -------------------------
 
     void UpdateCrosshair()
     {
