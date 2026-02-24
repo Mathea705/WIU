@@ -2246,7 +2246,7 @@ MonoBehaviour:
   submergeRiseTime: 3
   whirlpoolPrefab: {fileID: 6596172222965295673, guid: 502a783f76da1bd478ea91d189d412dc, type: 3}
   whirlpoolCount: 5
-  whirlpoolRadius: 120
+  whirlpoolRadius: 100
 --- !u!114 &4791045695778275732
 MonoBehaviour:
   m_ObjectHideFlags: 0
