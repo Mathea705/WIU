@@ -7929,8 +7929,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14321554, y: 0.6728169, z: -0.13512026, w: 0.7131264}
-  m_LocalPosition: {x: -21.091572, y: 10.76, z: 44.562424}
+  m_LocalRotation: {x: 0, y: 0.6033148, z: 0, w: 0.7975032}
+  m_LocalPosition: {x: -8.6, y: 5, z: 45.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17908,7 +17908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &971541780
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18466,7 +18466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &997459769
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33867,6 +33867,7 @@ MonoBehaviour:
   - {fileID: 521557009}
   - {fileID: 521557009}
   - {fileID: 80045759}
+  - {fileID: 2060572908}
   dialogueBox: {fileID: 629099125}
   dialogueText: {fileID: 306969236}
   firstLine: Nice to see a new face. Welcome to the shop. You say you want to take
