@@ -15623,7 +15623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &826982004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32028,7 +32028,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
   aurum: {fileID: 1508183011}
-  inventory: []
+  inventory:
+  - quantity: 1
+    lootedItem: {fileID: 11400000, guid: 4396a741ed308f742baf790f472a8139, type: 2}
+  - quantity: 1
+    lootedItem: {fileID: 11400000, guid: 3b9b27bc7cd6a3b408470215bc47208f, type: 2}
+  - quantity: 1
+    lootedItem: {fileID: 11400000, guid: 4170df82ab1ee7d4383d00b7036e832c, type: 2}
+  - quantity: 1
+    lootedItem: {fileID: 11400000, guid: c75990625a24a3440b49eb14a09ea600, type: 2}
+  - quantity: 1
+    lootedItem: {fileID: 11400000, guid: 2c9c517fa3c54d34685a1f1483cb283f, type: 2}
 --- !u!4 &1885344124
 Transform:
   m_ObjectHideFlags: 0
@@ -34464,7 +34474,6 @@ MonoBehaviour:
   repeatLine: See anything you like?
   typeSpeed: 0.03
   shopContent: {fileID: 1968559864}
-  cameraRotateDuration: 1
   AurumManager: {fileID: 1508183011}
   shopAurumText: {fileID: 1096539400}
   gunCanvas: {fileID: 80045759}
