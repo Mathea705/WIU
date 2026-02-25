@@ -394,7 +394,7 @@ public class ElectricEelBossAI : BossAI
 
     IEnumerator SpecialLightningAttack()
     {
-        int boltCount = Random.Range(5, 9); 
+        int boltCount = Random.Range(4, 7); 
 
         for (int i = 0; i < boltCount; i++)
         {
