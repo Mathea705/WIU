@@ -8,7 +8,7 @@ public class lightingAttack : BossAI
     public GameObject target;
     public float stopDistance = 0.5f;
     private bool HasHit = false;
-    public BossAI bossAttack;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
 
@@ -59,7 +59,7 @@ public class lightingAttack : BossAI
 
         //damaee
         Debug.Log("Player hit by lightning!");
-        bossAttack.DealDamageToShip(5);
+        DealDamageToShip(5);
         Destroy(gameObject, 0.1f);
     }
     public void HitGround()
