@@ -1579,6 +1579,7 @@ MonoBehaviour:
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
   flashDuration: 0.2
+  fadeDuration: 5
 --- !u!1001 &795234111
 PrefabInstance:
   m_ObjectHideFlags: 0

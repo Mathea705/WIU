@@ -13,6 +13,7 @@ public class BossAI : MonoBehaviour
     [SerializeField] private float barLerpSpeed = 5f;
 
     [SerializeField] private float flashDuration = 0.2f;
+    [SerializeField] private float fadeDuration = 2f;
 
     protected float currentHealth;
     protected HealthSystem shipHealth;
@@ -101,6 +102,28 @@ public class BossAI : MonoBehaviour
     {
         if (bossHealthBarPanel != null)
             bossHealthBarPanel.SetActive(false);
+
+        _invulnerable = true;
+        StopAllCoroutines();
+        StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeOut()
+    {
+
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                Color c = _originalColors[i];
+                c.a = alpha;
+                _renderers[i].material.color = c;
+            }
+            yield return null;
+        }
 
         Destroy(gameObject);
     }

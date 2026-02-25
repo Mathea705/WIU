@@ -6015,6 +6015,7 @@ MonoBehaviour:
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
   flashDuration: 0.2
+  fadeDuration: 2
   patroPoints:
   - {fileID: 42726324}
   - {fileID: 1169021592}
@@ -8350,6 +8351,7 @@ MonoBehaviour:
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
   flashDuration: 0.2
+  fadeDuration: 5
   patroPoints:
   - {fileID: 42726324}
   - {fileID: 1169021592}
