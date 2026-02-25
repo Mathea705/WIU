@@ -27,6 +27,8 @@ public class DriveTrigger : MonoBehaviour
     {
         playerRb    = playerController.GetComponent<Rigidbody>();
         _shipHealth = ship.GetComponentInChildren<HealthSystem>();
+        if (hullBounds == null)
+            hullBounds = ship.GetComponentInChildren<BoxCollider>();
     }
 
     private void Update()
@@ -91,6 +93,10 @@ public class DriveTrigger : MonoBehaviour
 
     private bool IsHullOverlappingWorld()
     {
+        if (hullBounds == null)
+            hullBounds = ship.GetComponentInChildren<BoxCollider>();
+        if (hullBounds == null) return false;
+
         Vector3 worldCenter = hullBounds.transform.TransformPoint(hullBounds.center);
         Vector3 halfExtents = Vector3.Scale(hullBounds.size * 0.5f, hullBounds.transform.lossyScale);
 
