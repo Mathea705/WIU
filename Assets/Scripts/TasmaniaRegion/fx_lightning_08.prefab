@@ -126,7 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a729b9d368c584da501076e42435cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::lightingAttack
+  maxHealth: 200
+  bossHealthBarPanel: {fileID: 0}
+  bossHealthBarFill: {fileID: 0}
+  barLerpSpeed: 5
+  flashDuration: 0.2
   speed: 40
   groundY: 0
   target: {fileID: 0}
   stopDistance: 0.5
+  bossAttack: {fileID: 9000048363532880942}
