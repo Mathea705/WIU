@@ -16902,6 +16902,7 @@ MonoBehaviour:
   smokePrefab: {fileID: 5299146926960630741, guid: 57970c6bb711ec24b8d98424b1806f3b, type: 3}
   smokePoint: {fileID: 1972495428}
   smokeFadeTime: 1
+  triggerDeathScene: 1
 --- !u!1 &891606555
 GameObject:
   m_ObjectHideFlags: 0
@@ -17901,6 +17902,7 @@ MonoBehaviour:
   smokePrefab: {fileID: 0}
   smokePoint: {fileID: 0}
   smokeFadeTime: 1
+  triggerDeathScene: 1
 --- !u!1 &968831458
 GameObject:
   m_ObjectHideFlags: 0
