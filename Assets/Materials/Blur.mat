@@ -25,7 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _BlurAmount: 3e-45
+    - _BlurAmount: 2.6966659e-30
     - _ChromaticAmount: 0
     - _VignetteAmount: 0
     m_Colors: []
