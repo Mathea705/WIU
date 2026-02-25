@@ -34351,7 +34351,6 @@ MonoBehaviour:
   repeatLine: See anything you like?
   typeSpeed: 0.03
   shopContent: {fileID: 1968559864}
-  cameraRotateDuration: 1
   AurumManager: {fileID: 1508183011}
   shopAurumText: {fileID: 1096539400}
   gunCanvas: {fileID: 80045759}
