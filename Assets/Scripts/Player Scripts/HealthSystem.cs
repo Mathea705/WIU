@@ -27,10 +27,14 @@ public class HealthSystem : MonoBehaviour
     private float _currentHealth;
     private float _displayHealth;
 
+    private bool isDead;
+
     void Awake()
     {
         _currentHealth = maxHealth;
         _displayHealth = maxHealth;
+
+        isDead = false;
     }
 
     void Start()
@@ -62,8 +66,9 @@ public class HealthSystem : MonoBehaviour
             }
         }
 
-        if (_currentHealth <= 0 && triggerDeathScene)
+        if (_currentHealth <= 0 && triggerDeathScene && !isDead)
         {
+            isDead = true;
             SceneManager.LoadScene("DeathScene");
         }
     }
