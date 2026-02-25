@@ -18074,8 +18074,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 384, y: -310}
-  m_SizeDelta: {x: -947.0198, y: -805.3818}
+  m_AnchoredPosition: {x: 428.75, y: -215.23}
+  m_SizeDelta: {x: -857.51, y: -430.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &971541781
 MonoBehaviour:
@@ -18632,8 +18632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 384, y: -310}
-  m_SizeDelta: {x: -947.0198, y: -805.3818}
+  m_AnchoredPosition: {x: 441.79, y: -215.23}
+  m_SizeDelta: {x: -835.6121, y: -430.4431}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &997459770
 MonoBehaviour:
@@ -32028,17 +32028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
   aurum: {fileID: 1508183011}
-  inventory:
-  - quantity: 1
-    lootedItem: {fileID: 11400000, guid: 4396a741ed308f742baf790f472a8139, type: 2}
-  - quantity: 1
-    lootedItem: {fileID: 11400000, guid: 3b9b27bc7cd6a3b408470215bc47208f, type: 2}
-  - quantity: 1
-    lootedItem: {fileID: 11400000, guid: 4170df82ab1ee7d4383d00b7036e832c, type: 2}
-  - quantity: 1
-    lootedItem: {fileID: 11400000, guid: c75990625a24a3440b49eb14a09ea600, type: 2}
-  - quantity: 1
-    lootedItem: {fileID: 11400000, guid: 2c9c517fa3c54d34685a1f1483cb283f, type: 2}
+  inventory: []
 --- !u!4 &1885344124
 Transform:
   m_ObjectHideFlags: 0
