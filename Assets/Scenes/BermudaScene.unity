@@ -8779,7 +8779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2943802397042340260, guid: 1b2bf070a0faca345b5133d5f169e916, type: 3}
       propertyPath: maxHealth
-      value: 750
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 6643372732231807017, guid: 1b2bf070a0faca345b5133d5f169e916, type: 3}
       propertyPath: m_LocalPosition.x
