@@ -8003,7 +8003,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 2
     Time: 2
     CustomCurve:
       serializedVersion: 2
@@ -27669,7 +27669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -32939,7 +32939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1968559865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33010,7 +33010,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968559864}
-  m_LocalRotation: {x: -0, y: -0.4427325, z: -0, w: 0.8966538}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -2.311}
   m_LocalScale: {x: 0.0010372654, y: 0.0012509748, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33019,7 +33019,7 @@ RectTransform:
   - {fileID: 974647231}
   - {fileID: 2081933305}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -52.557, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 8.947, y: 7.44}
@@ -34451,9 +34451,6 @@ MonoBehaviour:
   playerController: {fileID: 1804429238}
   shopIcon: {fileID: 1203586483}
   hideOnShopOpen:
-  - {fileID: 521557009}
-  - {fileID: 521557009}
-  - {fileID: 521557009}
   - {fileID: 521557009}
   - {fileID: 80045759}
   - {fileID: 2060572908}

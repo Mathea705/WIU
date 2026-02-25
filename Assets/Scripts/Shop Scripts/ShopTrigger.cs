@@ -215,24 +215,24 @@ public class ShopTrigger : MonoBehaviour
             yield return typeWait;
         }
         yield return new WaitForSeconds(0.5f);
-        yield return StartCoroutine(RotateCamera());
+        // yield return StartCoroutine(RotateCamera());
         dialogueBox.SetActive(false);
         shopContent.SetActive(true);
     }
 
-    private IEnumerator RotateCamera()
-    {
-        Quaternion startRot = shopCamera.transform.localRotation;
-        Quaternion endRot   = startRot * Quaternion.Euler(0f, 30f, 0f);
-        float elapsed = 0f;
-        while (elapsed < cameraRotateDuration)
-        {
-            elapsed += Time.deltaTime;
-            shopCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / cameraRotateDuration);
-            yield return null;
-        }
-        shopCamera.transform.localRotation = endRot;
-    }
+    // private IEnumerator RotateCamera()
+    // {
+    //     Quaternion startRot = shopCamera.transform.localRotation;
+    //     Quaternion endRot   = startRot * Quaternion.Euler(0f, 30f, 0f);
+    //     float elapsed = 0f;
+    //     while (elapsed < cameraRotateDuration)
+    //     {
+    //         elapsed += Time.deltaTime;
+    //         shopCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / cameraRotateDuration);
+    //         yield return null;
+    //     }
+    //     shopCamera.transform.localRotation = endRot;
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
