@@ -1574,7 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229f87e4a82d4e343b30dfb857749cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AI_Stingray
-  maxHealth: 200
+  maxHealth: 1500
   bossHealthBarPanel: {fileID: 0}
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
@@ -5073,7 +5073,7 @@ GameObject:
   - component: {fileID: 1834336977}
   - component: {fileID: 1834336979}
   - component: {fileID: 1834336978}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: WaterCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

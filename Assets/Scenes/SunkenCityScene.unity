@@ -2842,6 +2842,10 @@ PrefabInstance:
       value: Sea Leviathan
       objectReference: {fileID: 0}
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: whirlpoolMaxRadius
       value: 110
       objectReference: {fileID: 0}

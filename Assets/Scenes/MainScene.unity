@@ -7930,7 +7930,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.6033148, z: 0, w: 0.7975032}
-  m_LocalPosition: {x: -8.6, y: 5, z: 45.6}
+  m_LocalPosition: {x: -4, y: 6.95, z: -0.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30595,7 +30595,7 @@ Transform:
   m_GameObject: {fileID: 1804429237}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6033148, z: -0, w: 0.7975032}
-  m_LocalPosition: {x: -8.6, y: 4.42, z: 45.6}
+  m_LocalPosition: {x: -4, y: 6.37, z: -0.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35738,6 +35738,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1738901355}
     - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
+      propertyPath: dmg_highest
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
       propertyPath: ADSINACCURACY
       value: -0.6
       objectReference: {fileID: 0}
@@ -35899,6 +35903,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: isOperatingGun
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
       propertyPath: firerateCooldown
       value: 0.25
       objectReference: {fileID: 0}
@@ -36046,9 +36054,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1692505083}
     - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: dmg_lowest
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1738901355}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: dmg_highest
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
       propertyPath: LERP_INPUTSWAY
       value: 5
@@ -36267,9 +36283,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1692505083}
     - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: dmg_lowest
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1738901355}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: dmg_highest
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
       propertyPath: ADSINACCURACY
       value: -0.3
