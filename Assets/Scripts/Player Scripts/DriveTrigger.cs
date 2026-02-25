@@ -16,15 +16,17 @@ public class DriveTrigger : MonoBehaviour
     [SerializeField] private GameObject   gunCanvas;
     [SerializeField] private GameObject[] allGuns;
 
-    private Rigidbody  playerRb;
-    private GameObject _gunActiveBeforeDrive;
+    private Rigidbody     playerRb;
+    private GameObject    _gunActiveBeforeDrive;
+    private HealthSystem  _shipHealth;
 
     private bool _inRange;
     private bool _driving;
 
     void Start()
     {
-        playerRb = playerController.GetComponent<Rigidbody>();
+        playerRb    = playerController.GetComponent<Rigidbody>();
+        _shipHealth = ship.GetComponentInChildren<HealthSystem>();
     }
 
     private void Update()
@@ -69,6 +71,8 @@ public class DriveTrigger : MonoBehaviour
 
     private void HandleSteering()
     {
+        if (_shipHealth != null && !_shipHealth.IsAlive) return;
+
         float turn    = Input.GetAxis("Horizontal");
         float forward = Input.GetAxis("Vertical");
 

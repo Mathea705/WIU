@@ -17,6 +17,14 @@ public class ShopSlot : MonoBehaviour
     public static readonly List<GameObject> SoldGuns    = new List<GameObject>();
     public static bool GunOwned;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetStatics()
+    {
+        PendingGuns.Clear();
+        SoldGuns.Clear();
+        GunOwned = false;
+    }
+
     private AurumManager     _aurum;
     private ShopItemData     _data;
     private GameObject       _gunObject;

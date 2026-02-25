@@ -15,6 +15,7 @@ public class AurumManager : MonoBehaviour
         UpdateDisplay();
     }
 
+
     public void AddAurum(int amount)
     {
         Aurum += amount;
