@@ -37,8 +37,8 @@ public class ElectricEelBossAI : BossAI
     private float lastAttackTime;
     private bool isAttacking = false; //testing
 
-
-
+    private bool useSpecialAttack = false;
+    private bool specialAttackChecked = false;
     [Header("Retreat State")]
     public float retreatRange = 50f;
     public float retreatCooldown = 5f;
@@ -190,6 +190,9 @@ public class ElectricEelBossAI : BossAI
         if (shipl == null)
         {
             currentState = BossState.Patrol;
+            wasChasing = false; 
+            //useSpecialAttack = false;
+            specialAttackChecked = false;
             return;
         }
         // agent.isStopped = false;
@@ -210,7 +213,12 @@ public class ElectricEelBossAI : BossAI
         //        StartCoroutine(Attack());
         //    }
         //}
-
+        //if (!wasChasing)
+        //{
+        //    wasChasing = true;
+        //    useSpecialAttack = true;
+        //    Debug.Log("Chase started. Special attack? " + useSpecialAttack);
+        //}
         float attackBuffer = 5f; 
 
         if (distance > attackRange + attackBuffer)
@@ -219,11 +227,27 @@ public class ElectricEelBossAI : BossAI
             agent.isStopped = false;
             agent.stoppingDistance = attackRange; 
             agent.SetDestination(shipl.position);
-            if (!isAttacking && Time.time >= lastAttackTime + attackCooldown)
+            //if (useSpecialAttack && !isAttacking) //not really working
+            //{
+            //    isAttacking = true;
+            //    useSpecialAttack = false; 
+            //    StartCoroutine(SpecialLightningAttack());
+            //}
+            //if (!isAttacking && Time.time >= lastAttackTime + attackCooldown) {
+            //    if (Random.value < 0.3f) 
+            //    { 
+            //        StartCoroutine(SpecialLightningAttack()); 
+            //        isAttacking = true; 
+            //    } 
+            //}
+            if (!specialAttackChecked)
             {
-                StartCoroutine(SpecialLightningAttack());
-
-                isAttacking = true;
+                specialAttackChecked = true; // mark that we've considered it
+                if (Random.value < 0.5f)
+                {
+                    isAttacking = true;
+                    StartCoroutine(SpecialLightningAttack());
+                }
             }
         }
         else
@@ -282,6 +306,7 @@ public class ElectricEelBossAI : BossAI
                 shipl = hit.transform;
                 wasChasing = true;
                 currentState = BossState.Chase;
+
                 Debug.Log("Player detected: " + shipl.name);
                 break; 
             }
@@ -363,6 +388,8 @@ public class ElectricEelBossAI : BossAI
         yield return new WaitForSeconds(1f); //wait bit more for now lol
         isRetreating = false;
         isAttacking = false;
+        wasChasing = false;
+        useSpecialAttack = false;
         ignorePlayerUntil = Time.time + 3f; //fix should pls work
         shipl = null;
         currentState = BossState.Patrol;
