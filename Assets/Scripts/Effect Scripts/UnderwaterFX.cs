@@ -117,4 +117,21 @@ public class UnderwaterFX : MonoBehaviour
             playerCamera.backgroundColor = _savedBackgroundColor;
         }
     }
+
+    private void OnDisable()
+    {
+        // Reset the shared material so the effect doesn't bleed into other scenes.
+        if (underwaterMaterial != null)
+        {
+            underwaterMaterial.SetFloat(_intensityID, 0f);
+            underwaterMaterial.SetFloat(_vignetteIntensityID, 0f);
+        }
+
+        // Restore fog/camera in case the player was underwater when disabled.
+        if (_wasUnderwater)
+        {
+            OnExitUnderwater();
+            _wasUnderwater = false;
+        }
+    }
 }

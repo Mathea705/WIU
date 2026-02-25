@@ -20,6 +20,14 @@ public class PlayerFXController : MonoBehaviour
     private static readonly int VignetteProp  = Shader.PropertyToID("_VignetteAmount");
     private static readonly int ChromaticProp = Shader.PropertyToID("_ChromaticAmount");
 
+    void OnDisable()
+    {
+        if (fxMaterial == null) return;
+        fxMaterial.SetFloat(BlurProp,      0f);
+        fxMaterial.SetFloat(VignetteProp,  0f);
+        fxMaterial.SetFloat(ChromaticProp, 0f);
+    }
+
     void Update()
     {
         Material mat = fxMaterial;

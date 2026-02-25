@@ -13,7 +13,10 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private Vector3 playerOnShipOffset = new Vector3(0f, 2f, 0f);
 
     [SerializeField] private string mainSceneName   = "MainScene";
+    [SerializeField] private string deathSceneName  = "DeathScene";
     [SerializeField] private string startRegionName = "";
+
+    private bool[] _persistentActiveStates;
 
     public string PendingRegionName { get; set; }
 

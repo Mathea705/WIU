@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-// Attach this directly to the LoadingCanvas GameObject.
 public class SceneTransition : MonoBehaviour
 {
     public static SceneTransition Instance { get; private set; }
