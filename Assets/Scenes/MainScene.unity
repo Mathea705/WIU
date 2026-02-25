@@ -9733,7 +9733,6 @@ MonoBehaviour:
   - {fileID: 521557009}
   - {fileID: 157076952}
   - {fileID: 906960680}
-  - {fileID: 80045759}
   - {fileID: 1498409529}
   - {fileID: 871120895}
   - {fileID: 1508183009}
@@ -9746,6 +9745,7 @@ MonoBehaviour:
   - {fileID: 952572440}
   - {fileID: 991479434}
   - {fileID: 989638521}
+  - {fileID: 80045759}
   ship: {fileID: 579526995}
   playerOnShipOffset: {x: 0, y: 4, z: -5.1}
   mainSceneName: MainScene
