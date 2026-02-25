@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -61,7 +62,10 @@ public class HealthSystem : MonoBehaviour
         }
 
         if (_currentHealth <= 0)
+        {
             Debug.Log("Player died!");
+            SceneManager.LoadScene("DeathScene");
+        }
     }
 
     private IEnumerator FadeSmoke(float from, float to, bool destroyAfter = false)
