@@ -2843,8 +2843,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: maxHealth
-      value: 1000
+      value: 3000
       objectReference: {fileID: 0}
+    - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
+      propertyPath: bossHealthBarFill
+      value: 
+      objectReference: {fileID: 291676843}
+    - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
+      propertyPath: bossHealthBarPanel
+      value: 
+      objectReference: {fileID: 878394714}
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: whirlpoolMaxRadius
       value: 110
