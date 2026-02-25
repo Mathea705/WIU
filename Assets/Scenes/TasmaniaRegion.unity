@@ -3366,9 +3366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'abcdefgh
-
-'
+  m_text: Big Boy Eel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2842e5ddc540f324999d5a45ea6f580f, type: 2}
   m_sharedMaterial: {fileID: -4192669371778163000, guid: 2842e5ddc540f324999d5a45ea6f580f, type: 2}
