@@ -19,7 +19,6 @@ public class ShopTrigger : MonoBehaviour
     [SerializeField] private float  typeSpeed = 0.05f;
 
     [SerializeField] private GameObject shopContent;
-    [SerializeField] private float cameraRotateDuration = 0.5f;
     [SerializeField] private AurumManager AurumManager;
     [SerializeField] private TMP_Text     shopAurumText;
 
@@ -33,7 +32,6 @@ public class ShopTrigger : MonoBehaviour
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void ResetStatics() => _hasVisited = false;
-    private Quaternion _shopCameraStartRotation;
     private readonly List<GameObject> _gunsActiveBeforeShop = new List<GameObject>();
     private string[] _hideNames;
     private string[] _gunNames;
@@ -114,7 +112,6 @@ public class ShopTrigger : MonoBehaviour
 
     private void Start()
     {
-        _shopCameraStartRotation = shopCamera.transform.localRotation;
         RebindRefs();
     }
 
@@ -168,7 +165,6 @@ public class ShopTrigger : MonoBehaviour
         _shopOpen = false;
         StopAllCoroutines();
         shopCamera.gameObject.SetActive(false);
-        shopCamera.transform.localRotation = _shopCameraStartRotation;
         playerController.enabled = true;
         foreach (GameObject panel in hideOnShopOpen)
             if (panel != null) panel.SetActive(true);
@@ -215,26 +211,11 @@ public class ShopTrigger : MonoBehaviour
             yield return typeWait;
         }
         yield return new WaitForSeconds(0.5f);
-        // yield return StartCoroutine(RotateCamera());
         dialogueBox.SetActive(false);
         shopContent.SetActive(true);
     }
 
-    // private IEnumerator RotateCamera()
-    // {
-    //     Quaternion startRot = shopCamera.transform.localRotation;
-    //     Quaternion endRot   = startRot * Quaternion.Euler(0f, 30f, 0f);
-    //     float elapsed = 0f;
-    //     while (elapsed < cameraRotateDuration)
-    //     {
-    //         elapsed += Time.deltaTime;
-    //         shopCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / cameraRotateDuration);
-    //         yield return null;
-    //     }
-    //     shopCamera.transform.localRotation = endRot;
-    // }
-
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
