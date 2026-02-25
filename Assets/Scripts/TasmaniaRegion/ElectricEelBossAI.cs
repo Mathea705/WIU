@@ -219,9 +219,11 @@ public class ElectricEelBossAI : BossAI
             agent.isStopped = false;
             agent.stoppingDistance = attackRange; 
             agent.SetDestination(shipl.position);
-            if (Random.value < 0.3f) //possible rare attack
+            if (!isAttacking && Time.time >= lastAttackTime + attackCooldown)
             {
                 StartCoroutine(SpecialLightningAttack());
+
+                isAttacking = true;
             }
         }
         else
@@ -394,7 +396,7 @@ public class ElectricEelBossAI : BossAI
 
     IEnumerator SpecialLightningAttack()
     {
-        int boltCount = Random.Range(4, 7); 
+        int boltCount = Random.Range(2,6); 
 
         for (int i = 0; i < boltCount; i++)
         {
