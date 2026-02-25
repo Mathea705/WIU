@@ -2856,7 +2856,7 @@ PrefabInstance:
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: bossHealthBarPanel
       value: 
-      objectReference: {fileID: 878394714}
+      objectReference: {fileID: 150785146}
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: whirlpoolMaxRadius
       value: 110
