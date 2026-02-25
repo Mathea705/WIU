@@ -110,18 +110,20 @@ public class BossAI : MonoBehaviour
 
     private IEnumerator FadeOut()
     {
+        Color[] fadeColors = new Color[_originalColors.Length];
+        for (int i = 0; i < _originalColors.Length; i++)
+        {
+            fadeColors[i] = _originalColors[i];
+            fadeColors[i].a = 0f;
+        }
 
         float t = 0f;
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
+            float p = t / fadeDuration;
             for (int i = 0; i < _renderers.Length; i++)
-            {
-                Color c = _originalColors[i];
-                c.a = alpha;
-                _renderers[i].material.color = c;
-            }
+                _renderers[i].material.color = Color.Lerp(_originalColors[i], fadeColors[i], p);
             yield return null;
         }
 
