@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+       
     }
 
     void FixedUpdate()
@@ -142,4 +144,6 @@ public class PlayerController : MonoBehaviour
             lookPivot.transform.localPosition = pos;
         }
     }
+
+
 }
