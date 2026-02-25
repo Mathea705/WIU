@@ -30,7 +30,7 @@ public class BossAI : MonoBehaviour
         shipObject = GameObject.FindWithTag("Ship");
 
 
-            shipHealth = shipObject.GetComponent<HealthSystem>();
+         shipHealth = shipObject.GetComponent<HealthSystem>();
 
         _renderers = GetComponentsInChildren<Renderer>();
         _originalColors = new Color[_renderers.Length];

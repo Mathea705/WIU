@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class lightingAttack : MonoBehaviour
+public class lightingAttack : BossAI
 {
 
     public float speed = 40f;
@@ -8,14 +8,12 @@ public class lightingAttack : MonoBehaviour
     public GameObject target;
     public float stopDistance = 0.5f;
     private bool HasHit = false;
+    public BossAI bossAttack;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        //Destroy(gameObject, 1f);
-    }
+    
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (!HasHit) //travel downwards
         {
@@ -61,14 +59,14 @@ public class lightingAttack : MonoBehaviour
 
         //damaee
         Debug.Log("Player hit by lightning!");
-
+        bossAttack.DealDamageToShip(5);
         Destroy(gameObject, 0.1f);
     }
     public void HitGround()
     {
         HasHit = true;
 
-        //player and ship damage to be done here
+        //player and ship damage to be done here //nvm
 
         Destroy(gameObject, 0.1f);
     }
