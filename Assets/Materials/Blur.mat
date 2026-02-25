@@ -25,9 +25,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _BlurAmount: 1.4e-44
-    - _ChromaticAmount: 6e-45
-    - _VignetteAmount: 6e-45
+    - _BlurAmount: 1e-45
+    - _ChromaticAmount: 1e-45
+    - _VignetteAmount: 1e-45
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

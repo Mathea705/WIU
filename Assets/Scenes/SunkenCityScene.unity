@@ -2850,6 +2850,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
+      propertyPath: whirlpoolCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: bossHealthBarFill
       value: 
       objectReference: {fileID: 291676843}
@@ -2863,7 +2867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968659541818648866, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: whirlpoolMinRadius
-      value: 80
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7356719601583825200, guid: 99088f34336c844498571195e949c025, type: 3}
       propertyPath: m_LocalPosition.x

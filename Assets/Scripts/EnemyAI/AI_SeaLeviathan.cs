@@ -36,9 +36,9 @@ public class AI_SeaLeviathan : BossAI
     [SerializeField] private float submergeDuration   = 8f;    // time spent underwater
     [SerializeField] private float submergeRiseTime   = 2f;    // seconds to resurface
     [SerializeField] private GameObject whirlpoolPrefab;
-    [SerializeField] private int        whirlpoolCount     = 3;
-    [SerializeField] private float      whirlpoolMinRadius = 0f;
-    [SerializeField] private float      whirlpoolMaxRadius = 25f;
+    [SerializeField] private int        whirlpoolCount     = 5;
+    [SerializeField] private float      whirlpoolMinRadius = 4f;
+    [SerializeField] private float      whirlpoolMaxRadius = 12f;
 
     private float _orbitAngle;
     private float _swimTimer;
