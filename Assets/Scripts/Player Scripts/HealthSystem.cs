@@ -12,6 +12,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private Transform       smokePoint;
 
     [SerializeField] private float smokeFadeTime = 1f;
+    [SerializeField] private bool  triggerDeathScene = true;
 
 
     private ParticleSystem _smokeInstance;
@@ -61,9 +62,8 @@ public class HealthSystem : MonoBehaviour
             }
         }
 
-        if (_currentHealth <= 0)
+        if (_currentHealth <= 0 && triggerDeathScene)
         {
-            Debug.Log("Player died!");
             SceneManager.LoadScene("DeathScene");
         }
     }
