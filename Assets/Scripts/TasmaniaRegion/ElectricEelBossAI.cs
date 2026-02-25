@@ -48,7 +48,11 @@ public class ElectricEelBossAI : BossAI
     protected override void Start()
     {
         base.Start();
-      
+        currentState = BossState.Patrol;
+    shipl = null;
+    isAttacking = false;
+    isRetreating = false;
+    ignorePlayerUntil = 0f;
         agent = GetComponent<NavMeshAgent>();
         if (patroPoints.Length > 0)
         {
@@ -215,6 +219,10 @@ public class ElectricEelBossAI : BossAI
             agent.isStopped = false;
             agent.stoppingDistance = attackRange; 
             agent.SetDestination(shipl.position);
+            if (Random.value < 0.3f) //possible rare attack
+            {
+                StartCoroutine(SpecialLightningAttack());
+            }
         }
         else
         {
@@ -227,14 +235,8 @@ public class ElectricEelBossAI : BossAI
             //}
             if (!isAttacking && Time.time >= lastAttackTime + attackCooldown)
             {
-                if (Random.value < 0.3f) //possible rare attack
-                {
-                    StartCoroutine(SpecialLightningAttack());
-                }
-                else
-                {
-                    StartCoroutine(Attack()); 
-                }
+                StartCoroutine(Attack()); 
+               
                 isAttacking = true;
             }
         }
