@@ -7401,7 +7401,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782598660}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8344,7 +8344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4266b1e0614938840b9c5124011bc638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHealth: 200
+  maxHealth: 1500
   bossHealthBarPanel: {fileID: 0}
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
@@ -8385,10 +8385,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.6670582
+  m_Radius: 2.0116694
   m_Height: 21.461002
   m_Direction: 2
-  m_Center: {x: 0.8, y: -0.09, z: 0.058786392}
+  m_Center: {x: 1.1446111, y: -0.089999914, z: 0.058786392}
 --- !u!1001 &1949490465
 PrefabInstance:
   m_ObjectHideFlags: 0

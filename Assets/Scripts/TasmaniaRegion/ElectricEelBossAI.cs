@@ -48,7 +48,11 @@ public class ElectricEelBossAI : BossAI
     protected override void Start()
     {
         base.Start();
-      
+        currentState = BossState.Patrol;
+        shipl = null;
+        isAttacking = false;
+        isRetreating = false;
+        ignorePlayerUntil = 0f;
         agent = GetComponent<NavMeshAgent>();
         if (patroPoints.Length > 0)
         {
