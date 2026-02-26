@@ -51,7 +51,7 @@ public class AI_Stingray : BossAI
     private const int dmg_lowerBound = 5;
     private const int dmg_upperBound = 10;
 
-    private const float DAMAGEDISTANCETHRESHOLD = 6.0f;
+    private const float DAMAGEDISTANCETHRESHOLD = 3.0f;
 
     private bool hasAttemptedSpring;
 
@@ -62,7 +62,7 @@ public class AI_Stingray : BossAI
     private const float ELEVATIONSUBMERGED = -8.0f;
     private const float ELEVATIONJUMP = 3.0f;
 
-    private const float SPEEDLERP = 5.0f;
+    private const float SPEEDLERP = 2.0f;
 
     private Vector3 DEBUGSPHEREPOS;
 
@@ -219,7 +219,13 @@ public class AI_Stingray : BossAI
 
                 break;
             case State.STING:
+                speed = Mathf.Lerp(speed, SPEEDFAST, Time.deltaTime * SPEEDLERP);
+                pivotSpeed = PIVOTFAST;
 
+                transform.position = new Vector3(
+                        transform.position.x,
+                        Mathf.Lerp(transform.position.y, ELEVATIONSUBMERGED, Time.deltaTime * SPEEDLERP),
+                        transform.position.z);
                 break;
             case State.RECUPERATE:
                 speed = Mathf.Lerp(speed, SPEEDFAST, Time.deltaTime * SPEEDLERP);
@@ -285,6 +291,16 @@ public class AI_Stingray : BossAI
 
                 break;
             case State.STING:
+                targetPos = shipObject.transform.position;
+
+                Vector3 toShip2 = (shipObject.transform.position - transform.position);
+                if (toShip2.magnitude <= DAMAGEDISTANCETHRESHOLD * 2)
+                {
+                    DealDamageToShip(Random.Range(dmg_lowerBound, dmg_upperBound + 1));
+
+                    currentState = State.RECUPERATE;
+                }
+
                 break;
             case State.RECUPERATE:
                 hasAttemptedSpring = false;
@@ -329,6 +345,11 @@ public class AI_Stingray : BossAI
         dirVec.Normalize();
 
         transform.position += new Vector3(dirVec.x * speed * Time.deltaTime, 0, dirVec.z * speed * Time.deltaTime);
+
+        if (dirVec != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(dirVec, Vector3.up) * Quaternion.Euler(0f, 90f, 0f);
+        }
     }
 
     
