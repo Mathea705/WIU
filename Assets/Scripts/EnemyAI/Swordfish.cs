@@ -57,8 +57,6 @@ public class Swordfish : BossAI
 
         if (shipObject == null || currentHealth <= 0) return;
 
-        // --- THE Y-AXIS LOCK ---
-        // This forces the fish to stay at the YOffset every frame
         Vector3 pos = transform.position;
         pos.y = YOffset;
         transform.position = pos;
