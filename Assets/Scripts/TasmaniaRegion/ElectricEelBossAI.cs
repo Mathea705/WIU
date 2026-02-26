@@ -414,6 +414,8 @@ public class ElectricEelBossAI : BossAI
     {
         Vector3 strikePosition;
 
+         AudioManager.Instance.Play("LightningSFX");
+
         //50% hit ship
         if (Random.value < 0.5f)
         {
@@ -433,11 +435,15 @@ public class ElectricEelBossAI : BossAI
         {
             la.target = shipl.gameObject; //target of ai is target here!
         }
+
+
     }
 
     IEnumerator SpecialLightningAttack()
     {
         int boltCount = Random.Range(2,6); 
+
+        AudioManager.Instance.Play("LightningSFX");
 
         for (int i = 0; i < boltCount; i++)
         {

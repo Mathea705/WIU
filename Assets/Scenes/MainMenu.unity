@@ -3838,6 +3838,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f75cd975febf74b4ea80ce505d24907d, type: 3}
     volume: 1
     pitch: 1.11
+  - name: LightningSFX
+    clip: {fileID: 8300000, guid: 9d95d0376837b2b43b03af3c7f44c5a6, type: 3}
+    volume: 1
+    pitch: 1.11
   music:
   - name: MainSceneMusic
     clip: {fileID: 8300000, guid: 0ec2e4fb72c0bfd42b9c8f2dd4385fc3, type: 3}
@@ -3853,6 +3857,18 @@ MonoBehaviour:
     pitch: 1.12
   - name: SunkenCityMusic
     clip: {fileID: 8300000, guid: 90e400b25324d204694395387ef937bc, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  - name: TasmaniaMusic
+    clip: {fileID: 8300000, guid: 4a19f9a3447435b47822e5a8af3fcf02, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  - name: BermudaMusic
+    clip: {fileID: 8300000, guid: 185a8658c1fa12b4eb64b65be09da3e0, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  - name: BaliMusic
+    clip: {fileID: 8300000, guid: 1ca4bb670b43a02418224d510af12cc2, type: 3}
     volume: 0.826
     pitch: 1.12
   masterVolume: 0.559
