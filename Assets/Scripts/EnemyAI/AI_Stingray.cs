@@ -25,7 +25,7 @@ public class AI_Stingray : BossAI
     private float speed;
 
     private const float SPEEDDEFAULT = 10.0f;
-    private const float SPEEDFAST = 20.0f;
+    private const float SPEEDFAST = 40.0f;
     private const float SPEEDSLOW = 5.0f;
 
     private float pivotSpeed;
@@ -48,26 +48,37 @@ public class AI_Stingray : BossAI
 
     private bool randomAttack;
 
-    private const int dmg_lowerBound = 5;
-    private const int dmg_upperBound = 10;
+    private const int dmg_lowerBound = 20;
+    private const int dmg_upperBound = 40;
 
-    private const float DAMAGEDISTANCETHRESHOLD = 3.0f;
+    private const float DAMAGEDISTANCETHRESHOLD = 10.0f;
 
     private bool hasAttemptedSpring;
 
     private float dir;
     private float rad;
 
+    private float poisonTimer;
+    private const float POISONTIMERMAX = 5.0f;
+    private float poisonIntervalTimer;
+    private const float POISONINTERVALMAX = 1.0f;
+
+    private const float DMG_POISON = 5.0f;
+
+    private bool isPoisoned;
+
     private const float ELEVATIONSURFACE = 0.0f;
     private const float ELEVATIONSUBMERGED = -8.0f;
     private const float ELEVATIONJUMP = 3.0f;
 
-    private const float SPEEDLERP = 2.0f;
+    private const float SPEEDLERP = 1.0f;
 
     private Vector3 DEBUGSPHEREPOS;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         speed = SPEEDDEFAULT;
         pivotSpeed = PIVOTDEFAULT;
         dir = 0.0f;
@@ -82,6 +93,10 @@ public class AI_Stingray : BossAI
 
         aggroTimer = AGGROTIMERMAX;
         springTimer = SPRINGTIMERMAX;
+        poisonTimer = POISONTIMERMAX;
+        poisonIntervalTimer = POISONINTERVALMAX;
+
+        isPoisoned = false;
 
         shipObject = GameObject.FindWithTag("Ship");
         shipHealth = shipObject.GetComponent<HealthSystem>();
@@ -92,6 +107,7 @@ public class AI_Stingray : BossAI
         CheckStateTransitions();
         HandleBossSpeedsAndElevations();
         RunStateCode();
+        CheckPoisonedStatus();
         ParseInputs();
         ClampDir();
         HandleTransform();
@@ -155,7 +171,10 @@ public class AI_Stingray : BossAI
                 }
                 break;
             case State.STING:
-                currentState = State.RECUPERATE;
+                if (isPoisoned)
+                {
+                    currentState = State.RECUPERATE;
+                }
                 break;
             case State.RECUPERATE:
                 if ((shipObject.transform.position - transform.position).magnitude >= aggroRange)
@@ -209,7 +228,7 @@ public class AI_Stingray : BossAI
                 else
                 {
                     speed = SPEEDFAST;
-                    pivotSpeed = PIVOTDEFAULT;
+                    pivotSpeed = PIVOTFAST;
 
                     transform.position = new Vector3(
                         transform.position.x,
@@ -296,7 +315,7 @@ public class AI_Stingray : BossAI
                 Vector3 toShip2 = (shipObject.transform.position - transform.position);
                 if (toShip2.magnitude <= DAMAGEDISTANCETHRESHOLD * 2)
                 {
-                    DealDamageToShip(Random.Range(dmg_lowerBound, dmg_upperBound + 1));
+                    isPoisoned = true;
 
                     currentState = State.RECUPERATE;
                 }
@@ -315,6 +334,33 @@ public class AI_Stingray : BossAI
                 break;
 
         }
+    }
+
+
+    private void CheckPoisonedStatus()
+    {
+        if (isPoisoned)
+        {
+
+            poisonTimer -= Time.deltaTime;
+            poisonIntervalTimer -= Time.deltaTime;
+
+            if (poisonIntervalTimer < 0f)
+            {
+                DealDamageToShip(DMG_POISON);
+                poisonIntervalTimer = POISONINTERVALMAX;
+            }
+            if (poisonTimer < 0f)
+            {
+                isPoisoned = false;
+            }
+        }
+        else
+        {
+            poisonTimer = POISONTIMERMAX;
+            poisonIntervalTimer = POISONINTERVALMAX;
+        }
+            
     }
     
     private void OnTriggerEnter(Collider other)
