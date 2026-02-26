@@ -193,6 +193,7 @@ public class AI_SeaLeviathan : BossAI
 
         GameObject splash = Instantiate(splashPrefab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
         splash.transform.localScale = Vector3.one * splashScale;
+         AudioManager.Instance.Play("BigWaterSplashSFX");
         Destroy(splash, 2f);
         DealDamageToShip(slamDamage);
         impulseSource.GenerateImpulse();
@@ -264,6 +265,7 @@ public class AI_SeaLeviathan : BossAI
 
     
             GameObject splash = Instantiate(splashPrefab, new Vector3(transform.position.x, 0f, transform.position.z), Quaternion.identity);
+             AudioManager.Instance.Play("BigWaterSplashSFX");
             splash.transform.localScale = Vector3.one * splashScale;
             Destroy(splash, 2f);
         
@@ -280,5 +282,6 @@ public class AI_SeaLeviathan : BossAI
     protected override void OnDeath()
     {
         base.OnDeath();
+        AudioManager.Instance.Play("Bloop2");
     }
 }

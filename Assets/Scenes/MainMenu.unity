@@ -3830,6 +3830,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: fb7d4ac7509f64b499a21a4f7984badc, type: 3}
     volume: 1
     pitch: 0.86
+  - name: BigWaterSplashSFX
+    clip: {fileID: 8300000, guid: bbb8f0c60e978194fa4aa564e14b89b4, type: 3}
+    volume: 1
+    pitch: 1.11
+  - name: BoatImpactSFX
+    clip: {fileID: 8300000, guid: f75cd975febf74b4ea80ce505d24907d, type: 3}
+    volume: 1
+    pitch: 1.11
   music:
   - name: MainSceneMusic
     clip: {fileID: 8300000, guid: 0ec2e4fb72c0bfd42b9c8f2dd4385fc3, type: 3}

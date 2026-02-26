@@ -20,6 +20,7 @@ public class BossAI : MonoBehaviour
     protected bool _invulnerable = false;
 
     private float _displayHealth;
+    private float _impactSoundTimer;
     private Renderer[] _renderers;
     private Color[] _originalColors;
 
@@ -55,6 +56,8 @@ public class BossAI : MonoBehaviour
     public void TakeDamage(float amount)
     {
         if (_invulnerable) return;
+
+
 
         if (bossHealthBarPanel != null)
             bossHealthBarPanel.SetActive(true);
@@ -96,8 +99,13 @@ public class BossAI : MonoBehaviour
 
     public void DealDamageToShip(float amount)
     {
-     
-            shipHealth.TakeDamage(amount);
+        _impactSoundTimer -= Time.deltaTime;
+        if (_impactSoundTimer <= 0f)
+        {
+            AudioManager.Instance.Play("BoatImpactSFX");
+            _impactSoundTimer = 1.0f;
+        }
+        shipHealth.TakeDamage(amount);
     }
 
     protected virtual void OnDeath()
