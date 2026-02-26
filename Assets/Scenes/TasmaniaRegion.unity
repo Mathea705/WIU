@@ -7125,7 +7125,8 @@ MonoBehaviour:
   bossHealthBarFill: {fileID: 0}
   barLerpSpeed: 5
   flashDuration: 0.2
-  fadeDuration: 2
+  deathShakeDuration: 5
+  deathShakeIntensity: 0.4
   patroPoints:
   - {fileID: 42726324}
   - {fileID: 1169021592}
@@ -9980,12 +9981,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4266b1e0614938840b9c5124011bc638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHealth: 800
+  maxHealth: 1500
   bossHealthBarPanel: {fileID: 0}
   bossHealthBarFill: {fileID: 210247668}
   barLerpSpeed: 5
   flashDuration: 0.2
-  fadeDuration: 5
+  deathShakeDuration: 5
+  deathShakeIntensity: 0.4
   patroPoints:
   - {fileID: 42726324}
   - {fileID: 1169021592}
@@ -9993,7 +9995,7 @@ MonoBehaviour:
   - {fileID: 554987133}
   - {fileID: 1935814313}
   - {fileID: 64149779}
-  detectionRadius: 500
+  detectionRadius: 115
   shipLayer:
     serializedVersion: 2
     m_Bits: 64
