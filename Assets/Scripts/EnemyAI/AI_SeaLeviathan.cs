@@ -143,6 +143,8 @@ public class AI_SeaLeviathan : BossAI
     {
         if (shipObject == null) yield break;
 
+        AudioManager.Instance.Play("Bloop1");
+
    
         float t = 0f;
         while (t < slamAimDuration)
@@ -206,6 +208,8 @@ public class AI_SeaLeviathan : BossAI
     private IEnumerator SubmergeSequence()
     {
         if (shipObject == null) yield break;
+
+          AudioManager.Instance.Play("Bloop2");
 
         _invulnerable = true;
 

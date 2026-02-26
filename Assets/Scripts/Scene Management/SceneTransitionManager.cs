@@ -21,7 +21,6 @@ public class SceneTransitionManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
         AudioManager.Instance.Play("ButtonClickSFX");
           AudioManager.Instance.StopMusic();
-          AudioManager.Instance.PlayMusic("MainSceneMusic");
     }
 
     public void OpenMainMenu()

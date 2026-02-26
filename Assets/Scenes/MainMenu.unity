@@ -3822,6 +3822,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3e79135058141604ca778869043f4ad5, type: 3}
     volume: 1
     pitch: 1.68
+  - name: Bloop1
+    clip: {fileID: 8300000, guid: 0da8b129642451f4a9004128e6e3ed27, type: 3}
+    volume: 1
+    pitch: 0.95
+  - name: Bloop2
+    clip: {fileID: 8300000, guid: fb7d4ac7509f64b499a21a4f7984badc, type: 3}
+    volume: 1
+    pitch: 0.86
   music:
   - name: MainSceneMusic
     clip: {fileID: 8300000, guid: 0ec2e4fb72c0bfd42b9c8f2dd4385fc3, type: 3}
@@ -3833,6 +3841,10 @@ MonoBehaviour:
     pitch: 1.12
   - name: SwimMusic
     clip: {fileID: 8300000, guid: bedcbe570c0b0434fb60d2bfe3fe5bc5, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  - name: SunkenCityMusic
+    clip: {fileID: 8300000, guid: 90e400b25324d204694395387ef937bc, type: 3}
     volume: 0.826
     pitch: 1.12
   masterVolume: 0.559
