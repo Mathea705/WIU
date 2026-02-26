@@ -48,6 +48,7 @@ public class ElectricEelBossAI : BossAI
     protected override void Start()
     {
         base.Start();
+
         currentState = BossState.Patrol;
     shipl = null;
     isAttacking = false;
@@ -219,8 +220,18 @@ public class ElectricEelBossAI : BossAI
         //    useSpecialAttack = true;
         //    Debug.Log("Chase started. Special attack? " + useSpecialAttack);
         //}
-        float attackBuffer = 5f; 
-
+        float attackBuffer = 5f;
+        if (!specialAttackChecked)
+        {
+            specialAttackChecked = true; // mark that we've considered it
+            if (Random.value < 0.5f)
+            {
+                lastAttackTime = Time.time;
+                isAttacking = true;
+                StartCoroutine(SpecialLightningAttack());
+                return;
+            }
+        }
         if (distance > attackRange + attackBuffer)
         {
            //buffer and range
@@ -240,15 +251,7 @@ public class ElectricEelBossAI : BossAI
             //        isAttacking = true; 
             //    } 
             //}
-            if (!specialAttackChecked)
-            {
-                specialAttackChecked = true; // mark that we've considered it
-                if (Random.value < 0.5f)
-                {
-                    isAttacking = true;
-                    StartCoroutine(SpecialLightningAttack());
-                }
-            }
+            
         }
         else
         {
@@ -297,21 +300,32 @@ public class ElectricEelBossAI : BossAI
         //    }
         //}
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius); //change to tag now
-        shipl = null; 
+        shipl = null;
 
+        //foreach (Collider hit in hits)
+        //{
+        //    if (hit.CompareTag("Ship")) // check for tag instead of layer
+        //    {
+        //        shipl = hit.transform;
+        //        wasChasing = true;
+        //        currentState = BossState.Chase;
+
+        //        Debug.Log("Player detected: " + shipl.name);
+        //        break; 
+        //    }
+        //}
         foreach (Collider hit in hits)
         {
-            if (hit.CompareTag("Ship")) // check for tag instead of layer
+            if (hit.GetComponentInParent<ShipBob>() != null) // check for tag instead of layer
             {
                 shipl = hit.transform;
                 wasChasing = true;
                 currentState = BossState.Chase;
 
                 Debug.Log("Player detected: " + shipl.name);
-                break; 
+                break;
             }
         }
-
         //else return to normal
 
         if (shipl != null && Vector3.Distance(transform.position, shipl.position) > detectionRadius + 5f)
