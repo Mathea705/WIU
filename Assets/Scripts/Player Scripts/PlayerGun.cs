@@ -64,6 +64,8 @@ public class GunController : BossAI
     [SerializeField] private bool isOperatingGun;
     [SerializeField] private bool isFullAuto;
     [SerializeField] private float firerateCooldown;
+    [SerializeField] private string shootSoundName;
+    [SerializeField] private string reloadSoundName;
 
     private float shootCooldown;
 
@@ -176,6 +178,8 @@ public class GunController : BossAI
             }
             
             muzzleFlash.Play();
+            if (!string.IsNullOrEmpty(shootSoundName))
+                AudioManager.Instance.Play(shootSoundName);
 
             if (adsAction)
             {
@@ -216,6 +220,8 @@ public class GunController : BossAI
         {
             isReloading = true;
             reloadTimer = 1f;
+            if (!string.IsNullOrEmpty(reloadSoundName))
+                AudioManager.Instance.Play(reloadSoundName);
         }
 
         if (isReloading)

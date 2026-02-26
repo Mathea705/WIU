@@ -20,7 +20,7 @@ public class BossAI : MonoBehaviour
     protected bool _invulnerable = false;
 
     private float _displayHealth;
-    private float _impactSoundTimer;
+    private float _lastImpactSoundTime = -999f;
     private Renderer[] _renderers;
     private Color[] _originalColors;
 
@@ -99,11 +99,10 @@ public class BossAI : MonoBehaviour
 
     public void DealDamageToShip(float amount)
     {
-        _impactSoundTimer -= Time.deltaTime;
-        if (_impactSoundTimer <= 0f)
+        if (Time.time >= _lastImpactSoundTime + 1.0f)
         {
             AudioManager.Instance.Play("BoatImpactSFX");
-            _impactSoundTimer = 1.0f;
+            _lastImpactSoundTime = Time.time;
         }
         shipHealth.TakeDamage(amount);
     }

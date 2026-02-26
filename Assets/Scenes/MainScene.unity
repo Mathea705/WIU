@@ -35913,6 +35913,14 @@ PrefabInstance:
       propertyPath: LERP_RECOILROT
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
+      propertyPath: shootSoundName
+      value: PistolSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250479629758982936, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
+      propertyPath: reloadSoundName
+      value: PistolReloadSFX
+      objectReference: {fileID: 0}
     - target: {fileID: 4757186361144494645, guid: 1a704b80d83655447b7002eb3fab5b18, type: 3}
       propertyPath: m_Name
       value: AK74
@@ -36065,6 +36073,14 @@ PrefabInstance:
     - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
       propertyPath: isOperatingGun
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: shootSoundName
+      value: PistolSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
+      propertyPath: reloadSoundName
+      value: PistolReloadSFX
       objectReference: {fileID: 0}
     - target: {fileID: 1051060836473219938, guid: dfa1cc65ee425904cb79be8f172a28ad, type: 3}
       propertyPath: firerateCooldown
@@ -36232,6 +36248,14 @@ PrefabInstance:
     - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
       propertyPath: LERP_RECOILROT
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: shootSoundName
+      value: ShotgunSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
+      propertyPath: reloadSoundName
+      value: ShotgunReloadSFX
       objectReference: {fileID: 0}
     - target: {fileID: 2890271854073414509, guid: f94d6ffdb2bde6f439c1d8e6d63318af, type: 3}
       propertyPath: SHOOTINACCURACYADS
@@ -36467,8 +36491,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: shootSoundName
+      value: PistolSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
       propertyPath: CROSSHAIROFFSET
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
+      propertyPath: reloadSoundName
+      value: PistolReloadSFX
       objectReference: {fileID: 0}
     - target: {fileID: 8794661914848675973, guid: 5a119c5c97c96104ba3f7af0ea44868b, type: 3}
       propertyPath: SHOOTINACCURACYADS

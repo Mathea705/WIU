@@ -3842,6 +3842,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9d95d0376837b2b43b03af3c7f44c5a6, type: 3}
     volume: 1
     pitch: 1.11
+  - name: ShotgunSFX
+    clip: {fileID: 8300000, guid: c4b89f22bc7ccd240b2e18d94bde737d, type: 3}
+    volume: 1
+    pitch: 1.11
+  - name: ShotgunReloadSFX
+    clip: {fileID: 8300000, guid: 9a8be4f83fc6cae41a0aca24f283dd35, type: 3}
+    volume: 1
+    pitch: 1.11
+  - name: PistolSFX
+    clip: {fileID: 8300000, guid: 9642286fd6b527546a0a36f0c6019ec3, type: 3}
+    volume: 1
+    pitch: 1.11
+  - name: PistolReloadSFX
+    clip: {fileID: 8300000, guid: 0a999e17df06d7b4fbac6f7f4f44ea08, type: 3}
+    volume: 1
+    pitch: 1.11
   music:
   - name: MainSceneMusic
     clip: {fileID: 8300000, guid: 0ec2e4fb72c0bfd42b9c8f2dd4385fc3, type: 3}
@@ -3869,6 +3885,10 @@ MonoBehaviour:
     pitch: 1.12
   - name: BaliMusic
     clip: {fileID: 8300000, guid: 1ca4bb670b43a02418224d510af12cc2, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  - name: DeathSceneMusic
+    clip: {fileID: 8300000, guid: d46f090ab79abf24b9ae2a576cfe63c2, type: 3}
     volume: 0.826
     pitch: 1.12
   masterVolume: 0.559
