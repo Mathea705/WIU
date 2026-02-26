@@ -283,6 +283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-sand-a (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a490fab30a9386d45863f5496eb08c01, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1091,9 +1095,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       propertyPath: m_Name
       value: rock-sand-b (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1759,7 +1771,8 @@ MonoBehaviour:
   bossHealthBarFill: {fileID: 923979259}
   barLerpSpeed: 5
   flashDuration: 0.2
-  fadeDuration: 5
+  deathShakeDuration: 5
+  deathShakeIntensity: 0.4
 --- !u!95 &433350777
 Animator:
   serializedVersion: 7
@@ -2959,9 +2972,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       propertyPath: m_Name
       value: rock-sand-b (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3058,9 +3079,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       propertyPath: m_Name
       value: rock-sand-b (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4969,9 +4998,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       propertyPath: m_Name
       value: rock-sand-b (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5706,6 +5743,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a490fab30a9386d45863f5496eb08c01, type: 3}
       propertyPath: m_Name
       value: rock-sand-a (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a490fab30a9386d45863f5496eb08c01, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6923,6 +6964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-sand-a
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a490fab30a9386d45863f5496eb08c01, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8134,9 +8179,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       propertyPath: m_Name
       value: rock-sand-b (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8851,9 +8904,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       propertyPath: m_Name
       value: rock-sand-b (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8862,6 +8923,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2067120900}
+    - targetCorrespondingSourceObject: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2067120902}
   m_SourcePrefab: {fileID: 100100000, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
 --- !u!1 &2067120899 stripped
 GameObject:
@@ -8890,6 +8954,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &2067120901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 829416842857256227, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
+  m_PrefabInstance: {fileID: 2067120898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2067120902
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067120901}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5207063195140669057, guid: a82605bf2f931224598ec25a98325f6b, type: 3}
 --- !u!1 &2099217038
 GameObject:
   m_ObjectHideFlags: 0
@@ -9165,6 +9256,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b61146e238a63947b9d0d94bdf7fe9d, type: 3}
       propertyPath: m_Name
       value: rock-sand-b
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b61146e238a63947b9d0d94bdf7fe9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
