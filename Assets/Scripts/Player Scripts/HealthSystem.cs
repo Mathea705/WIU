@@ -37,6 +37,13 @@ public class HealthSystem : MonoBehaviour
         isDead = false;
     }
 
+    private void OnEnable()
+    {
+        _currentHealth = maxHealth;
+        _displayHealth = maxHealth;
+        isDead         = false;
+    }
+
     void Start()
     {
 
