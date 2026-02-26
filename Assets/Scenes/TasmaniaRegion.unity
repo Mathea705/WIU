@@ -9948,7 +9948,7 @@ MonoBehaviour:
   - {fileID: 554987133}
   - {fileID: 1935814313}
   - {fileID: 64149779}
-  detectionRadius: 70
+  detectionRadius: 500
   shipLayer:
     serializedVersion: 2
     m_Bits: 64

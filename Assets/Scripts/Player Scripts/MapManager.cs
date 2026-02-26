@@ -29,11 +29,13 @@ public class MapManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible   = true;
+            AudioManager.Instance.Play("PageFlipSFX");
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
+            AudioManager.Instance.Play("PageFlipSFX");
         }
     }
 
@@ -84,6 +86,7 @@ public class MapManager : MonoBehaviour
         GameObject panel = mapPanels[index];
         panel.SetActive(true);
         StartCoroutine(AnimatePanel(panel));
+         AudioManager.Instance.Play("PageFlipSFX");
     }
 
     private IEnumerator AnimatePanel(GameObject panel)

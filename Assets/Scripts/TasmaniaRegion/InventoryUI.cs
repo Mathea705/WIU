@@ -37,6 +37,7 @@ public class InventoryUI : MonoBehaviour
         isOpen = !isOpen;
         inventoryPanel.SetActive(isOpen);
         panelOutline.SetActive(isOpen);
+        AudioManager.Instance.Play("UnzipBagSFX");
 
         if (isOpen)
         {

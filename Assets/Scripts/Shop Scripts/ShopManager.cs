@@ -50,17 +50,23 @@ public class ShopManager : MonoBehaviour
 
     private void RebindRefs()
     {
-        foreach (var am in FindObjectsByType<AurumManager>(FindObjectsSortMode.None))
+        foreach (var am in FindObjectsByType<AurumManager>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             if (am.gameObject.scene.name == "DontDestroyOnLoad") { aurumManager = am; break; }
 
-        foreach (var pc in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+        foreach (var pc in FindObjectsByType<PlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             if (pc.gameObject.scene.name == "DontDestroyOnLoad") { playerController = pc; break; }
 
-        foreach (var hs in FindObjectsByType<HealthSystem>(FindObjectsSortMode.None))
-            if (hs.gameObject.scene.name == "DontDestroyOnLoad") { healthSystem = hs; break; }
-
-        foreach (var ss in FindObjectsByType<StaminaSystem>(FindObjectsSortMode.None))
+        foreach (var ss in FindObjectsByType<StaminaSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             if (ss.gameObject.scene.name == "DontDestroyOnLoad") { staminaSystem = ss; break; }
+
+        // Derive HealthSystem from the same object as PlayerController to avoid
+        // accidentally picking up the ship's HealthSystem.
+        if (playerController != null)
+        {
+            healthSystem = playerController.GetComponent<HealthSystem>();
+            if (healthSystem == null)
+                healthSystem = playerController.GetComponentInChildren<HealthSystem>(true);
+        }
 
         if (_gunNames != null && sceneGuns != null)
             for (int i = 0; i < sceneGuns.Length; i++)

@@ -59,6 +59,7 @@ public class SwimController : MonoBehaviour
         float e = lookPivot.localEulerAngles.x;
         _xRotation = e > 180f ? e - 360f : e;
         if (_stamina != null) _stamina.SetSwimming(true);
+        AudioManager.Instance.PlayLayer("SwimMusic");
         SpawnSplash(surfaceY);
     }
 
@@ -69,11 +70,13 @@ public class SwimController : MonoBehaviour
         _rb.useGravity  = true;
         SetUnderwater(false);
         if (_stamina != null) _stamina.SetSwimming(false);
+        AudioManager.Instance.StopLayer();
         SpawnSplash(_waterSurfaceY);
     }
 
     private void SpawnSplash(float surfaceY)
     {
+        AudioManager.Instance.Play("WaterSplashSFX");
         Vector3 pos = new(_rb.position.x, surfaceY, _rb.position.z);
 
     

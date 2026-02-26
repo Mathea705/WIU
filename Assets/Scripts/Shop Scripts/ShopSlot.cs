@@ -65,6 +65,8 @@ public class ShopSlot : MonoBehaviour
         if (_gunObject != null && GunOwned) return;
         if (!_aurum.DeductAurum(_data.price)) return;
 
+        AudioManager.Instance.Play("BuyItemSFX");
+
         // Consumables: apply effect and leave button active
         switch (_data.effect)
         {
@@ -112,6 +114,8 @@ public class ShopSlot : MonoBehaviour
     private void TrySell()
     {
         if (_purchased) return;
+
+        AudioManager.Instance.Play("BuyItemSFX");
 
         _purchased             = true;
         buyButton.interactable = false;

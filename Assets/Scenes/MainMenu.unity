@@ -3764,6 +3764,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967880882}
   m_CullTransparentMesh: 1
+--- !u!1 &2025962556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025962558}
+  - component: {fileID: 2025962557}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2025962557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025962556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6d8c69df58c8445a82503839960f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  sfx:
+  - name: ButtonClickSFX
+    clip: {fileID: 8300000, guid: 60d0eae3072dfa840ba5854d065c0001, type: 3}
+    volume: 1
+    pitch: 1.69
+  - name: BuyItemSFX
+    clip: {fileID: 8300000, guid: 68dffd01edd9daa418fc1ab410918ad8, type: 3}
+    volume: 1
+    pitch: 1.68
+  - name: PageFlipSFX
+    clip: {fileID: 8300000, guid: 6e9ecf7a9b43bf5459c17dbe9ca4f643, type: 3}
+    volume: 1
+    pitch: 1.68
+  - name: UnzipBagSFX
+    clip: {fileID: 8300000, guid: f5d93122eb1f8e34787069665a50543e, type: 3}
+    volume: 1
+    pitch: 1.68
+  - name: ShipSteerSFX
+    clip: {fileID: 8300000, guid: 119e10bf76dba8b4395abc99fb508699, type: 3}
+    volume: 1
+    pitch: 1.68
+  - name: HeartbeatSFX
+    clip: {fileID: 8300000, guid: 1b4ec87dfe8440943955f7c45b4af824, type: 3}
+    volume: 1
+    pitch: 1.68
+  - name: WaterSplashSFX
+    clip: {fileID: 8300000, guid: 3e79135058141604ca778869043f4ad5, type: 3}
+    volume: 1
+    pitch: 1.68
+  music:
+  - name: MainSceneMusic
+    clip: {fileID: 8300000, guid: 0ec2e4fb72c0bfd42b9c8f2dd4385fc3, type: 3}
+    volume: 0.749
+    pitch: 1.05
+  - name: MainMenuMusic
+    clip: {fileID: 8300000, guid: eb43ce69dc142eb45aae40241b22085f, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  - name: SwimMusic
+    clip: {fileID: 8300000, guid: bedcbe570c0b0434fb60d2bfe3fe5bc5, type: 3}
+    volume: 0.826
+    pitch: 1.12
+  masterVolume: 0.559
+  musicVolume: 0.563
+  sfxVolume: 1
+--- !u!4 &2025962558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025962556}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.38074, y: -0, z: -22.62997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2085543236
 GameObject:
   m_ObjectHideFlags: 0
@@ -4018,6 +4107,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2025962558}
   - {fileID: 961739753}
   - {fileID: 203844589}
   - {fileID: 2085543240}

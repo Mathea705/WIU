@@ -22,6 +22,7 @@ public class DriveTrigger : MonoBehaviour
 
     private bool _inRange;
     private bool _driving;
+    private bool _isTurning;
 
     void Start()
     {
@@ -75,8 +76,15 @@ public class DriveTrigger : MonoBehaviour
     {
         if (_shipHealth != null && !_shipHealth.IsAlive) return;
 
+       
+
         float turn    = Input.GetAxis("Horizontal");
         float forward = Input.GetAxis("Vertical");
+
+        bool turningNow = Mathf.Abs(turn) > 0.1f;
+        if (turningNow && !_isTurning)
+            AudioManager.Instance.Play("ShipSteerSFX");
+        _isTurning = turningNow;
 
         ship.Rotate(Vector3.up, turn * turnSpeed * Time.deltaTime);
 

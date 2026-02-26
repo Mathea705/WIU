@@ -80,6 +80,8 @@ public class StaminaSystem : MonoBehaviour
     private IEnumerator FlashIcon()
     {
 
+        AudioManager.Instance.Play("HeartbeatSFX");
+
         GameObject copy  = Instantiate(flashIcon.gameObject, flashIcon.parent);
         RectTransform rt = copy.GetComponent<RectTransform>();
         Image img  = copy.GetComponent<Image>();
