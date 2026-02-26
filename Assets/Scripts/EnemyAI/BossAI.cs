@@ -13,7 +13,8 @@ public class BossAI : MonoBehaviour
     [SerializeField] private float barLerpSpeed = 5f;
 
     [SerializeField] private float flashDuration = 0.2f;
-    [SerializeField] private float fadeDuration = 2f;
+    [SerializeField] private float deathShakeDuration = 5f;
+    [SerializeField] private float deathShakeIntensity = 0.4f;
 
     protected float currentHealth;
     protected HealthSystem shipHealth;
@@ -114,25 +115,18 @@ public class BossAI : MonoBehaviour
 
         _invulnerable = true;
         StopAllCoroutines();
-        StartCoroutine(FadeOut());
+        StartCoroutine(DeathShake());
     }
 
-    private IEnumerator FadeOut()
+    private IEnumerator DeathShake()
     {
-        Color[] fadeColors = new Color[_originalColors.Length];
-        for (int i = 0; i < _originalColors.Length; i++)
-        {
-            fadeColors[i] = _originalColors[i];
-            fadeColors[i].a = 0f;
-        }
-
+        Vector3 origin = transform.position;
         float t = 0f;
-        while (t < fadeDuration)
+
+        while (t < deathShakeDuration)
         {
             t += Time.deltaTime;
-            float p = t / fadeDuration;
-            for (int i = 0; i < _renderers.Length; i++)
-                _renderers[i].material.color = Color.Lerp(_originalColors[i], fadeColors[i], p);
+            transform.position = origin + Random.insideUnitSphere * deathShakeIntensity;
             yield return null;
         }
 
