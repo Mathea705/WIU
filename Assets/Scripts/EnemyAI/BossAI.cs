@@ -48,6 +48,8 @@ public class BossAI : MonoBehaviour
 
         _displayHealth = Mathf.Lerp(_displayHealth, currentHealth, Time.deltaTime * barLerpSpeed);
         bossHealthBarFill.fillAmount = _displayHealth / maxHealth;
+
+        Debug.Log(bossHealthBarFill.fillAmount);
     }
 
     public void TakeDamage(float amount)

@@ -104,6 +104,8 @@ public class AI_Stingray : BossAI
 
     private void Update()
     {
+        base.Update();
+
         CheckStateTransitions();
         HandleBossSpeedsAndElevations();
         RunStateCode();
@@ -112,7 +114,7 @@ public class AI_Stingray : BossAI
         ClampDir();
         HandleTransform();
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
         //Debug.Log(shipHealth);
 
 
